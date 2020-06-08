@@ -63,15 +63,16 @@
                     <parallel>classes</parallel>
                     <threadCount>40</threadCount>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                    <excludes>
+                        <exclude>**/TestBase.java</exclude>
+                        <exclude>**/Constants.java</exclude> <!-- not needed, just in case -->
+                    </excludes>
                     <!--
                     <suiteXmlFiles>testng.xml</suiteXmlFiles>
                     <includes>
                         <include>LoginTests.java</include>
                     </includes>
-                    <excludes>
-                        <exclude>**/TestBase.java</exclude>
-                        <exclude>**/Constants.java</exclude>
-                    </excludes>
+
                     -->
                 </configuration>
             </plugin>
