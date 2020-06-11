@@ -66,13 +66,16 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
+                    <suiteXmlFiles>src/test/resources/testng.xml</suiteXmlFiles>
+                    <!--
                     <parallel>classes</parallel>
                     <threadCount>40</threadCount>
                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
                     <excludes>
                         <exclude>**/TestBase.java</exclude>
-                        <exclude>**/Constants.java</exclude> <!-- not needed, just in case -->
+                        <exclude>**/Constants.java</exclude>
                     </excludes>
+                    -->
                     <!--
                     <suiteXmlFiles>testng.xml</suiteXmlFiles>
                     <includes>
