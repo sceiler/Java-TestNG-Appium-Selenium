@@ -10,7 +10,7 @@ import java.rmi.UnexpectedException;
 
 public class LoginTests extends TestBase {
 
-    @Test(dataProvider = "hardCodedBrowsers", enabled = false)
+    @Test(dataProvider = "hardCodedBrowsers")
     public void invalidCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
@@ -25,7 +25,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getWebDriver().findElements(By.className("error-button")).size() > 0);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers", enabled = false)
+    @Test(dataProvider = "hardCodedBrowsers")
     public void blankCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");

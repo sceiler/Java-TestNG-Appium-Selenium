@@ -4,6 +4,8 @@
     <test name="Selenium">
         <classes>
             <class name="com.saucelabs.yy.Tests.LoginTests"/>
+            <class name="com.saucelabs.yy.Tests.AddItemsTests"/>
+            <class name="com.saucelabs.yy.Tests.RemoveItemsTests"/>
         </classes>
     </test>
 </suite>

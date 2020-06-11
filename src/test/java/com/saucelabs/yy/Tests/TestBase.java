@@ -60,7 +60,9 @@ public class TestBase {
                 new Object[]{Constants.BROWSER.CHROME.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.WINDOWS81.getNotation()},
                 new Object[]{Constants.BROWSER.EDGE.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.WINDOWS10.getNotation()},
                 new Object[]{Constants.BROWSER.INTERNETEXPLORER.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.WINDOWS81.getNotation()},
-                new Object[]{Constants.BROWSER.SAFARI.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.MACOSCATALINA.getNotation()}
+                new Object[]{Constants.BROWSER.SAFARI.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.MACOSCATALINA.getNotation()},
+                new Object[]{Constants.BROWSER.CHROME.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.MACOSMOJAVE.getNotation()},
+                new Object[]{Constants.BROWSER.SAFARI.getNotation(), Constants.VERSION.LATEST.getNotation(), Constants.PLATFORM.MACOSHIGHSIERRA.getNotation()}
         };
     }
 
