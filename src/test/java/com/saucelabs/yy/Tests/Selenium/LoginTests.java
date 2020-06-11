@@ -1,4 +1,4 @@
-package com.saucelabs.yy.Tests;
+package com.saucelabs.yy.Tests.Selenium;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;

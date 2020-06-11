@@ -1,4 +1,4 @@
-package com.saucelabs.yy.Tests;
+package com.saucelabs.yy.Tests.Selenium;
 
 public class Constants {
     enum PLATFORM
