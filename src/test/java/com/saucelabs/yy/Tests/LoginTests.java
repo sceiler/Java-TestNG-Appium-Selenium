@@ -55,9 +55,9 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory"));
     }
 
-    @Test
-    public void loginUIPresent() throws MalformedURLException, UnexpectedException {
-        createDriver("chrome", "latest", "Windows 10", "loginUIPresent");
+    @Test(dataProvider = "hardCodedBrowsers", enabled = false)
+    public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
+        createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
         getWebDriver().get("https://www.saucedemo.com");
         annotate("Check if username input present");
