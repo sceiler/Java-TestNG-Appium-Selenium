@@ -1,6 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" >
+
+    <listeners>
+        <listener class-name="com.saucelabs.yy.Tests.TestListener"/>
+    </listeners>
+
     <test name="Selenium">
         <classes>
             <class name="com.saucelabs.yy.Tests.LoginTests"/>
