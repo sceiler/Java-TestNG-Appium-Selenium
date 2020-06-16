@@ -8,8 +8,10 @@ import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -34,7 +36,7 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
     public String buildTag = System.getenv("BUILD_TAG");
     public String username = System.getenv("SAUCE_USERNAME");
     public String accesskey = System.getenv("SAUCE_ACCESS_KEY");
-    public String app = "https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/android/GuineaPigApp-debug.apk?raw=true";
+    //public String app = "https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/android/GuineaPigApp-debug.apk?raw=true";
     //public String app = "../../../../../../resources/android/GuineaPigApp-debug.apk";
 
     /**
@@ -62,8 +64,7 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Samsung Galaxy Tab S3 GoogleAPI Emulator", "8.1", "1.9.1", "portrait"},
-                new Object[]{"Android", "Samsung Galaxy S9 Plus FHD GoogleAPI Emulator", "8.1", "1.9.1", "portrait"}
+                new Object[]{"Android", "Samsung Galaxy S9 WQHD GoogleAPI Emulator", "9.0", "1.9.1", "portrait", "chrome"}
         };
     }
 
@@ -105,6 +106,7 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
     protected void createDriver(
             String platformName,
             String deviceName,
+            String browserName,
             String platformVersion,
             String appiumVersion,
             String deviceOrientation,
@@ -114,21 +116,21 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
         capabilities.setCapability("platformName", platformName);
         capabilities.setCapability("platformVersion", platformVersion);
         capabilities.setCapability("deviceName", deviceName);
-        capabilities.setCapability("browserName", "");
+        capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("deviceOrientation", deviceOrientation);
         capabilities.setCapability("appiumVersion", appiumVersion);
         capabilities.setCapability("name", methodName);
-        capabilities.setCapability("app", app);
-        capabilities.setCapability("build", "Java-TestNG-Appium-Android");
 
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         }
 
         // Launch remote browser and set it as the current thread
-        androidDriver.set(new AndroidDriver(
-                new URL("https://" + authentication.getUsername() + ":" + authentication.getAccessKey() + seleniumURI + "/wd/hub"),
-                capabilities));
+//        androidDriver.set(new AndroidDriver(
+//                new URL("https://" + authentication.getUsername() + ":" + authentication.getAccessKey() + seleniumURI + "/wd/hub"),
+//                capabilities));
+        //noinspection rawtypes
+        androidDriver.set(new AndroidDriver(new URL(accesskey), capabilities));
 
         String id = ((RemoteWebDriver) getAndroidDriver()).getSessionId().toString();
         sessionId.set(id);
@@ -140,9 +142,14 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
      * Closes the browser
      */
     @AfterMethod
-    public void tearDown() throws Exception {
+    public void tearDown(ITestResult result) throws Exception {
 
         //Gets browser logs if available.
+        ((JavascriptExecutor) androidDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
         androidDriver.get().quit();
+    }
+
+    protected void annotate(String text) {
+        ((JavascriptExecutor) androidDriver.get()).executeScript("sauce:context=" + text);
     }
 }

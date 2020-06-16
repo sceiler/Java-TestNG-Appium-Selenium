@@ -40,7 +40,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getWebDriver().findElements(By.className("error-button")).size() > 0);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers", enabled = false)
+    @Test(dataProvider = "hardCodedBrowsers")
     public void validCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
@@ -55,7 +55,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory"));
     }
 
-    @Test(dataProvider = "hardCodedBrowsers", enabled = false)
+    @Test(dataProvider = "hardCodedBrowsers")
     public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");

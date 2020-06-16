@@ -97,7 +97,7 @@ public class TestBase {
      * @throws MalformedURLException if an error occurs parsing the url
      */
     protected void createDriver(String browser, String version, String os, String methodName)
-            throws MalformedURLException, UnexpectedException {
+            throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         // set desired capabilities to launch appropriate browser on Sauce
@@ -105,6 +105,7 @@ public class TestBase {
         capabilities.setCapability(CapabilityType.VERSION, version);
         capabilities.setCapability(CapabilityType.PLATFORM, os);
         capabilities.setCapability("name", methodName);
+        // buildTag = System.currentTimeMillis() + "-MANUAL";
 
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
