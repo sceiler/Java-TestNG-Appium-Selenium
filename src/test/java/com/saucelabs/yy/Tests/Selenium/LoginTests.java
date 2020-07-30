@@ -14,55 +14,55 @@ public class LoginTests extends TestBase {
     public void invalidCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
-        getWebDriver().get("https://www.saucedemo.com");
+        getRemoteWebDriver().get("https://www.saucedemo.com");
         annotate("Sending invalid username");
-        getWebDriver().findElement(By.id("user-name")).sendKeys("bad");
+        getRemoteWebDriver().findElement(By.id("user-name")).sendKeys("bad");
         annotate("Sending invalid password");
-        getWebDriver().findElement(By.id("password")).sendKeys("bad");
+        getRemoteWebDriver().findElement(By.id("password")).sendKeys("bad");
         annotate("Clicking login button");
-        getWebDriver().findElement(By.className("btn_action")).click();
+        getRemoteWebDriver().findElement(By.className("btn_action")).click();
 
-        Assert.assertTrue(getWebDriver().findElements(By.className("error-button")).size() > 0);
+        Assert.assertTrue(getRemoteWebDriver().findElements(By.className("error-button")).size() > 0);
     }
 
     @Test(dataProvider = "hardCodedBrowsers")
     public void blankCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
-        getWebDriver().get("https://www.saucedemo.com");
+        getRemoteWebDriver().get("https://www.saucedemo.com");
         annotate("Sending blank username");
-        getWebDriver().findElement(By.id("user-name")).sendKeys("");
+        getRemoteWebDriver().findElement(By.id("user-name")).sendKeys("");
         annotate("Sending blank password");
-        getWebDriver().findElement(By.id("password")).sendKeys("");
+        getRemoteWebDriver().findElement(By.id("password")).sendKeys("");
         annotate("Clicking login button");
-        getWebDriver().findElement(By.className("btn_action")).click();
+        getRemoteWebDriver().findElement(By.className("btn_action")).click();
 
-        Assert.assertTrue(getWebDriver().findElements(By.className("error-button")).size() > 0);
+        Assert.assertTrue(getRemoteWebDriver().findElements(By.className("error-button")).size() > 0);
     }
 
     @Test(dataProvider = "hardCodedBrowsers")
     public void validCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
-        getWebDriver().get("https://www.saucedemo.com");
+        getRemoteWebDriver().get("https://www.saucedemo.com");
         annotate("Sending valid username");
-        getWebDriver().findElement(By.id("user-name")).sendKeys("standard_user");
+        getRemoteWebDriver().findElement(By.id("user-name")).sendKeys("standard_user");
         annotate("Sending valid password");
-        getWebDriver().findElement(By.id("password")).sendKeys("secret_sauce");
+        getRemoteWebDriver().findElement(By.id("password")).sendKeys("secret_sauce");
         annotate("Clicking login button");
-        getWebDriver().findElement(By.className("btn_action")).click();
+        getRemoteWebDriver().findElement(By.className("btn_action")).click();
 
-        Assert.assertTrue(getWebDriver().getCurrentUrl().contains("inventory"));
+        Assert.assertTrue(getRemoteWebDriver().getCurrentUrl().contains("inventory"));
     }
 
     @Test(dataProvider = "hardCodedBrowsers")
     public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
-        getWebDriver().get("https://www.saucedemo.com");
+        getRemoteWebDriver().get("https://www.saucedemo.com");
         annotate("Check if username input present");
-        Assert.assertTrue(getWebDriver().findElement(By.id("user-name")).isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().findElement(By.id("user-name")).isDisplayed());
         annotate("Check if password input present");
-        Assert.assertTrue(getWebDriver().findElement(By.id("password")).isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().findElement(By.id("password")).isDisplayed());
     }
 }

@@ -1,14 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Appium Suite" verbose="1" parallel="tests" >
-
+<!--
     <listeners>
         <listener class-name="com.saucelabs.yy.Tests.TestListener"/>
     </listeners>
-
+-->
     <test name="Appium" parallel="methods">
         <packages>
-            <package name="com.saucelabs.yy.Tests.Appium"></package>
+            <package name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"></package>
         </packages>
     </test>
 </suite>

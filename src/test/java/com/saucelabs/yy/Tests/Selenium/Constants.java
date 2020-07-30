@@ -12,13 +12,13 @@ public class Constants {
         MACOSMOJAVE("macOS 10.14"),
         MACOSCATALINA("macOS 10.15");
 
-        String notation;
+        String label;
 
-        PLATFORM(String notation) {
-            this.notation = notation;
+        PLATFORM(String label) {
+            this.label = label;
         }
 
-        public String getNotation() { return notation; }
+        public String label() { return label; }
     }
 
     enum BROWSER
@@ -29,13 +29,13 @@ public class Constants {
         SAFARI("safari"),
         INTERNETEXPLORER("internet explorer");
 
-        String notation;
+        String label;
 
-        BROWSER(String notation) {
-            this.notation = notation;
+        BROWSER(String label) {
+            this.label = label;
         }
 
-        public String getNotation() { return notation; }
+        public String label() { return label; }
     }
 
     enum VERSION
@@ -45,12 +45,12 @@ public class Constants {
         BETA("beta"),
         DEV("dev");
 
-        String notation;
+        String label;
 
-        VERSION(String notation) {
-            this.notation = notation;
+        VERSION(String label) {
+            this.label = label;
         }
 
-        public String getNotation() { return notation; }
+        public String label() { return label; }
     }
 }

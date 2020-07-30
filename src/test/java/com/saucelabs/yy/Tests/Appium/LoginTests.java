@@ -6,15 +6,12 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.rmi.UnexpectedException;
 
 public class LoginTests extends TestBase {
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void invalidCredentials(String platform, String deviceName, String platformVersion, String appiumVersion,
-                                   String orientation, String browserName, Method methodName) throws MalformedURLException, UnexpectedException {
-
-        createDriver(platform, deviceName, browserName, platformVersion, appiumVersion, orientation, methodName.getName());
+    @Test(dataProvider = "emulatorBrowserDataProvider")
+    public void invalidCredentials(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
+        createDriver(platform, deviceName, platformVersion, methodName.getName());
         annotate("Open saucedemo.com");
         getAndroidDriver().get("https://www.saucedemo.com");
         annotate("Sending invalid username");
@@ -27,10 +24,9 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getAndroidDriver().findElements(By.className("error-button")).size() > 0);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void blankCredentials(String platform, String deviceName, String platformVersion, String appiumVersion,
-                                 String orientation, String browserName, Method methodName) throws MalformedURLException, UnexpectedException {
-        createDriver(platform, deviceName, browserName, platformVersion, appiumVersion, orientation, methodName.getName());
+    @Test(dataProvider = "emulatorBrowserDataProvider")
+    public void blankCredentials(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
+        createDriver(platform, deviceName, platformVersion, methodName.getName());
         annotate("Open saucedemo.com");
         getAndroidDriver().get("https://www.saucedemo.com");
         annotate("Sending blank username");
@@ -43,10 +39,9 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getAndroidDriver().findElements(By.className("error-button")).size() > 0);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void validCredentials(String platform, String deviceName, String platformVersion, String appiumVersion,
-                                 String orientation, String browserName, Method methodName) throws MalformedURLException, UnexpectedException {
-        createDriver(platform, deviceName, browserName, platformVersion, appiumVersion, orientation, methodName.getName());
+    @Test(dataProvider = "emulatorBrowserDataProvider")
+    public void validCredentials(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
+        createDriver(platform, deviceName, platformVersion, methodName.getName());
         annotate("Open saucedemo.com");
         getAndroidDriver().get("https://www.saucedemo.com");
         annotate("Sending valid username");
@@ -59,10 +54,9 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getAndroidDriver().getCurrentUrl().contains("inventory"));
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void loginUIPresent(String platform, String deviceName, String platformVersion, String appiumVersion,
-                               String orientation, String browserName, Method methodName) throws MalformedURLException, UnexpectedException {
-        createDriver(platform, deviceName, browserName, platformVersion, appiumVersion, orientation, methodName.getName());
+    @Test(dataProvider = "emulatorBrowserDataProvider")
+    public void loginUIPresent(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
+        createDriver(platform, deviceName, platformVersion, methodName.getName());
         annotate("Open saucedemo.com");
         getAndroidDriver().get("https://www.saucedemo.com");
         annotate("Check if username input present");
