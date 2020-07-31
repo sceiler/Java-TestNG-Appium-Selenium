@@ -3,7 +3,7 @@
 <suite name="Sauce Connect Suite" verbose="1" parallel="tests" >
     <test name="Sauce Connect Test" parallel="methods">
         <packages>
-            <package name="com.saucelabs.yy.Tests.Appium.SauceConnect"></package>
+            <package name="com.saucelabs.yy.Tests.Appium.SauceConnect"/>
         </packages>
     </test>
 </suite>

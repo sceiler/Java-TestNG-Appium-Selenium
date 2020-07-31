@@ -3,7 +3,7 @@
 <suite name="Swag Labs App Suite" verbose="1" parallel="tests" >
     <test name="Swag Labs App Test" parallel="methods">
         <packages>
-            <package name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"></package>
+            <package name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"/>
         </packages>
     </test>
 </suite>

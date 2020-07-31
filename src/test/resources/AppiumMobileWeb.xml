@@ -4,8 +4,8 @@
     <test name="Appium Mobile Web Test" parallel="methods">
         <packages>
             <package name="com.saucelabs.yy.Tests.Appium">
-                <exclude name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"></exclude>
-                <exclude name="com.saucelabs.yy.Tests.Appium.SauceConnect"></exclude>
+                <exclude name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"/>
+                <exclude name="com.saucelabs.yy.Tests.Appium.SauceConnect"/>
             </package>
         </packages>
     </test>

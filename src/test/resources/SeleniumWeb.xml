@@ -3,8 +3,7 @@
 <suite name="Selenium Web Suite" verbose="1" parallel="tests" >
     <test name="Selenium Web Test" parallel="methods">
         <packages>
-            <package name="com.saucelabs.yy.Tests.Selenium">
-            </package>
+            <package name="com.saucelabs.yy.Tests.Selenium"/>
         </packages>
     </test>
 </suite>
