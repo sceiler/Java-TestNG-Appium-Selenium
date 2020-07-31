@@ -3,7 +3,6 @@ package com.saucelabs.yy.Tests.Appium.SauceConnect;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SauceConnectHelper {
 
@@ -19,7 +18,6 @@ public class SauceConnectHelper {
     }
 
     public void stopSauceConnect() {
-        //getProcess().destroy();
         getThread().stop();
     }
 
@@ -47,10 +45,6 @@ public class SauceConnectHelper {
                 text.append("\n");
             }
             s.close();
-
-            //int result = getProcess().waitFor();
-
-            //System.out.printf("Process exited with result %d and output %s%n", result, text);
         }));
     }
 }
