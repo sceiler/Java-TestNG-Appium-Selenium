@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Selenium Web Suite" verbose="1" parallel="tests" >
+    <test name="Selenium Web Test" parallel="methods">
+        <packages>
+            <package name="com.saucelabs.yy.Tests.Selenium">
+            </package>
+        </packages>
+    </test>
+</suite>
