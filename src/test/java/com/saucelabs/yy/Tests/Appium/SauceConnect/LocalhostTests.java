@@ -12,7 +12,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
@@ -25,16 +24,11 @@ public class LocalhostTests extends TestBase {
     private SauceREST sauceREST;
 
     @BeforeSuite
-    public void setup() throws IOException, InterruptedException {
+    public void setup() throws InterruptedException {
         sauceREST = new SauceREST(username, accesskey, DataCenter.EU);
         sauceConnectHelper.set(new SauceConnectHelper());
         sauceConnectHelper.get().startSauceConnect();
-
-        // wait for Sauce Connect tunnel to be established
-        //Thread.sleep(20000);
-
         String tunnels = sauceREST.getTunnels();
-
         Gson gson = new Gson();
 
         do {
@@ -47,6 +41,7 @@ public class LocalhostTests extends TestBase {
 
             for (String id : gson.fromJson(tunnels, String[].class)) {
                 System.out.println("Tunnel(s) existing. See if it is the correct one and if it is running.");
+                Thread.sleep(1000);
                 JsonParser parser = new JsonParser();
                 JsonObject object = parser.parse(sauceREST.getTunnelInformation(id)).getAsJsonObject();
 
