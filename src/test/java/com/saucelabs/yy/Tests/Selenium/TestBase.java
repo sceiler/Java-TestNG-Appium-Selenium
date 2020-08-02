@@ -57,6 +57,8 @@ public class TestBase extends SuperTestBase {
 
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
+        } else {
+            capabilities.setCapability("build", "YiMin-Manual-Selenium");
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
