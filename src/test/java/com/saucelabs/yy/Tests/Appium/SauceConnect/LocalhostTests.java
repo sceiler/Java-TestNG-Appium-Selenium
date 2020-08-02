@@ -8,9 +8,7 @@ import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.yy.Tests.Appium.TestBase;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -23,7 +21,7 @@ public class LocalhostTests extends TestBase {
     private boolean keepTrying = true;
     private SauceREST sauceREST;
 
-    @BeforeSuite
+    @BeforeClass
     public void setup() throws InterruptedException {
         sauceREST = new SauceREST(username, accesskey, DataCenter.EU);
         sauceConnectHelper.set(new SauceConnectHelper());
@@ -59,7 +57,7 @@ public class LocalhostTests extends TestBase {
     @Test(dataProvider = "emulatorBrowserDataProvider")
     public void openLocalRouterLoginPage(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
         MutableCapabilities caps = new MutableCapabilities();
-        caps.setCapability("tunnelIdentifier", "myTunnel");
+        caps.setCapability("tunnelIdentifier", tunnelName);
         createDriver(platform, deviceName, platformVersion, methodName.getName(), caps);
 
         getAndroidDriver().get("http://192.168.178.1");
@@ -67,7 +65,7 @@ public class LocalhostTests extends TestBase {
         Assert.assertEquals(getAndroidDriver().getTitle(), "FRITZ!Box");
     }
 
-    @AfterSuite
+    @AfterClass
     public void teardown() {
         sauceConnectHelper.get().stopSauceConnect();
         System.out.println("Delete tunnel.");
