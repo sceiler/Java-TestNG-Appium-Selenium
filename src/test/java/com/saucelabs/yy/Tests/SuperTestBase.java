@@ -18,7 +18,9 @@ public class SuperTestBase implements ITestListener {
 
     public URL createDriverURL(Region region) throws MalformedURLException {
         switch (region) {
-            case EU: return new URL("https://" + username + ":" + accesskey + Region.EU.label);
+            case EU:
+                System.out.println("https://" + username + ":" + accesskey + Region.EU.label);
+                return new URL("https://" + username + ":" + accesskey + Region.EU.label);
             case EU_RDC: return new URL("https://" + username + ":" + accesskey + Region.EU_RDC.label);
             case US: return new URL("https://" + username + ":" + accesskey + Region.US.label);
             case HEADLESS: return new URL("https://" + username + ":" + accesskey + Region.HEADLESS.label);
