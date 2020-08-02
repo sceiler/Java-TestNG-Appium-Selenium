@@ -8,7 +8,9 @@ import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.yy.Tests.Appium.TestBase;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
