@@ -2,10 +2,8 @@ package com.saucelabs.yy.Tests;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestListener;
-import org.testng.ITestResult;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,6 +19,7 @@ public class SuperTestBase implements ITestListener {
     public URL createDriverURL(Region region) throws MalformedURLException {
         switch (region) {
             case EU: return new URL("https://" + username + ":" + accesskey + Region.EU.label);
+            case EU_RDC: return new URL("https://" + username + ":" + accesskey + Region.EU_RDC.label);
             case US: return new URL("https://" + username + ":" + accesskey + Region.US.label);
             case HEADLESS: return new URL("https://" + username + ":" + accesskey + Region.HEADLESS.label);
         }
