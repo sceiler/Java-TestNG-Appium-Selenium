@@ -1,14 +1,11 @@
 package com.saucelabs.yy.Tests.Appium.SwagLabsApp;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
-
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
-
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
@@ -46,6 +43,7 @@ public class TestBase extends SuperTestBase {
         caps.setCapability("name", testMethod);
 
         if (buildTag != null) {
+            System.out.println("build:" + buildTag);
             caps.setCapability("build", buildTag);
         }
 
