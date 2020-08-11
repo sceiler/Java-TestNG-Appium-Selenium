@@ -8,7 +8,7 @@ import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.yy.Tests.Appium.TestBase;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -67,7 +67,7 @@ public class LocalhostTests extends TestBase {
         Assert.assertEquals(getAndroidDriver().getTitle(), "FRITZ!Box");
     }
 
-    @AfterSuite
+    @AfterClass
     public void teardown() {
         sauceConnectHelper.get().stopSauceConnect();
         System.out.println("Delete tunnel.");
