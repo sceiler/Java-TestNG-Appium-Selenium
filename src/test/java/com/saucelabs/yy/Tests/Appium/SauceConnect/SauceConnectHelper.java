@@ -18,7 +18,11 @@ public class SauceConnectHelper {
     }
 
     public void stopSauceConnect() {
-        getThread().stop();
+        try {
+            getThread().stop();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void startSauceConnect() {
