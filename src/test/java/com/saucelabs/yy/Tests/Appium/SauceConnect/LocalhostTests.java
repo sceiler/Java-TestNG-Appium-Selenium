@@ -42,8 +42,7 @@ public class LocalhostTests extends TestBase {
             for (String id : gson.fromJson(tunnels, String[].class)) {
                 System.out.println("Tunnel(s) existing. See if it is the correct one and if it is running.");
                 Thread.sleep(1000);
-                JsonParser parser = new JsonParser();
-                JsonObject object = parser.parse(sauceREST.getTunnelInformation(id)).getAsJsonObject();
+                JsonObject object = JsonParser.parseString(sauceREST.getTunnelInformation(id)).getAsJsonObject();
 
                 if (object.get("tunnel_identifier").getAsString().equals("myTunnel") && object.get("status").getAsString().equals("running")) {
                     System.out.println("Correct tunnel found and running.");
@@ -69,7 +68,11 @@ public class LocalhostTests extends TestBase {
 
     @AfterClass
     public void teardown() {
-        sauceConnectHelper.get().stopSauceConnect();
+        try {
+            sauceConnectHelper.get().stopSauceConnect();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         System.out.println("Delete tunnel.");
         sauceREST.deleteTunnel(tunnelID);
     }
