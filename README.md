@@ -5,4 +5,4 @@ Also includes test for Sauce Connect (starts and stops Sauce Connect as part of 
 
 In addition, there are tests using the Application Storage including automatically retrieving file_id using Sauce REST API.
 
-Visual testing using Screener is also included. 
+Visual testing using Screener is also included but not working currently.
