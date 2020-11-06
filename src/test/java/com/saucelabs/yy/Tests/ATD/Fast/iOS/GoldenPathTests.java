@@ -16,7 +16,7 @@ public class GoldenPathTests extends TestBase {
 
     @Test(dataProvider = "iOSSimulator")
     public void buyStuffFast(String platformName, String deviceName, String platformVersion, String appiumVersion, Method testMethod) throws MalformedURLException {
-        createDriver(platformName, deviceName, platformVersion, appiumVersion, String.format("Appium-%s_%s_ID", appiumVersion, deviceName));
+        createDriver(platformName, deviceName, platformVersion, appiumVersion, String.format("Appium-%s_iOS-%s_ID", appiumVersion, platformVersion));
 
         getDriver().findElement(By.id("test-Username")).sendKeys("standard_user");
         getDriver().findElement(By.id("test-Password")).sendKeys("secret_sauce");

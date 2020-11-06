@@ -24,21 +24,16 @@ public class TestBase extends SuperTestBase {
     @DataProvider(name = "iOSSimulator", parallel = true)
     public static Object[][] iOSSimulator(Method testMethod) {
         return new Object[][]{
+                new Object[]{"iOS", "iPhone XS Max Simulator", "12.0", "1.9.1"},
+                new Object[]{"iOS", "iPhone XS Max Simulator", "12.2", "1.12.1"},
+                new Object[]{"iOS", "iPhone XS Max Simulator", "12.2", "1.13.0"},
                 new Object[]{"iOS", "iPhone XS Max Simulator", "12.4", "1.13.0"},
-                new Object[]{"iOS", "iPhone XR Simulator", "12.4", "1.13.0"},
                 new Object[]{"iOS", "iPhone XS Max Simulator", "13.0", "1.15.0"},
-                new Object[]{"iOS", "iPhone XR Simulator", "13.0", "1.15.0"},
-                //iOS 12
-                //appium 1.14 1.15
-        };
-    }
-
-    @DataProvider(name = "AndroidEmulator", parallel = true)
-    public static Object[][] androidEmulator(Method testMethod) {
-        return new Object[][]{
-                new Object[]{"Android", "Android GoogleAPI Emulator", "11.0"},
-                new Object[]{"Android", "Android GoogleAPI Emulator", "10.0"},
-                new Object[]{"Android", "Android GoogleAPI Emulator", "9.0"}
+                new Object[]{"iOS", "iPhone XS Max Simulator", "13.0", "1.16.0"},
+                new Object[]{"iOS", "iPhone XS Max Simulator", "13.0", "1.17.1"},
+                new Object[]{"iOS", "iPhone XS Max Simulator", "13.2", "1.16.0"},
+                new Object[]{"iOS", "iPhone XS Max Simulator", "13.2", "1.17.1"},
+                new Object[]{"iOS", "iPhone XS Max Simulator", "13.4", "1.17.1"},
         };
     }
 
@@ -71,7 +66,7 @@ public class TestBase extends SuperTestBase {
 
         driver.set(new AppiumDriver(createDriverURL(), caps));
         sessionId.set(driver.get().getSessionId().toString());
-        System.out.println("Session id:" + sessionId.get());
+        System.out.println("Session id:" + getSessionId());
         getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 

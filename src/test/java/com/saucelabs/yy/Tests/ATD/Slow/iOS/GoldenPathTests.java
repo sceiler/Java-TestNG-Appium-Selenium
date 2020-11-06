@@ -16,7 +16,7 @@ public class GoldenPathTests extends TestBase {
 
     @Test(dataProvider = "iOSSimulator")
     public void buyStuffSlow(String platformName, String deviceName, String platformVersion, String appiumVersion, Method testMethod) throws MalformedURLException {
-        createDriver(platformName, deviceName, platformVersion, appiumVersion, String.format("Appium-%s_%s_XPATH", appiumVersion, deviceName));
+        createDriver(platformName, deviceName, platformVersion, appiumVersion, String.format("Appium-%s_iOS-%s_XPATH", appiumVersion, platformVersion));
 
         getDriver().findElement(By.xpath("//XCUIElementTypeTextField[@name=\"test-Username\"]")).sendKeys("standard_user");
         getDriver().findElement(By.xpath("//XCUIElementTypeSecureTextField[@name=\"test-Password\"]")).sendKeys("secret_sauce");
