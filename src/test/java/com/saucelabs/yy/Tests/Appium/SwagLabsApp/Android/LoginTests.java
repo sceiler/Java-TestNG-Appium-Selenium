@@ -1,4 +1,4 @@
-package com.saucelabs.yy.Tests.Appium.SwagLabsApp;
+package com.saucelabs.yy.Tests.Appium.SwagLabsApp.Android;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
@@ -30,8 +30,21 @@ public class LoginTests extends TestBase {
             if (kind.equals("android") && name.equals(APK_FILE_NAME)) {
                 APK_FILE_ID = id;
                 break;
+            } else
+            {
+                APK_FILE_ID = "2e9dc343-ce8a-4b64-8443-40b78fb0581e";
+                break;
             }
         }
+
+        APK_FILE_ID = "2e9dc343-ce8a-4b64-8443-40b78fb0581e";
+    }
+
+    @Test(dataProvider = "iOSRealDevices")
+    public void test(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
+        createDriver(platformName, deviceName, testMethod.getName(), APK_FILE_ID);
+
+        System.out.println(getIOSDriver().getCapabilities());
     }
 
     @Test(dataProvider = "hardCodedBrowsers")

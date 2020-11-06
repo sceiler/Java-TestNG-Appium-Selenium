@@ -37,6 +37,22 @@ public class LoginTests extends TestBase {
         getAndroidDriver().findElement(By.className("btn_action")).click();
 
         Assert.assertTrue(getAndroidDriver().findElements(By.className("error-button")).size() > 0);
+        Assert.assertTrue(getDriver().findElements(By.className("error-button")).size() > 0);
+    }
+
+    @Test(dataProvider = "EmuSimDataProvider")
+    public void test(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
+        createDriver(platform, deviceName, platformVersion, methodName.getName());
+        annotate("Open saucedemo.com");
+        getDriver().get("https://www.saucedemo.com");
+        annotate("Sending blank username");
+        getDriver().findElement(By.id("user-name")).sendKeys("");
+        annotate("Sending blank password");
+        getDriver().findElement(By.id("password")).sendKeys("");
+        annotate("Clicking login button");
+        getDriver().findElement(By.className("btn_action")).click();
+
+        Assert.assertTrue(getDriver().findElements(By.className("error-button")).size() > 0);
     }
 
     @Test(dataProvider = "emulatorBrowserDataProvider")

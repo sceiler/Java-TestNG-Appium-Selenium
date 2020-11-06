@@ -44,7 +44,7 @@ public class ScreenerTest {
         caps.setCapability("browserVersion", "latest");
         caps.setCapability("platformName", "windows 10");
         caps.setCapability("sauce:visual", sauceVisual);
-        String sauceUrl = "http://staging-hub.screener.io:80/wd/hub";
+        String sauceUrl = "http://hub.screener.io:80/wd/hub";
         //String sauceUrl = "https://ondemand.saucelabs.com:443/wd/hub";
         URL url = new URL(sauceUrl);
         driver = new RemoteWebDriver(url, caps);
@@ -82,6 +82,43 @@ public class ScreenerTest {
         System.out.println("**Visual Snapshot 2**");
         js.executeScript("/*@visual.snapshot*/", "Swag Labs - Product Page");
     }
+
+    @Tag(name = "Sauce-Demo_Visual_Beta")
+    //@DisplayName("SauceDemoVisualBetaTest()")
+    @Test
+    public void SauceDemoVisualBetaTestChanged() throws AssertionError {
+        driver.get("https://www.saucedemo.com");
+        String getTitle = driver.getTitle();
+
+        // Remove logo to cause visual defect
+        js.executeScript("document.getElementsByClassName('login_logo')[0].remove();");
+
+        //Get the Visual Snapshot
+        //JavascriptExecutor js = (JavascriptExecutor) driver;
+        System.out.println("**Visual Init**");
+        js.executeScript("/*@visual.init*/", "Init");
+        System.out.println("**Visual Snapshot 1**");
+        js.executeScript("/*@visual.snapshot*/", "Swag Labs - Login Page");
+        Assert.assertEquals(getTitle, "Swag Labs");
+        if (getTitle.equals("Swag Labs")) {
+            result = true;
+        }else result = false;
+        System.out.println("Logging in...");
+        System.out.println("entering username");
+        WebElement el1 = driver.findElement(By.id("user-name"));
+        el1.sendKeys("standard_user");
+        System.out.println("entering password");
+        el1 = null;
+        el1 = driver.findElement(By.id("password"));
+        //el1.sendKeys("secret_sauce");
+        System.out.println("clicking login");
+        el1 = null;
+        el1 = driver.findElement(By.id("login-button"));
+        el1.click();
+        System.out.println("**Visual Snapshot 2**");
+        js.executeScript("/*@visual.snapshot*/", "Swag Labs - Product Page");
+    }
+
     @AfterTest
     public void teardown() {
         ((JavascriptExecutor) driver).executeScript("sauce:job-result=" + (result ? "passed" : "failed"));

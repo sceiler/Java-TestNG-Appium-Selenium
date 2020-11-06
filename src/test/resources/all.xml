@@ -5,8 +5,9 @@
     <test name="Appium Mobile Web Test" parallel="methods">
         <packages>
             <package name="com.saucelabs.yy.Tests.Appium">
-                <exclude name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"/>
                 <exclude name="com.saucelabs.yy.Tests.Appium.SauceConnect"/>
+                <exclude name="com.saucelabs.yy.Tests.Appium.IBM"/>
+                <exclude name="com.saucelabs.yy.Tests.Appium.SwagLabsApp"/>
             </package>
         </packages>
     </test>
@@ -23,10 +24,10 @@
         </packages>
     </test>
 
-    <test name="Sauce Connect Test" parallel="methods">
-        <packages>
-            <package name="com.saucelabs.yy.Tests.Appium.SauceConnect"/>
-        </packages>
-    </test>
+<!--    <test name="Sauce Connect Test" parallel="methods">-->
+<!--        <packages>-->
+<!--            <package name="com.saucelabs.yy.Tests.Appium.SauceConnect"/>-->
+<!--        </packages>-->
+<!--    </test>-->
 
 </suite>

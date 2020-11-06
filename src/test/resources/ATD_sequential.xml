@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Swag Labs App Suite" verbose="1">
+    <test name="Swag Labs App Test for ATD">
+        <packages>
+            <package name="com.saucelabs.yy.Tests.ATD.*"/>
+        </packages>
+    </test>
+</suite>

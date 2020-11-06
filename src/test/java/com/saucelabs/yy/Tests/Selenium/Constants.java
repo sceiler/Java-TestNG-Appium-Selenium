@@ -1,7 +1,7 @@
 package com.saucelabs.yy.Tests.Selenium;
 
 public class Constants {
-    enum PLATFORM
+    public enum PLATFORM
     {
         WINDOWS10("Windows 10"),
         WINDOWS81("Windows 8.1"),
@@ -21,7 +21,7 @@ public class Constants {
         public String label() { return label; }
     }
 
-    enum BROWSER
+    public enum BROWSER
     {
         CHROME("chrome"),
         FIREFOX("firefox"),
@@ -38,10 +38,11 @@ public class Constants {
         public String label() { return label; }
     }
 
-    enum VERSION
+    public enum VERSION
     {
         LATEST("latest"),
         LATEST1("latest-1"),
+        LATEST2("latest-2"),
         BETA("beta"),
         DEV("dev");
 

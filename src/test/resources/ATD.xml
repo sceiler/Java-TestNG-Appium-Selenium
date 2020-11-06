@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Swag Labs App Suite" verbose="1" parallel="tests" >
-    <test name="Swag Labs App Test" parallel="methods">
+    <test name="Swag Labs App Test for ATD" parallel="methods">
         <packages>
-            <package name="com.saucelabs.yy.Tests.Appium.SwagLabsApp.*"/>
+            <package name="com.saucelabs.yy.Tests.ATD.*"/>
         </packages>
     </test>
 </suite>

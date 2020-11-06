@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -7,6 +8,10 @@ import org.testng.ITestListener;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class SuperTestBase implements ITestListener {
     public String username = System.getenv("SAUCE_USERNAME");
@@ -15,6 +20,8 @@ public class SuperTestBase implements ITestListener {
     public ThreadLocal<AndroidDriver> androidDriver = new ThreadLocal<>();
     public ThreadLocal<IOSDriver> iosDriver = new ThreadLocal<>();
     public ThreadLocal<RemoteWebDriver> remoteWebDriver = new ThreadLocal<>();
+    public ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    public String dateTime = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault()));
 
     public URL createDriverURL(Region region) throws MalformedURLException {
         switch (region) {
@@ -45,5 +52,9 @@ public class SuperTestBase implements ITestListener {
 
     public RemoteWebDriver getRemoteWebDriver() {
         return remoteWebDriver.get();
+    }
+
+    public AppiumDriver getDriver() {
+        return driver.get();
     }
 }
