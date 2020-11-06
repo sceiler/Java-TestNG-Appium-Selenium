@@ -84,12 +84,12 @@ public class TestBase extends SuperTestBase {
         } else {
             sauceREST.get().jobFailed(sessionId.get());
         }
-
-        try {
-            sauceREST.get().downloadAllAssets(sessionId.get(), new File(System.getProperty("user.home") + "/Tests").getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//uncomment with 1.0.48 of saucerest
+//        try {
+//            sauceREST.get().downloadAllAssets(sessionId.get(), new File(System.getProperty("user.home") + "/Tests").getAbsolutePath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     protected void annotate(String text) {
