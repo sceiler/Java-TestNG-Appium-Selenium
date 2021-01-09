@@ -1,7 +1,7 @@
 package com.saucelabs.yy.Tests.Appium.SwagLabsApp;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.ITestResult;
@@ -15,15 +15,16 @@ import java.util.concurrent.TimeUnit;
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
-    public final String APK_FILE_NAME = "Android.SauceLabs.Mobile.Sample.app.2.3.0.apk";
+    public final String ANDROID_FILE_NAME = "Android.SauceLabs.Mobile.Sample.app.2.7.1.apk";
+    public final String IOS_FILE_NAME = "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa";
 
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 
-    @DataProvider(name = "hardCodedBrowsers", parallel = true)
+    @DataProvider(name = "RealDevices", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Google.*"},
-                new Object[]{"Android", "Google.*"}
+                new Object[]{"Android", "Samsung.*"},
+                new Object[]{"iOS", "iPhone.*"}
         };
     }
 
@@ -31,43 +32,34 @@ public class TestBase extends SuperTestBase {
         return sessionId.get();
     }
 
-    protected void createDriver(String platformName, String deviceName, String testMethod, String apkFileID) throws MalformedURLException {
-        System.out.println("createDriver()");
+    protected void createDriver(String platformName, String deviceName, String testMethod) throws MalformedURLException {
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("username", username);
         caps.setCapability("accessKey", accesskey);
         caps.setCapability("deviceName", deviceName);
         caps.setCapability("browserName", "");
         caps.setCapability("platformName", platformName);
-        caps.setCapability("app", "storage:" + apkFileID);
         caps.setCapability("name", testMethod);
 
-        if (buildTag != null) {
-            System.out.println("build:" + buildTag);
-            caps.setCapability("build", buildTag);
+        if (platformName.equals("Android")) {
+            caps.setCapability("app", "storage:filename=" + ANDROID_FILE_NAME);
+        } else if (platformName.equals("iOS")) {
+            caps.setCapability("app", "storage:filename=" + IOS_FILE_NAME);
         }
 
-        androidDriver.set(new AndroidDriver(createDriverURL(), caps));
-        getAndroidDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        if (buildTag != null) {
+            caps.setCapability("build", buildTag);
+        } else {
+            caps.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + super.dateTime);
+        }
+
+        driver.set(new AppiumDriver<>(createDriverURL(), caps));
+        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        ((JavascriptExecutor) getAndroidDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-        getAndroidDriver().quit();
-    }
-
-    protected void annotate(String text) {
-        ((JavascriptExecutor) getAndroidDriver()).executeScript("sauce:context=" + text);
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult iTestResult) {
-        ((JavascriptExecutor) getAndroidDriver()).executeScript("sauce:job-result=" + (iTestResult.isSuccess() ? "passed" : "failed"));
-    }
-
-    @Override
-    public void onTestFailure(ITestResult iTestResult) {
-        ((JavascriptExecutor) getAndroidDriver()).executeScript("sauce:job-result=" + (iTestResult.isSuccess() ? "passed" : "failed"));
+        ((JavascriptExecutor) getDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+        getDriver().quit();
     }
 }

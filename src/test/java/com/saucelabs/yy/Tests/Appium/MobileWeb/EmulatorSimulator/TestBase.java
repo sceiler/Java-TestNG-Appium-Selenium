@@ -1,11 +1,9 @@
-package com.saucelabs.yy.Tests.Appium;
+package com.saucelabs.yy.Tests.Appium.MobileWeb.EmulatorSimulator;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
@@ -18,40 +16,12 @@ public class TestBase extends SuperTestBase {
     public String buildTag = System.getenv("BUILD_TAG");
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 
-    @DataProvider(name = "emulatorBrowserDataProvider", parallel = true)
-    public static Object[][] emulatorBrowserDataProvider(Method testMethod) {
-        return new Object[][]{
-                new Object[]{"Android", "Samsung Galaxy S9 WQHD GoogleAPI Emulator", "9.0"},
-                new Object[]{"Android", "Android GoogleAPI Emulator", "10.0"}
-        };
-    }
-
-    @DataProvider(name = "simulatorBrowserDataProvider", parallel = true)
-    public static Object[][] simulatorBrowserDataProvider(Method testMethod) {
-        return new Object[][]{
-                new Object[]{"iOS", "iPhone XS Simulator", "13.4"},
-                new Object[]{"iOS", "iPhone 11 Pro Simulator", "13.2"}
-        };
-    }
-
-    @DataProvider(name = "RDCBrowserDataProvider", parallel = true)
-    public static Object[][] RDCBrowserDataProvider(Method testMethod) {
-        return new Object[][]{
-                new Object[]{"Android", "Samsung.*", "10"},
-                new Object[]{"Android", "Google.*", "11"}
-        };
-    }
-
     @DataProvider(name = "EmulatorSimulatorDataProvider", parallel = true)
     public static Object[][] emuSimDataProvider(Method testMethod) {
         return new Object[][]{
                 new Object[]{"Android", "Android GoogleAPI Emulator", "10.0"},
                 new Object[]{"iOS", "iPhone XS Simulator", "13.4"}
         };
-    }
-
-    public AndroidDriver getAndroidDriver() {
-        return androidDriver.get();
     }
 
     public String getSessionId() {
@@ -90,31 +60,17 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-" + super.dateTime);
+            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-EmuSim-" + super.dateTime);
         }
 
-        if (platformName.equals("Android")) {
-            driver.set(new AndroidDriver(createDriverURL(), capabilities));
-            androidDriver.set(new AndroidDriver(createDriverURL(), capabilities));
-        } else {
-            driver.set(new IOSDriver(createDriverURL(), capabilities));
-            //iosDriver.set(new IOSDriver(createDriverURL(), capabilities));
-        }
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
-        //sessionId.set(getAndroidDriver().getSessionId().toString());
+        driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-        driver.get().quit();
-
-        if (androidDriver.get() != null) {
-            ((JavascriptExecutor) androidDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-            androidDriver.get().quit();
-        } else if (iosDriver.get() != null) {
-            ((JavascriptExecutor) iosDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-            iosDriver.get().quit();
+        if (driver.get() != null) {
+            ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            driver.get().quit();
         }
     }
 

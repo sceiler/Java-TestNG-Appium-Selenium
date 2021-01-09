@@ -12,6 +12,7 @@ import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 
 public class TestBase extends SuperTestBase {
 
@@ -60,6 +61,7 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability(CapabilityType.VERSION, version);
         capabilities.setCapability(CapabilityType.PLATFORM, os);
         capabilities.setCapability("name", methodName);
+        capabilities.setCapability("tags", Arrays.asList(""));
 
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
