@@ -10,7 +10,8 @@ public class Constants {
         LINUX("Linux"),
         MACOSHIGHSIERRA("macOS 10.13"),
         MACOSMOJAVE("macOS 10.14"),
-        MACOSCATALINA("macOS 10.15");
+        MACOSCATALINA("macOS 10.15"),
+        MACOSBIGSUR("macOS 10.16");
 
         String label;
 
