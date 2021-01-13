@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Sauce Performance Suite" verbose="1" parallel="tests">
+    <test name="Sauce Performance Test" parallel="methods">
+        <packages>
+            <package name="com.saucelabs.yy.Tests.Selenium.Performance"/>
+        </packages>
+    </test>
+</suite>
