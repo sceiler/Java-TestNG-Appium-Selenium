@@ -22,4 +22,4 @@ jobs:
       env:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-        BUILD_TAG: Github-Java-Selenium-Web-1.$GITHUB_RUN_NUMBER
+        BUILD_TAG: Github-Java-Selenium-Web-1.{$GITHUB_RUN_NUMBER}
