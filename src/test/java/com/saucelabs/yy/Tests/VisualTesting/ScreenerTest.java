@@ -1,13 +1,16 @@
 package com.saucelabs.yy.Tests.VisualTesting;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.xml.dom.Tag;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,7 +54,7 @@ public class ScreenerTest {
         js = (JavascriptExecutor) driver;
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }
-    @Tag(name = "Sauce-Demo_Visual_Beta")
+
     //@DisplayName("SauceDemoVisualBetaTest()")
     @Test
     public void SauceDemoVisualBetaTest() throws AssertionError {
@@ -83,7 +86,6 @@ public class ScreenerTest {
         js.executeScript("/*@visual.snapshot*/", "Swag Labs - Product Page");
     }
 
-    @Tag(name = "Sauce-Demo_Visual_Beta")
     //@DisplayName("SauceDemoVisualBetaTest()")
     @Test
     public void SauceDemoVisualBetaTestChanged() throws AssertionError {
