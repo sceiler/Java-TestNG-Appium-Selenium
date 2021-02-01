@@ -18,8 +18,8 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -X clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/SwagLabsApp.xml
+      run: mvn -X clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/SaucePerformance.xml
       env:
         SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
         SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-        BUILD_TAG: Github-Java-Appium-Mobile-App-RDC-1.$GITHUB_RUN_NUMBER
+        BUILD_TAG: Github-Java-Selenium-Web-Performance-1.$GITHUB_RUN_NUMBER
