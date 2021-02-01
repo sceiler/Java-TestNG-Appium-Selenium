@@ -1,4 +1,4 @@
-name: Mobile App RDC Tests
+name: Sauce Performance Tests
 
 on:
   push:

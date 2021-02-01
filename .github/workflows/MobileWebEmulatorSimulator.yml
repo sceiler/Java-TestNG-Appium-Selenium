@@ -1,4 +1,4 @@
-name: Mobile App RDC Tests
+name: Mobile Web EmuSim Tests
 
 on:
   push:
