@@ -5,7 +5,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
@@ -13,12 +12,11 @@ import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
-    private ThreadLocal<String> sessionId = new ThreadLocal<>();
-    private ThreadLocal<WebDriverWait> webDriverWait = new ThreadLocal<>();
 
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
@@ -46,14 +44,6 @@ public class TestBase extends SuperTestBase {
         };
     }
 
-    public RemoteWebDriver getRemoteWebDriver() {
-        return remoteWebDriver.get();
-    }
-
-    public String getSessionId() {
-        return sessionId.get();
-    }
-
     protected void createDriver(String browser, String version, String os, String methodName) throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -70,8 +60,7 @@ public class TestBase extends SuperTestBase {
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
-        webDriverWait.set(new WebDriverWait(remoteWebDriver.get(), 10));
-        sessionId.set(getRemoteWebDriver().getSessionId().toString());
+        remoteWebDriver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @AfterMethod
