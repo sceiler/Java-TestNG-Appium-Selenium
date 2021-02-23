@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
     public String buildTag = System.getenv("BUILD_TAG");
-    public final String ANDROID_APK_FILE_NAME = "Android.SauceLabs.Mobile.Sample.app.2.7.0.apk";
-    public final String IOS_IPA_FILE_NAME = "iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.0.zip";
+    public final String ANDROID_APK_FILE_NAME = "Android.SauceLabs.Mobile.Sample.app.2.7.1.apk";
+    public final String IOS_IPA_FILE_NAME = "iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.zip";
 
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 
