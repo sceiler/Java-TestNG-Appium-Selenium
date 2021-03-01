@@ -12,7 +12,7 @@
     <description>Maven project containing tests run against saucedemo.com</description>
 
     <properties>
-        <org.testng.testng.version>7.3.0</org.testng.testng.version>
+        <org.testng.testng.version>7.4.0</org.testng.testng.version>
         <org.hamcrest.hamcrest-core.version>2.2</org.hamcrest.hamcrest-core.version>
         <org.seleniumhq.selenium.selenium-java>3.141.59</org.seleniumhq.selenium.selenium-java>
         <io.appium.java-client>7.4.1</io.appium.java-client>
