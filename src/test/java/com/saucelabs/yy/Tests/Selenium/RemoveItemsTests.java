@@ -6,12 +6,11 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.rmi.UnexpectedException;
 
 public class RemoveItemsTests extends TestBase {
 
     @Test(dataProvider = "hardCodedBrowsers")
-    public void removeOneItemFromCart(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
+    public void removeOneItemFromCart(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         getRemoteWebDriver().get("https://www.saucedemo.com/inventory.html");
         getRemoteWebDriver().findElement(By.className("btn_primary")).click();

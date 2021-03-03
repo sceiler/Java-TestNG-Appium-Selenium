@@ -1,6 +1,7 @@
 package com.saucelabs.yy.Tests.Selenium;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -61,6 +62,8 @@ public class TestBase extends SuperTestBase {
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
         remoteWebDriver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        remoteWebDriver.get().get("https://www.saucedemo.com");
+        remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }
 
     @AfterMethod

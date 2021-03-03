@@ -2,6 +2,7 @@ package com.saucelabs.yy.Tests.Appium.MobileWeb.EmulatorSimulator;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.ITestResult;
@@ -64,6 +65,8 @@ public class TestBase extends SuperTestBase {
         }
 
         driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
+        driver.get().get("https://www.saucedemo.com");
+        driver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }
 
     @AfterMethod

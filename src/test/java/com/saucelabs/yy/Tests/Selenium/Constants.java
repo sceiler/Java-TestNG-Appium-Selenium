@@ -11,7 +11,7 @@ public class Constants {
         MACOSHIGHSIERRA("macOS 10.13"),
         MACOSMOJAVE("macOS 10.14"),
         MACOSCATALINA("macOS 10.15"),
-        MACOSBIGSUR("macOS 10.16");
+        MACOSBIGSUR("macOS 11.00");
 
         String label;
 

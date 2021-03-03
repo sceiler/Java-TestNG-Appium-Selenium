@@ -6,12 +6,11 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.rmi.UnexpectedException;
 
 public class LoginTests extends TestBase {
 
     @Test(dataProvider = "hardCodedBrowsers")
-    public void invalidCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
+    public void invalidCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
         getRemoteWebDriver().get("https://www.saucedemo.com");
@@ -26,7 +25,7 @@ public class LoginTests extends TestBase {
     }
 
     @Test(dataProvider = "hardCodedBrowsers")
-    public void blankCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
+    public void blankCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
         getRemoteWebDriver().get("https://www.saucedemo.com");
@@ -41,7 +40,7 @@ public class LoginTests extends TestBase {
     }
 
     @Test(dataProvider = "hardCodedBrowsers")
-    public void validCredentials(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
+    public void validCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
         getRemoteWebDriver().get("https://www.saucedemo.com");
@@ -56,7 +55,7 @@ public class LoginTests extends TestBase {
     }
 
     @Test(dataProvider = "hardCodedBrowsers")
-    public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException, UnexpectedException {
+    public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
         getRemoteWebDriver().get("https://www.saucedemo.com");
