@@ -61,7 +61,7 @@ public class TestBase extends SuperTestBase {
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
-        remoteWebDriver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //remoteWebDriver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         remoteWebDriver.get().get("https://www.saucedemo.com");
         remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }
