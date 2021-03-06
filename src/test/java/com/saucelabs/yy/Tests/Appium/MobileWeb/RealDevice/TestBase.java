@@ -5,12 +5,14 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.remote.CapabilityType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
 
@@ -39,7 +41,7 @@ public class TestBase extends SuperTestBase {
 
     protected void createDriver(String platformName, String deviceName, String platformVersion, String methodName, MutableCapabilities caps) throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability("platformName", platformName);
+        capabilities.setCapability(CapabilityType.PLATFORM_NAME, platformName);
 
         if (!platformVersion.equals("")) {
             capabilities.setCapability("platformVersion", platformVersion);
@@ -49,9 +51,9 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("name", methodName);
 
         if (platformName.equals("Android")) {
-            capabilities.setCapability("browserName", "chrome");
+            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
         } else {
-            capabilities.setCapability("browserName", "Safari");
+            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Safari");
         }
 
         if (caps != null) {
@@ -65,6 +67,7 @@ public class TestBase extends SuperTestBase {
         }
 
         driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
+        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get().get("https://www.saucedemo.com");
         driver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }
