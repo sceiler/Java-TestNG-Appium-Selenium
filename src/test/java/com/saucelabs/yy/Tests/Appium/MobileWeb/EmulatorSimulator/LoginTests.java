@@ -15,13 +15,15 @@ public class LoginTests extends TestBase {
         annotate("Open saucedemo.com");
         getDriver().get("https://www.saucedemo.com");
         annotate("Sending invalid username");
-        getDriver().findElement(By.id("user-name")).sendKeys("bad");
+        getDriver().findElement(By.cssSelector("#user-name")).sendKeys("bad");
         annotate("Sending invalid password");
-        getDriver().findElement(By.id("password")).sendKeys("bad");
+        getDriver().findElement(By.cssSelector("#password")).sendKeys("bad");
+        // need to hide keyboard because otherwise clicking on login button does not work on Android -.-
+        getDriver().hideKeyboard();
         annotate("Clicking login button");
-        getDriver().findElement(By.className("btn_action")).click();
+        getDriver().findElement(By.cssSelector("#login-button")).click();
 
-        Assert.assertTrue(getDriver().findElements(By.className("error-button")).size() > 0);
+        Assert.assertTrue(getDriver().findElements(By.cssSelector("button[class='error-button']")).size() > 0);
     }
 
     @Test(dataProvider = "EmulatorSimulatorDataProvider")
@@ -30,14 +32,13 @@ public class LoginTests extends TestBase {
         annotate("Open saucedemo.com");
         getDriver().get("https://www.saucedemo.com");
         annotate("Sending blank username");
-        getDriver().findElement(By.id("user-name")).sendKeys("");
+        getDriver().findElement(By.cssSelector("#user-name")).sendKeys("");
         annotate("Sending blank password");
-        getDriver().findElement(By.id("password")).sendKeys("");
+        getDriver().findElement(By.cssSelector("#password")).sendKeys("");
         annotate("Clicking login button");
-        getDriver().findElement(By.className("btn_action")).click();
+        getDriver().findElement(By.cssSelector("#login-button")).click();
 
-        Assert.assertTrue(getDriver().findElements(By.className("error-button")).size() > 0);
-        Assert.assertTrue(getDriver().findElements(By.className("error-button")).size() > 0);
+        Assert.assertTrue(getDriver().findElements(By.cssSelector("button[class='error-button']")).size() > 0);
     }
 
     @Test(dataProvider = "EmulatorSimulatorDataProvider")
@@ -46,11 +47,11 @@ public class LoginTests extends TestBase {
         annotate("Open saucedemo.com");
         getDriver().get("https://www.saucedemo.com");
         annotate("Sending valid username");
-        getDriver().findElement(By.id("user-name")).sendKeys("standard_user");
+        getDriver().findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
         annotate("Sending valid password");
-        getDriver().findElement(By.id("password")).sendKeys("secret_sauce");
+        getDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         annotate("Clicking login button");
-        getDriver().findElement(By.className("btn_action")).click();
+        getDriver().findElement(By.cssSelector("#login-button")).click();
 
         Assert.assertTrue(getDriver().getCurrentUrl().contains("inventory"));
     }
@@ -61,8 +62,8 @@ public class LoginTests extends TestBase {
         annotate("Open saucedemo.com");
         getDriver().get("https://www.saucedemo.com");
         annotate("Check if username input present");
-        Assert.assertTrue(getDriver().findElement(By.id("user-name")).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("#user-name")).isDisplayed());
         annotate("Check if password input present");
-        Assert.assertTrue(getDriver().findElement(By.id("password")).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("#password")).isDisplayed());
     }
 }

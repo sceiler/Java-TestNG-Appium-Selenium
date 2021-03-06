@@ -13,13 +13,14 @@ public class AddItemsTests extends TestBase {
     public void addOneItemtoCart(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
         getDriver().get("https://www.saucedemo.com/inventory.html");
-        getDriver().findElement(By.className("btn_primary")).click();
-        getDriver().findElement(By.className("btn_primary")).click();
-        getDriver().findElement(By.className("btn_secondary")).click();
 
-        Assert.assertEquals("1", getDriver().findElement(By.className("shopping_cart_badge")).getText());
+        getDriver().findElement(By.cssSelector("button[class='btn_primary btn_inventory']")).click();
+        getDriver().findElement(By.cssSelector("button[class='btn_primary btn_inventory']")).click();
+        getDriver().findElement(By.cssSelector("button[class='btn_secondary btn_inventory']")).click();
+
+        Assert.assertEquals("1", getDriver().findElement(By.cssSelector("span[class*='shopping_cart_badge']")).getText());
 
         getDriver().get("http://www.saucedemo.com/cart.html");
-        Assert.assertEquals(1, getDriver().findElements(By.className("inventory_item_name")).size());
+        Assert.assertEquals(1, getDriver().findElements(By.cssSelector("div[class='inventory_item_name']")).size());
     }
 }
