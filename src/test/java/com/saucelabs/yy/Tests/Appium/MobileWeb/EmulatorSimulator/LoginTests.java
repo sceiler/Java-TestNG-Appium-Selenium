@@ -36,6 +36,7 @@ public class LoginTests extends TestBase {
         annotate("Sending blank password");
         getDriver().findElement(By.cssSelector("#password")).sendKeys("");
         annotate("Clicking login button");
+        getDriver().hideKeyboard();
         getDriver().findElement(By.cssSelector("#login-button")).click();
 
         Assert.assertTrue(getDriver().findElements(By.cssSelector("button[class='error-button']")).size() > 0);
@@ -51,6 +52,7 @@ public class LoginTests extends TestBase {
         annotate("Sending valid password");
         getDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         annotate("Clicking login button");
+        getDriver().hideKeyboard();
         getDriver().findElement(By.cssSelector("#login-button")).click();
 
         Assert.assertTrue(getDriver().getCurrentUrl().contains("inventory"));
