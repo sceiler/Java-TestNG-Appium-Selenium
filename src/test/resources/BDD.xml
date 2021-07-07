@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BDD Test Suite" verbose="1" parallel="tests" thread-count="3">
+    <test name="iPhone_1" preserve-order="true">
+        <parameter name="deviceName" value="iPhone 11.*"/>
+        <parameter name="platformName" value="iOS"/>
+        <classes>
+            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
+        </classes>
+    </test>
+    <test name="iPhone_2" preserve-order="true">
+        <parameter name="deviceName" value="iPhone 12.*"/>
+        <parameter name="platformName" value="iOS"/>
+        <classes>
+            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
+        </classes>
+    </test>
+    <test name="iPhone_3" preserve-order="true">
+        <parameter name="deviceName" value="iPhone X.*"/>
+        <parameter name="platformName" value="iOS"/>
+        <classes>
+            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
+        </classes>
+    </test>
+</suite>
