@@ -7,9 +7,9 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.Status;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 
 public class StepDefinitions extends RunTest {
 
@@ -22,8 +22,7 @@ public class StepDefinitions extends RunTest {
 
     @Then("I should see Swag Labs login page")
     public void iShouldSeeSwagLabsLoginPage() {
-        //WebElement loginField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("test-LOGIN")));
-        Assert.assertTrue("Should see login field", driver.get().findElement(By.id("test-LOGIN")).isDisplayed());
+        Assert.assertTrue(driver.get().findElement(By.id("test-LOGIN")).isDisplayed());
     }
 
     @After
