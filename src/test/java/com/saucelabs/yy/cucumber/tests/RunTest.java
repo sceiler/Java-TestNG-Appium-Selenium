@@ -33,6 +33,7 @@ public class RunTest {
     private TestNGCucumberRunner testNGCucumberRunner;
 
     public static ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    public String buildTag = System.getenv("BUILD_TAG");
 
     @BeforeClass(alwaysRun = true)
     public void setUpCucumber() {
@@ -46,8 +47,14 @@ public class RunTest {
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("platformName", platformName);
         capabilities.setCapability("browserName", "");
-        capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault())));
+        //capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault())));
         capabilities.setCapability("app", "storage:filename=" + "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+
+        if (buildTag != null) {
+            capabilities.setCapability("build", buildTag);
+        } else {
+            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault())));
+        }
 
         driver.set(new AppiumDriver(new URL("https://" + System.getenv("SAUCE_USERNAME") + ":" + System.getenv("SAUCE_ACCESS_KEY") + "@ondemand.eu-central-1.saucelabs.com/wd/hub"), capabilities));
     }
