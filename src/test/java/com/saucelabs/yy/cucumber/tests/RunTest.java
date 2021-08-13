@@ -25,7 +25,7 @@ import java.time.temporal.ChronoUnit;
         plugin = {
         "summary",
         "pretty",
-        "html:target/cucumber-reports/cucumber-pretty",
+        "html:target/cucumber-reports/cucumber-pretty.html",
         "json:target/cucumber-reports/CucumberTestReport.json"
         })
 
@@ -47,7 +47,6 @@ public class RunTest {
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("platformName", platformName);
         capabilities.setCapability("browserName", "");
-        //capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault())));
         capabilities.setCapability("app", "storage:filename=" + "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
 
         if (buildTag != null) {
@@ -70,8 +69,8 @@ public class RunTest {
     }
 
     @AfterClass(alwaysRun = true)
-    public void tearDownClass() throws Exception {
+    public void tearDownClass() {
         testNGCucumberRunner.finish();
-        //driver.get().quit();
+        System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
     }
 }
