@@ -3,6 +3,7 @@ package com.saucelabs.yy.Tests;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestListener;
 
@@ -16,11 +17,13 @@ import java.time.temporal.ChronoUnit;
 public class SuperTestBase implements ITestListener {
     public String username = System.getenv("SAUCE_USERNAME");
     public String accesskey = System.getenv("SAUCE_ACCESS_KEY");
+    public String visualAccessKey = System.getenv("SCREENER_API_KEY");
     //public String driverCreation = System.getenv("SAUCE_DRIVER_CREATION");
     public ThreadLocal<AndroidDriver> androidDriver = new ThreadLocal<>();
     public ThreadLocal<IOSDriver> iosDriver = new ThreadLocal<>();
     public ThreadLocal<RemoteWebDriver> remoteWebDriver = new ThreadLocal<>();
     public ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    public ThreadLocal<JavascriptExecutor> javascriptExecutor = new ThreadLocal<>();
     public String dateTime = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault()));
 
     public URL createDriverURL(Region region) throws MalformedURLException {
@@ -28,6 +31,7 @@ public class SuperTestBase implements ITestListener {
             case EU: return new URL("https://" + username + ":" + accesskey + Region.EU.label);
             case EU_RDC: return new URL("https://" + username + ":" + accesskey + Region.EU_RDC.label);
             case US: return new URL("https://" + username + ":" + accesskey + Region.US.label);
+            case APAC: return new URL("https://" + username + ":" + accesskey + Region.APAC.label);
             case HEADLESS: return new URL("https://" + username + ":" + accesskey + Region.HEADLESS.label);
         }
         return null;
@@ -56,5 +60,9 @@ public class SuperTestBase implements ITestListener {
 
     public AppiumDriver getDriver() {
         return driver.get();
+    }
+
+    public JavascriptExecutor getJavaScriptExecutor() {
+        return javascriptExecutor.get();
     }
 }
