@@ -1,5 +1,6 @@
 package com.saucelabs.yy.cucumber.tests;
 
+import com.saucelabs.yy.Tests.SuperTestBase;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
@@ -7,6 +8,7 @@ import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 import org.openqa.selenium.MutableCapabilities;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -14,10 +16,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.net.URL;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 
 @CucumberOptions(
         features = "src/test/java/com/saucelabs/yy/cucumber/feature",
@@ -29,7 +28,7 @@ import java.time.temporal.ChronoUnit;
         "json:target/cucumber-reports/CucumberTestReport.json"
         })
 
-public class RunTest {
+public class RunTest extends SuperTestBase {
     private TestNGCucumberRunner testNGCucumberRunner;
 
     public static ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
@@ -47,15 +46,21 @@ public class RunTest {
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("platformName", platformName);
         capabilities.setCapability("browserName", "");
-        capabilities.setCapability("app", "storage:filename=" + "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+
+        if (platformName.equals("iOS")) {
+            capabilities.setCapability("app", "storage:filename=" + "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+        } else if (platformName.equals("Android")) {
+            capabilities.setCapability("app", "storage:filename=" + "Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+        }
 
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault())));
+            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + SuperTestBase.localBuildTag);
         }
 
-        driver.set(new AppiumDriver(new URL("https://" + System.getenv("SAUCE_USERNAME") + ":" + System.getenv("SAUCE_ACCESS_KEY") + "@ondemand.eu-central-1.saucelabs.com/wd/hub"), capabilities));
+        driver.set(new AppiumDriver(new URL("https://" + username + ":" + accesskey + "@ondemand.eu-central-1.saucelabs.com/wd/hub"), capabilities));
+        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test(groups = "cucumber", description = "Run Cucumber Features.", dataProvider = "scenarios")
@@ -63,14 +68,20 @@ public class RunTest {
         testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
     }
 
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[][] scenarios() {
         return testNGCucumberRunner.provideScenarios();
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void tearDownMethod() {
+        System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
+    }
+
     @AfterClass(alwaysRun = true)
     public void tearDownClass() {
-        testNGCucumberRunner.finish();
         System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
+        testNGCucumberRunner.finish();
+
     }
 }

@@ -1,37 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="BDD Test Suite" verbose="1" parallel="tests" thread-count="100" preserve-order="false">
-    <test name="iPhone_1">
+<suite name="BDD Test Suite" verbose="1" parallel="tests" data-provider-thread-count="100" thread-count="100" preserve-order="false">
+    <test name="iPhone" parallel="methods">
         <parameter name="deviceName" value="iPhone.*"/>
         <parameter name="platformName" value="iOS"/>
         <classes>
             <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
         </classes>
     </test>
-    <test name="iPhone_2">
-        <parameter name="deviceName" value="iPhone.*"/>
-        <parameter name="platformName" value="iOS"/>
-        <classes>
-            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
-        </classes>
-    </test>
-    <test name="iPhone_3">
-        <parameter name="deviceName" value="iPhone.*"/>
-        <parameter name="platformName" value="iOS"/>
-        <classes>
-            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
-        </classes>
-    </test>
-    <test name="iPhone_4">
-        <parameter name="deviceName" value="iPhone.*"/>
-        <parameter name="platformName" value="iOS"/>
-        <classes>
-            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
-        </classes>
-    </test>
-    <test name="iPhone_5">
-        <parameter name="deviceName" value="iPhone.*"/>
-        <parameter name="platformName" value="iOS"/>
+    <test name="Android" parallel="methods">
+        <parameter name="deviceName" value="Google Pixel.*"/>
+        <parameter name="platformName" value="Android"/>
         <classes>
             <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
         </classes>
