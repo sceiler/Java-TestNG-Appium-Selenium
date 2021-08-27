@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Device" verbose="0" parallel="tests" thread-count="50" data-provider-thread-count="50">
+    <test name="Check if Apple ID signed in" parallel="methods" thread-count="50">
+        <packages>
+            <package name="com.saucelabs.yy.Tests.Appium.Devices.Apple.*"/>
+        </packages>
+    </test>
+</suite>
