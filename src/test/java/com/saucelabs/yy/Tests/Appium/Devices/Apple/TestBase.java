@@ -8,11 +8,17 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.DataProvider;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -214,7 +220,7 @@ public class TestBase extends SuperTestBase {
                 new Object[]{"iOS", ".*", "15"},
                 new Object[]{"iOS", ".*", "15"},
                 new Object[]{"iOS", ".*", "15"},
-                new Object[]{"iOS", ".*", "15"},
+                new Object[]{"iOS", ".*", "15"}
         };
     }
 
@@ -263,7 +269,7 @@ public class TestBase extends SuperTestBase {
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) {
+    public void tearDown(ITestResult result) throws IOException {
         if (driver.get() != null) {
             ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
@@ -273,18 +279,17 @@ public class TestBase extends SuperTestBase {
                 String deviceName = (String) caps.getCapability("testobject_device");
                 String platformVersion = (String) caps.getCapability("platformVersion");
                 String url = (String) caps.getCapability("testobject_test_report_url");
-                deviceInfo.get().add(String.format("%s,%s,%s,%s", udid, deviceName, platformVersion, url));
+                //deviceInfo.get().add(String.format("%s,%s,%s,%s", udid, deviceName, platformVersion, url));
+
+                File yourFile = new File("/Users/yimin.yang/Downloads/devices.txt");
+                yourFile.createNewFile(); // if file already exists will do nothing
+                FileOutputStream oFile = new FileOutputStream(yourFile, true);
+                try (Writer writer = new BufferedWriter(new OutputStreamWriter(oFile, StandardCharsets.UTF_8))) {
+                    writer.write(String.format("%s,%s,%s,%s" + System.lineSeparator(), udid, deviceName, platformVersion, url + "#4"));
+                }
             }
 
             driver.get().quit();
         }
     }
-
-    @AfterSuite
-    public void tearDown() {
-        for (String text : deviceInfo.get()) {
-            System.out.println(text);
-        }
-    }
-
 }

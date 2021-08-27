@@ -16,6 +16,6 @@ public class DeviceTests extends TestBase {
         driver.get().activateApp("com.apple.Preferences");
         String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE));
 
-        Assert.assertTrue(result.contains("Sign in to your iPhone") || result.contains("Sign in to your iPad") || result.contains("Sign in to your iPod"), result);
+        Assert.assertTrue(result.contains("Sign in to your iPhone") || result.contains("Sign in to your iPad") || result.contains("Sign in to your iPod"));
     }
 }
