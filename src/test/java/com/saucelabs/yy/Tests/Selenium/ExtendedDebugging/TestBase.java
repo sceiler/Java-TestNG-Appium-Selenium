@@ -41,14 +41,14 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
         capabilities.setCapability(CapabilityType.VERSION, version);
-        capabilities.setCapability(CapabilityType.PLATFORM, os);
+        //capabilities.setCapability(CapabilityType.PLATFORM, os);
         capabilities.setCapability("extendedDebugging", true);
         capabilities.setCapability("name", methodName);
 
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Selenium-Web-ExtendedDebugging-" + super.dateTime);
+            capabilities.setCapability("build", "YiMin-Local-Java-Selenium-Web-ExtendedDebugging-" + localBuildTag);
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));

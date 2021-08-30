@@ -51,7 +51,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Selenium-Web-Performance-" + super.dateTime);
+            capabilities.setCapability("build", "YiMin-Local-Java-Selenium-Web-Performance-" + localBuildTag);
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
