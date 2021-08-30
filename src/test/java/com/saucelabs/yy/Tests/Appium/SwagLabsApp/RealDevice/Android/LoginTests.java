@@ -1,6 +1,6 @@
-package com.saucelabs.yy.Tests.Appium.SwagLabsApp.Android;
+package com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.Android;
 
-import com.saucelabs.yy.Tests.Appium.SwagLabsApp.TestBase;
+import com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.TestBase;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,16 +10,17 @@ import java.net.MalformedURLException;
 
 public class LoginTests extends TestBase {
 
-    @Test(dataProvider = "RealDevices")
+    @Test(dataProvider = "AndroidRealDevices")
     public void blankCredentials(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, testMethod.getName());
 
         getDriver().findElementByAccessibilityId("test-LOGIN").click();
         Assert.assertTrue(getDriver().findElementByAccessibilityId("test-Error message").isDisplayed());
         getDriver().getScreenshotAs(OutputType.FILE);
+        System.out.println(getDriver().getCapabilities().getCapability("testobject_test_report_url"));
     }
 
-    @Test(dataProvider = "RealDevices")
+    @Test(dataProvider = "AndroidRealDevices")
     public void validCredentials(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, testMethod.getName());
 
@@ -27,6 +28,5 @@ public class LoginTests extends TestBase {
         getDriver().findElementByAccessibilityId("test-Password").sendKeys("secret_sauce");
         getDriver().findElementByAccessibilityId("test-LOGIN").click();
         getDriver().getScreenshotAs(OutputType.FILE);
-        Assert.assertTrue(getDriver().findElementByXPath("(//android.view.ViewGroup[@content-desc=\"test-Item\"])[1]/android.view.ViewGroup/android.widget.ImageView").isDisplayed());
     }
 }

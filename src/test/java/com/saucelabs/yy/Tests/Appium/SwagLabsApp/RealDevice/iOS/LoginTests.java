@@ -1,6 +1,6 @@
-package com.saucelabs.yy.Tests.Appium.SwagLabsApp.iOS;
+package com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.iOS;
 
-import com.saucelabs.yy.Tests.Appium.SwagLabsApp.TestBase;
+import com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.TestBase;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 
 public class LoginTests extends TestBase {
 
-    @Test(dataProvider = "RealDevices")
+    @Test(dataProvider = "iOSRealDevices")
     public void blankCredentials(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, testMethod.getName());
 
@@ -19,7 +19,7 @@ public class LoginTests extends TestBase {
         getDriver().getScreenshotAs(OutputType.FILE);
     }
 
-    @Test(dataProvider = "RealDevices")
+    @Test(dataProvider = "iOSRealDevices")
     public void validCredentials(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, testMethod.getName());
 
