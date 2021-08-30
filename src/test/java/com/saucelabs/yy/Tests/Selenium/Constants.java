@@ -8,6 +8,7 @@ public class Constants {
         WINDOWS8("Windows 8"),
         WINDOWS7("Windows 7"),
         LINUX("Linux"),
+        OSXELCAPITAN("macOS 10.12"),
         MACOSHIGHSIERRA("macOS 10.13"),
         MACOSMOJAVE("macOS 10.14"),
         MACOSCATALINA("macOS 10.15"),
