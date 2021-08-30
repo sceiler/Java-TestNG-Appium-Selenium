@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.util.Locale;
 
 public class DeviceTests extends TestBase {
 
@@ -16,6 +17,6 @@ public class DeviceTests extends TestBase {
         driver.get().activateApp("com.apple.Preferences");
         String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE));
 
-        Assert.assertTrue(result.contains("Sign in to your iPhone") || result.contains("Sign in to your iPad") || result.contains("Sign in to your iPod"));
+        Assert.assertTrue(result.toLowerCase(Locale.ROOT).contains("sign in to"));
     }
 }

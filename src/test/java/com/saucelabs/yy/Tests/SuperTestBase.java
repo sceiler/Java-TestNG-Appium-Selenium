@@ -9,22 +9,18 @@ import org.testng.ITestListener;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 public class SuperTestBase implements ITestListener {
     public String username = System.getenv("SAUCE_USERNAME");
     public String accesskey = System.getenv("SAUCE_ACCESS_KEY");
     public String visualAccessKey = System.getenv("SCREENER_API_KEY");
-    //public String driverCreation = System.getenv("SAUCE_DRIVER_CREATION");
     public ThreadLocal<AndroidDriver> androidDriver = new ThreadLocal<>();
     public ThreadLocal<IOSDriver> iosDriver = new ThreadLocal<>();
     public ThreadLocal<RemoteWebDriver> remoteWebDriver = new ThreadLocal<>();
     public ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
     public ThreadLocal<JavascriptExecutor> javascriptExecutor = new ThreadLocal<>();
-    public String dateTime = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MINUTES).atZone(ZoneId.systemDefault()));
+    public final static String localBuildTag = String.valueOf(new Random(System.currentTimeMillis()).nextInt()).replace("-", "");
 
     public URL createDriverURL(Region region) throws MalformedURLException {
         switch (region) {

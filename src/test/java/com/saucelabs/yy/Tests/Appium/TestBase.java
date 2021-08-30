@@ -90,7 +90,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-" + super.dateTime);
+            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-" + localBuildTag);
         }
 
         if (platformName.equals("Android")) {
