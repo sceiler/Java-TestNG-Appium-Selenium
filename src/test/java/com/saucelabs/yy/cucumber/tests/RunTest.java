@@ -16,16 +16,17 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @CucumberOptions(
         features = "src/test/java/com/saucelabs/yy/cucumber/feature",
         glue = {"com.saucelabs.yy.cucumber.steps"},
         plugin = {
-        "summary",
-        "pretty",
-        "html:target/cucumber-reports/cucumber-pretty.html",
-        "json:target/cucumber-reports/CucumberTestReport.json"
+                "summary",
+                "pretty",
+                "html:target/cucumber-reports/cucumber-pretty.html",
+                "json:target/cucumber-reports/CucumberTestReport.json"
         })
 
 public class RunTest extends SuperTestBase {
@@ -40,7 +41,7 @@ public class RunTest extends SuperTestBase {
     }
 
     @BeforeMethod(alwaysRun = true)
-    @Parameters({ "deviceName", "platformName" })
+    @Parameters({"deviceName", "platformName"})
     public void setUpClass(String deviceName, String platformName) throws Exception {
         MutableCapabilities capabilities = new MutableCapabilities();
         capabilities.setCapability("deviceName", deviceName);
@@ -53,11 +54,7 @@ public class RunTest extends SuperTestBase {
             capabilities.setCapability("app", "storage:filename=" + "Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
         }
 
-        if (buildTag != null) {
-            capabilities.setCapability("build", buildTag);
-        } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-BDD-" + SuperTestBase.localBuildTag);
-        }
+        capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Mobile-App-BDD-" + SuperTestBase.localBuildTag));
 
         driver.set(new AppiumDriver(new URL("https://" + username + ":" + accesskey + "@ondemand.eu-central-1.saucelabs.com/wd/hub"), capabilities));
         driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -75,13 +72,16 @@ public class RunTest extends SuperTestBase {
 
     @AfterMethod(alwaysRun = true)
     public void tearDownMethod() {
-        System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
+        if (driver.get() != null) {
+            System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
+        }
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDownClass() {
-        System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
+        if (driver.get() != null) {
+            System.out.println(driver.get().getCapabilities().getCapability("testobject_test_report_url"));
+        }
         testNGCucumberRunner.finish();
-
     }
 }
