@@ -82,7 +82,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             sauceOptions.setCapability("build", buildTag);
         } else {
-            sauceOptions.setCapability("build", "YiMin-Local-Java-Selenium-Web-" + super.dateTime);
+            sauceOptions.setCapability("build", "YiMin-Local-Java-Selenium-Web-" + localBuildTag);
         }
 
         capabilities.setCapability("sauce:options", sauceOptions);
