@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
-public class LoginTests extends TestBase {
+public class VisualTests extends TestBase {
 
     @Test(dataProvider = "singleBrowser")
     public void SauceDemo(String browser, String version, String os, Method method) throws MalformedURLException {
@@ -25,13 +25,14 @@ public class LoginTests extends TestBase {
         javascriptExecutor.get().executeScript("/*@visual.snapshot*/", "Swag Labs - Inventory");
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
-    public void GoogleMaps(String browser, String version, String os, Method method) throws MalformedURLException {
+    @Test(dataProvider = "singleBrowser")
+    public void GoogleMaps(String browser, String version, String os, Method method) throws MalformedURLException, InterruptedException {
         createDriver(browser, version, os, method.getName());
         getRemoteWebDriver().get("https://www.google.com/maps");
         javascriptExecutor.get().executeScript("/*@visual.snapshot*/", "Google Maps - Init");
         getRemoteWebDriver().findElement(By.cssSelector("#searchboxinput")).sendKeys("Frankfurt");
         getRemoteWebDriver().findElement(By.cssSelector("#searchboxinput")).sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
         javascriptExecutor.get().executeScript("/*@visual.snapshot*/", "Google Maps - Result");
     }
 }
