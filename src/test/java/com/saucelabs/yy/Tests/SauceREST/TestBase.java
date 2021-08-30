@@ -13,8 +13,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
@@ -66,7 +64,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-SauceREST-" + super.dateTime);
+            capabilities.setCapability("build", "YiMin-Local-Java-SauceREST-" + localBuildTag);
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));

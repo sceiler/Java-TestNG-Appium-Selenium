@@ -61,7 +61,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             caps.setCapability("build", buildTag);
         } else {
-            caps.setCapability("build", "YiMin-Local-ATD-" + platformName + "-" + super.dateTime);
+            caps.setCapability("build", "YiMin-Local-ATD-" + platformName + "-" + localBuildTag);
         }
 
         driver.set(new AppiumDriver(createDriverURL(), caps));
