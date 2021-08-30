@@ -22,8 +22,8 @@ public class TestBase extends SuperTestBase {
     @DataProvider(name = "RDCDataProvider", parallel = true)
     public static Object[][] emuSimDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Samsung.*", "10"},
-                new Object[]{"iOS", "iP.*", "14"}
+                new Object[]{"Android", ".*", "10"},
+                new Object[]{"iOS", ".*", "14"}
         };
     }
 
@@ -63,7 +63,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             capabilities.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-RDC-" + super.dateTime);
+            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-" + localBuildTag);
         }
 
         driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
@@ -82,6 +82,7 @@ public class TestBase extends SuperTestBase {
 
     /**
      * Currently not available for RDC tests.
+     *
      * @param text
      */
     protected void annotate(String text) {

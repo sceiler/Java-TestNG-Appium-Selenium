@@ -64,7 +64,7 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             sauceOptions.setCapability("build", buildTag);
         } else {
-            sauceOptions.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-EmuSim-" + super.dateTime);
+            sauceOptions.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-EmuSim-" + localBuildTag);
         }
 
         capabilities.setCapability("sauce:options", sauceOptions);

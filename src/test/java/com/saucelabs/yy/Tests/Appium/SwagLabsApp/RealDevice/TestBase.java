@@ -1,4 +1,4 @@
-package com.saucelabs.yy.Tests.Appium.SwagLabsApp;
+package com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
 import io.appium.java_client.AppiumDriver;
@@ -20,10 +20,22 @@ public class TestBase extends SuperTestBase {
 
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 
-    @DataProvider(name = "RealDevices", parallel = true)
-    public static Object[][] sauceBrowserDataProvider(Method testMethod) {
+    @DataProvider(name = "AndroidRealDevices", parallel = true)
+    public static Object[][] androidRealDevicesDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Samsung.*"},
+                new Object[]{"Android", ".*"},
+                new Object[]{"Android", ".*"},
+                new Object[]{"Android", ".*"},
+                new Object[]{"Android", ".*"}
+        };
+    }
+
+    @DataProvider(name = "iOSRealDevices", parallel = true)
+    public static Object[][] iOSRealDevicesDataProvider(Method testMethod) {
+        return new Object[][]{
+                new Object[]{"iOS", "iPhone.*"},
+                new Object[]{"iOS", "iPhone.*"},
+                new Object[]{"iOS", "iPhone.*"},
                 new Object[]{"iOS", "iPhone.*"}
         };
     }
@@ -50,10 +62,11 @@ public class TestBase extends SuperTestBase {
         if (buildTag != null) {
             caps.setCapability("build", buildTag);
         } else {
-            caps.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + super.dateTime);
+            caps.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + localBuildTag);
         }
 
         driver.set(new AppiumDriver<>(createDriverURL(), caps));
+        sessionId.set(driver.get().getSessionId().toString());
         driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
