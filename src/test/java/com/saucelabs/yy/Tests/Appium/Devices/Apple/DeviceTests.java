@@ -13,13 +13,13 @@ public class DeviceTests extends TestBase {
     /**
      * Run the test twice to increase chance to also hit the same device model but different device
      */
-    @Test(dataProvider = "RDCDataProvider", invocationCount = 2)
+    @Test(dataProvider = "RDCDataProvider", invocationCount = 3)
     public void checkForSignedInAppleID(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 
         driver.get().activateApp("com.apple.Preferences");
-        String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE));
+        String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
-        Assert.assertTrue(result.toLowerCase(Locale.ROOT).contains("sign in to"));
+        Assert.assertTrue(result.contains("sign in to") || result.contains("testobject"), result);
     }
 }

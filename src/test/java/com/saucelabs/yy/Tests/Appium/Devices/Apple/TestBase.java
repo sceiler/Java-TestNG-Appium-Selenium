@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 
@@ -21,6 +22,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -28,8 +30,10 @@ public class TestBase extends SuperTestBase {
     public String buildTag = System.getenv("BUILD_TAG");
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
     protected ThreadLocal<OCR> ocr = new ThreadLocal<>();
+    private ArrayList<String> signedInDevices = new ArrayList<>();
 
     @DataProvider(name = "RDCDataProvider", parallel = true)
+
     public static Object[][] RDCDataProvider(Method testMethod) throws IOException, URISyntaxException, InterruptedException {
         var deviceList = SauceRESTHelper.getDevices();
         Object[][] objects = new Object[deviceList.size()][];
@@ -99,11 +103,20 @@ public class TestBase extends SuperTestBase {
                 FileOutputStream oFile = new FileOutputStream(yourFile, true);
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(oFile, StandardCharsets.UTF_8))) {
                     // add #4 to directly jump to the test report step where one can see the Settings app
-                    writer.write(String.format("%s,%s,%s,%s" + System.lineSeparator(), udid, deviceName, platformVersion, url + "#4"));
+                    String output = String.format("%s,%s,%s,%s", udid, deviceName, platformVersion, url + "#4");
+                    writer.write(output + System.lineSeparator());
+                    signedInDevices.add(output);
                 }
             }
 
             driver.get().quit();
+        }
+    }
+
+    @AfterClass
+    public void tearDown() {
+        for (String signedInDevice : signedInDevices) {
+            System.out.println(signedInDevice);
         }
     }
 }
