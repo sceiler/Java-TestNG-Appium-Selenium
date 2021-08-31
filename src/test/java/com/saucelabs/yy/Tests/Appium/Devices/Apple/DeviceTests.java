@@ -13,7 +13,7 @@ public class DeviceTests extends TestBase {
     /**
      * Run the test twice to increase chance to also hit the same device model but different device
      */
-    @Test(dataProvider = "RDCDataProvider", invocationCount = 3)
+    @Test(dataProvider = "RDCDataProvider")
     public void checkForSignedInAppleID(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 
