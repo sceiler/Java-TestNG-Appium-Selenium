@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests;
 
+import com.saucelabs.yy.Region;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -24,17 +25,21 @@ public class SuperTestBase implements ITestListener {
 
     public URL createDriverURL(Region region) throws MalformedURLException {
         switch (region) {
-            case EU: return new URL("https://" + username + ":" + accesskey + Region.EU.label);
-            case EU_RDC: return new URL("https://" + username + ":" + accesskey + Region.EU_RDC.label);
-            case US: return new URL("https://" + username + ":" + accesskey + Region.US.label);
-            case APAC: return new URL("https://" + username + ":" + accesskey + Region.APAC.label);
-            case HEADLESS: return new URL("https://" + username + ":" + accesskey + Region.HEADLESS.label);
+            case EU:
+                return new URL("https://" + username + ":" + accesskey + Region.EU.hub);
+            case US:
+                return new URL("https://" + username + ":" + accesskey + Region.US.hub);
+            case APAC:
+                return new URL("https://" + username + ":" + accesskey + Region.APAC.hub);
+            case HEADLESS:
+                return new URL("https://" + username + ":" + accesskey + Region.HEADLESS.hub);
         }
         return null;
     }
 
     /**
      * Default returned driver URL will be EU.
+     *
      * @return EU driver URL
      * @throws MalformedURLException
      */

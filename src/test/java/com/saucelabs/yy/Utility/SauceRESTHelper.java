@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Utility;
 
+import com.saucelabs.yy.Region;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,13 +15,13 @@ import java.util.Base64;
 
 public class SauceRESTHelper {
 
-    public static ArrayList<DeviceModel> getDevices() throws IOException, URISyntaxException, InterruptedException {
+    public static ArrayList<DeviceModel> getDevices(Region region) throws IOException, URISyntaxException, InterruptedException {
         ArrayList<DeviceModel> deviceModelArrayList = new ArrayList<>();
         var client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .build();
         var request = HttpRequest.newBuilder()
-                .uri(new URI("https://api.eu-central-1.saucelabs.com/v1/rdc/devices"))
+                .uri(new URI(region.apiServer + "v1/rdc/devices"))
                 .header("Authorization", basicAuth(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY")))
                 .build();
 
@@ -41,6 +42,10 @@ public class SauceRESTHelper {
         }
 
         return deviceModelArrayList;
+    }
+
+    public static ArrayList<DeviceModel> getDevices() throws IOException, URISyntaxException, InterruptedException {
+        return getDevices(Region.EU);
     }
 
     private static String basicAuth(String username, String password) {
