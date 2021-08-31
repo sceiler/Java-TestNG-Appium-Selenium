@@ -92,7 +92,6 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("sauce:options", sauceOptions);
 
         driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
-        //driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @AfterMethod
