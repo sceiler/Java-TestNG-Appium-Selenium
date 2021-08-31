@@ -21,14 +21,13 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
     public String buildTag = System.getenv("BUILD_TAG");
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
     protected ThreadLocal<OCR> ocr = new ThreadLocal<>();
-    private ThreadLocal<List<String>> deviceInfo = new ThreadLocal<>();
 
     @DataProvider(name = "RDCDataProvider", parallel = true)
     public static Object[][] RDCDataProvider(Method testMethod) throws IOException, URISyntaxException, InterruptedException {
@@ -64,6 +63,7 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("name", methodName);
+        capabilities.setCapability("testobject_session_creation_timeout", "90000");
 
         if (platformName.equals("Android")) {
             capabilities.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
@@ -75,11 +75,7 @@ public class TestBase extends SuperTestBase {
             capabilities.merge(caps);
         }
 
-        if (buildTag != null) {
-            capabilities.setCapability("build", buildTag);
-        } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag);
-        }
+        capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
 
         driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
         driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -97,12 +93,12 @@ public class TestBase extends SuperTestBase {
                 String deviceName = (String) caps.getCapability("testobject_device");
                 String platformVersion = (String) caps.getCapability("platformVersion");
                 String url = (String) caps.getCapability("testobject_test_report_url");
-                //deviceInfo.get().add(String.format("%s,%s,%s,%s", udid, deviceName, platformVersion, url));
 
                 File yourFile = new File("/Users/yimin.yang/Downloads/devices.txt");
                 yourFile.createNewFile(); // if file already exists will do nothing
                 FileOutputStream oFile = new FileOutputStream(yourFile, true);
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(oFile, StandardCharsets.UTF_8))) {
+                    // add #4 to directly jump to the test report step where one can see the Settings app
                     writer.write(String.format("%s,%s,%s,%s" + System.lineSeparator(), udid, deviceName, platformVersion, url + "#4"));
                 }
             }
