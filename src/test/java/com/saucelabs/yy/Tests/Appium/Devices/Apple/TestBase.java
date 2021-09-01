@@ -49,6 +49,10 @@ public class TestBase extends SuperTestBase {
         return sessionId.get();
     }
 
+    private void setSessionId(String id) {
+        sessionId.set(id);
+    }
+
     protected void createDriver(String platformName, String deviceName, String platformVersion, String methodName) throws MalformedURLException {
         createDriver(platformName, deviceName, platformVersion, methodName, null);
     }
@@ -82,6 +86,8 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
 
         driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
+        System.out.println("Setting SessionID:" + driver.get().getSessionId());
+        setSessionId(driver.get().getSessionId().toString());
         driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         ocr.set(new OCR());
     }
@@ -89,6 +95,7 @@ public class TestBase extends SuperTestBase {
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
         System.out.println("About to tearDown after method");
+
         if (driver.get() != null) {
             ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
@@ -109,8 +116,7 @@ public class TestBase extends SuperTestBase {
                     signedInDevices.add(output);
                 }
             }
-            System.out.println("Quit driver");
-            System.out.println("SessionID:" + driver.get().getSessionId());
+            System.out.println("Quitting driver with SessionID:" + getSessionId());
             driver.get().quit();
         }
     }
