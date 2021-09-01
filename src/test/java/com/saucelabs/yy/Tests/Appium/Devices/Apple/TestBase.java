@@ -88,6 +88,7 @@ public class TestBase extends SuperTestBase {
 
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
+        System.out.println("About to tearDown after method");
         if (driver.get() != null) {
             ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
@@ -108,13 +109,15 @@ public class TestBase extends SuperTestBase {
                     signedInDevices.add(output);
                 }
             }
-
+            System.out.println("Quit driver");
+            System.out.println("SessionID:" + driver.get().getSessionId());
             driver.get().quit();
         }
     }
 
     @AfterClass
     public void tearDown() {
+        System.out.println("About to tearDown after class");
         for (String signedInDevice : signedInDevices) {
             System.out.println(signedInDevice);
         }

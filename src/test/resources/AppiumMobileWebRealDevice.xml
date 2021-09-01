@@ -1,7 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Appium Mobile Web RDC Suite" verbose="1" parallel="tests" >
-    <test name="Appium Mobile Web RDC Test" parallel="methods">
+<suite name="Appium Mobile Web RDC Suite" verbose="1" parallel="tests" thread-count="100"
+       data-provider-thread-count="100">
+    <test name="Appium Mobile Web RDC Test" parallel="methods" thread-count="100">
         <packages>
             <package name="com.saucelabs.yy.Tests.Appium.MobileWeb.RealDevice">
             </package>
