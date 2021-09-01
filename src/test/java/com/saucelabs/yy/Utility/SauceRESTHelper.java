@@ -3,6 +3,7 @@ package com.saucelabs.yy.Utility;
 import com.saucelabs.yy.Region;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,10 +13,12 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SauceRESTHelper {
 
-    public static ArrayList<DeviceModel> getDevices(Region region) throws IOException, URISyntaxException, InterruptedException {
+    public static ArrayList<DeviceModel> getDevices(Region region, boolean isAvailable) throws IOException, URISyntaxException, InterruptedException {
         ArrayList<DeviceModel> deviceModelArrayList = new ArrayList<>();
         var client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
@@ -41,14 +44,48 @@ public class SauceRESTHelper {
             }
         }
 
+        if (isAvailable) {
+            List<String> listAvailableDevices = getAvailableDevices(Region.EU);
+            deviceModelArrayList = deviceModelArrayList.stream().filter(x -> listAvailableDevices.contains(x.getId())).collect(Collectors.toCollection(ArrayList::new));
+        }
+
         return deviceModelArrayList;
     }
 
     public static ArrayList<DeviceModel> getDevices() throws IOException, URISyntaxException, InterruptedException {
-        return getDevices(Region.EU);
+        return getDevices(Region.EU, true);
+    }
+
+    public static ArrayList<String> getAvailableDevices() throws IOException, URISyntaxException, InterruptedException {
+        return getAvailableDevices(Region.EU);
+    }
+
+    public static ArrayList<String> getAvailableDevices(Region region) throws IOException, URISyntaxException, InterruptedException {
+        ArrayList<String> availableDeviceList = new ArrayList<>();
+        var client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .build();
+        var request = HttpRequest.newBuilder()
+                .uri(new URI(region.apiServer + "v1/rdc/devices/available"))
+                .header("Authorization", basicAuth(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY")))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONArray jsonArray = new JSONArray(response.body());
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            availableDeviceList.add(jsonArray.get(i).toString());
+        }
+
+        return availableDeviceList;
     }
 
     private static String basicAuth(String username, String password) {
         return "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
+    }
+
+    @Test
+    public void test() throws IOException, URISyntaxException, InterruptedException {
+        getDevices();
     }
 }
