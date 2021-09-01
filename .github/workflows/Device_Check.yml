@@ -1,4 +1,4 @@
-name: Mobile App RDC Tests
+name: Device Check Test
 
 on:
   push:
