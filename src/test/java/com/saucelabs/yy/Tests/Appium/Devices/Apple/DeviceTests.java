@@ -20,6 +20,6 @@ public class DeviceTests extends TestBase {
         driver.get().activateApp("com.apple.Preferences");
         String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
-        Assert.assertTrue(result.contains("sign in to") || result.contains("testobject"), result);
+        Assert.assertTrue(result.contains("sign in to") || result.contains("testobject"), deviceName + System.lineSeparator() + result);
     }
 }
