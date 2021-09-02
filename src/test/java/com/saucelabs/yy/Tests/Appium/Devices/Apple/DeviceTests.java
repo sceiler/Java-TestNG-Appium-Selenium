@@ -1,6 +1,5 @@
 package com.saucelabs.yy.Tests.Appium.Devices.Apple;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,9 +18,10 @@ public class DeviceTests extends TestBase {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 
         driver.get().activateApp("com.apple.Preferences");
-        ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:context=Start OCR");
+        long startTime = System.currentTimeMillis();
         String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
-        ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:context=Stopped OCR");
+        long endTime = System.currentTimeMillis();
+        System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
         Assert.assertTrue(result.contains("sign in to") || result.contains("testobject"), deviceName + System.lineSeparator() + result);
     }
