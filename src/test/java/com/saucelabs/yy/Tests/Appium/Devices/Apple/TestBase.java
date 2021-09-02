@@ -90,7 +90,7 @@ public class TestBase extends SuperTestBase {
         System.out.println("Setting SessionID:" + driver.get().getSessionId());
         setSessionId(driver.get().getSessionId().toString());
         driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        ocr.set(new OCR());
+        //ocr.set(new OCR());
     }
 
     @AfterMethod(alwaysRun = true)

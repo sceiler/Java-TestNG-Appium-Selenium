@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests.Appium.Devices.Apple;
 
+import com.saucelabs.yy.Tests.Appium.Devices.OCR;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,7 +20,9 @@ public class DeviceTests extends TestBase {
 
         driver.get().activateApp("com.apple.Preferences");
         long startTime = System.currentTimeMillis();
-        String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
+        //String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
+        OCR ocr = new OCR();
+        String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
         long endTime = System.currentTimeMillis();
         System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
