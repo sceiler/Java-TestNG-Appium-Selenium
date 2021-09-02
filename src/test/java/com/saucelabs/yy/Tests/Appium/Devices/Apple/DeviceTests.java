@@ -26,6 +26,6 @@ public class DeviceTests extends TestBase {
         long endTime = System.currentTimeMillis();
         System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
-        Assert.assertTrue(result.contains("sign in to") || result.contains("testobject"), deviceName + System.lineSeparator() + result);
+        Assert.assertTrue(result.contains("sign in to") && result.contains("testobject"), deviceName + System.lineSeparator() + result);
     }
 }
