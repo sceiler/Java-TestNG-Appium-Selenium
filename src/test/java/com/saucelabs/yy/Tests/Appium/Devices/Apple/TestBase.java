@@ -74,9 +74,9 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("testobject_session_creation_timeout", "90000");
 
         if (platformName.equals("Android")) {
-            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
+            capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
         } else {
-            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Safari");
+            capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
         }
 
         if (caps != null) {
