@@ -94,8 +94,6 @@ public class TestBase extends SuperTestBase {
 
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
-        System.out.println("About to tearDown after method");
-
         if (driver.get() != null) {
             ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
@@ -118,6 +116,8 @@ public class TestBase extends SuperTestBase {
             }
             System.out.println("Quitting driver with SessionID:" + getSessionId());
             driver.get().quit();
+        } else {
+            System.out.println("Driver is null for whatever reason.");
         }
     }
 
