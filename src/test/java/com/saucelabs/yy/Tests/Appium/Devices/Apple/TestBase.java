@@ -122,10 +122,10 @@ public class TestBase extends SuperTestBase {
             capabilities.merge(caps);
         }
 
-        sauceOptions.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
-        sauceOptions.setCapability("publicDevicesOnly", true);
-        sauceOptions.setCapability("privateDevicesOnly", false);
-        sauceOptions.setCapability("tags", List.of("device_check"));
+        capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
+        capabilities.setCapability("publicDevicesOnly", true);
+        capabilities.setCapability("privateDevicesOnly", false);
+        capabilities.setCapability("tags", List.of("device_check"));
         capabilities.setCapability("sauce:options", sauceOptions);
 
         driver.set(new AppiumDriver<>(createDriverURL(region), capabilities));
