@@ -2,8 +2,12 @@
 
 <suite name="Device" verbose="0" parallel="tests" thread-count="90" data-provider-thread-count="90">
     <test name="Check if Apple ID signed in" parallel="methods" thread-count="90">
-        <packages>
-            <package name="com.saucelabs.yy.Tests.Appium.Devices.Apple.*"/>
-        </packages>
+        <classes>
+            <class name="com.saucelabs.yy.Tests.Appium.Devices.Apple.DeviceTests">
+                <methods>
+                    <include name="checkForSignedInAppleIdOnEU"/>
+                </methods>
+            </class>
+        </classes>
     </test>
 </suite>

@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public enum Region {
     EU("@ondemand.eu-central-1.saucelabs.com/wd/hub", "https://eu-central-1.saucelabs.com/", "https://api.eu-central-1.saucelabs.com/", "https://app.eu-central-1.saucelabs.com/"),
-    US("@ondemand.saucelabs.com/wd/hub", "https://saucelabs.com/", "https://api.us-west-1.saucelabs.com/", "https://app.saucelabs.com/"),
+    US("@ondemand.us-west-1.saucelabs.com/wd/hub", "https://saucelabs.com/", "https://api.us-west-1.saucelabs.com/", "https://app.saucelabs.com/"),
     APAC("@ondemand.apac-southeast-1.saucelabs.com/wd/hub", "", "", ""),
     HEADLESS("@ondemand.us-east-1.saucelabs.com/wd/hub", "", "", "");
 

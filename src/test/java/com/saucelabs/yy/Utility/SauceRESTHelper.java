@@ -45,7 +45,7 @@ public class SauceRESTHelper {
         }
 
         if (isAvailable) {
-            List<String> listAvailableDevices = getAvailableDevices(Region.EU);
+            List<String> listAvailableDevices = getAvailableDevices(region);
             deviceModelArrayList = deviceModelArrayList.stream().filter(x -> listAvailableDevices.contains(x.getId())).collect(Collectors.toCollection(ArrayList::new));
         }
 
@@ -54,6 +54,10 @@ public class SauceRESTHelper {
 
     public static ArrayList<DeviceModel> getDevices() throws IOException, URISyntaxException, InterruptedException {
         return getDevices(Region.EU, true);
+    }
+
+    public static ArrayList<DeviceModel> getDevices(Region region) throws IOException, URISyntaxException, InterruptedException {
+        return getDevices(region, true);
     }
 
     public static ArrayList<String> getAvailableDevices() throws IOException, URISyntaxException, InterruptedException {

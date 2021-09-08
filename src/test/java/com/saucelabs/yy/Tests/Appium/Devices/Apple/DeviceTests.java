@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests.Appium.Devices.Apple;
 
+import com.saucelabs.yy.Region;
 import com.saucelabs.yy.Tests.Appium.Devices.OCR;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
@@ -11,21 +12,27 @@ import java.util.Locale;
 
 public class DeviceTests extends TestBase {
 
-    /**
-     * Run the test twice to increase chance to also hit the same device model but different device
-     */
-    @Test(dataProvider = "RDCDataProvider")
-    public void checkForSignedInAppleID(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
+    @Test(dataProvider = "RDCDataProviderEU")
+    public void checkForSignedInAppleIdOnEU(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 
         driver.get().activateApp("com.apple.Preferences");
-        long startTime = System.currentTimeMillis();
-        //String result = ocr.get().getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
+        Thread.sleep(1000);
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
-        long endTime = System.currentTimeMillis();
-        System.out.println("That took " + (endTime - startTime) + " milliseconds");
 
-        Assert.assertTrue(result.contains("sign in to") && result.contains("testobject"), deviceName + System.lineSeparator() + result);
+        Assert.assertTrue(result.contains("sign in to") && result.contains("testobject"), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
+    }
+
+    @Test(dataProvider = "RDCDataProviderUS")
+    public void checkForSignedInAppleIdOnUS(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
+        createDriver(platform, deviceName, platformVersion, methodName.getName(), Region.US);
+
+        driver.get().activateApp("com.apple.Preferences");
+        Thread.sleep(1000);
+        OCR ocr = new OCR();
+        String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
+
+        Assert.assertTrue(result.contains("sign in to") && result.contains("testobject"), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
     }
 }
