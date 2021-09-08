@@ -109,7 +109,7 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability("appium:deviceName", deviceName);
         capabilities.setCapability("testobject_session_creation_timeout", "90000");
-        capabilities.setCapability("newCommandTimeout", "90");
+        capabilities.setCapability("newCommandTimeout", "900");
         capabilities.setCapability("name", methodName);
 
         if (platformName.equals("Android")) {
