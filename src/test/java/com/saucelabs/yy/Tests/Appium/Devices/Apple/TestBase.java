@@ -135,7 +135,7 @@ public class TestBase extends SuperTestBase {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown(ITestResult result) throws IOException {
+    public void tearDownMethod(ITestResult result) throws IOException {
         if (driver.get() != null) {
             ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
@@ -174,7 +174,7 @@ public class TestBase extends SuperTestBase {
     }
 
     @AfterClass
-    public void tearDown() {
+    public void tearDownClass() {
         System.out.println("About to tearDown after class");
         for (String signedInDevice : signedInDevices) {
             System.out.println(signedInDevice);
