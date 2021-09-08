@@ -173,7 +173,7 @@ public class TestBase extends SuperTestBase {
         }
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDownClass() {
         System.out.println("About to tearDown after class");
         for (String signedInDevice : signedInDevices) {
