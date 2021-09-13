@@ -21,7 +21,7 @@ public class DeviceTests extends TestBase {
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
-        Assert.assertTrue(result.contains("sign in to") && result.contains("testobject"), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
+        Assert.assertTrue(assertion(result), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
     }
 
     @Test(dataProvider = "RDCDataProviderUS")
@@ -33,6 +33,14 @@ public class DeviceTests extends TestBase {
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
-        Assert.assertTrue(result.contains("sign in to") && result.contains("testobject"), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
+        Assert.assertTrue(assertion(result), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
+    }
+
+    private boolean assertion(String text) {
+        if (text.contains("sign in to") || text.contains("signin to")) {
+            return text.contains("testobject");
+        } else {
+            return false;
+        }
     }
 }
