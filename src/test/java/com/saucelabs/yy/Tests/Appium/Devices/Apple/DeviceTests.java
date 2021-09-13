@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public class DeviceTests extends TestBase {
 
-    @Test(dataProvider = "RDCDataProviderEU")
+    @Test(dataProvider = "singleRDCDataProviderEU")
     public void checkForSignedInAppleIdOnEU(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 

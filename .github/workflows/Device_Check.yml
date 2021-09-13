@@ -27,7 +27,7 @@ jobs:
           BUILD_TAG: GitHub-Java-Appium-Device-Check-1.${{ github.run_number }}
       - name: Read devices.txt
         id: devices
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@v1.1.4
         with:
           path: /tmp/devices.txt
       - name: Echo devices.txt
