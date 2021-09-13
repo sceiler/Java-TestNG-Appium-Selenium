@@ -14,6 +14,7 @@ import org.testng.annotations.DataProvider;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -135,7 +136,7 @@ public class TestBase extends SuperTestBase {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDownMethod(ITestResult result) throws IOException {
+    public void tearDownMethod(ITestResult result) {
         if (driver.get() != null) {
             ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
@@ -147,9 +148,20 @@ public class TestBase extends SuperTestBase {
                 String url = (String) caps.getCapability("testobject_test_report_url");
 
                 File yourFile = new File(System.getProperty("java.io.tmpdir") + "/devices.txt");
-                yourFile.createNewFile(); // if file already exists will do nothing
+
+                try {
+                    yourFile.createNewFile(); // if file already exists will do nothing
+                } catch (IOException e) {
+                    System.out.println("Could not create devices.txt. Cause: " + e.getCause());
+                }
+
                 System.out.println("Writing result to: " + yourFile.getAbsolutePath());
-                FileOutputStream oFile = new FileOutputStream(yourFile, true);
+                FileOutputStream oFile = null;
+                try {
+                    oFile = new FileOutputStream(yourFile, true);
+                } catch (FileNotFoundException e) {
+                    System.out.println("File not found. Cause: " + e.getCause());
+                }
 
                 // TODO: change in future...
                 String datacenter = "";
@@ -164,9 +176,11 @@ public class TestBase extends SuperTestBase {
                     String output = String.format("%s,%s,%s,%s,%s,%s", Instant.now().toString(), datacenter, udid, deviceName, platformVersion, url + "#4");
                     writer.write(output + System.lineSeparator());
                     signedInDevices.add(output);
+                } catch (IOException e) {
+                    System.out.println("Error writing to file. Cause: " + e.getCause());
                 }
             }
-            System.out.println("Quitting driver with SessionID: " + getSessionId());
+            //System.out.println("Quitting driver with SessionID: " + getSessionId());
             driver.get().quit();
         } else {
             System.out.println("Driver is null for whatever reason.");
@@ -175,7 +189,7 @@ public class TestBase extends SuperTestBase {
 
     @AfterClass(alwaysRun = true)
     public void tearDownClass() {
-        System.out.println("About to tearDown after class");
+        //System.out.println("About to tearDown after class");
         for (String signedInDevice : signedInDevices) {
             System.out.println(signedInDevice);
         }
