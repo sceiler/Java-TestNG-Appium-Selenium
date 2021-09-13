@@ -20,13 +20,11 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
       - name: Build with Maven
-        run: mvn --quiet clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Device_Check.xml
+        run: |
+          mvn --quiet clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Device_Check.xml
+          echo ::set-output name=version::$(cat /tmp/devices.txt)
+          echo ${{ steps.vars.outputs.version }}
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           BUILD_TAG: GitHub-Java-Appium-Device-Check-1.${{ github.run_number }}
-      - name: Get Apple signed in devices
-        id: vars
-        run: echo ::set-output name=version::$(cat /tmp/devices.txt)
-      - name: Echo output
-        run: echo ${{ steps.vars.outputs.version }}
