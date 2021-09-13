@@ -30,7 +30,7 @@ jobs:
         uses: juliangruber/read-file-action@v1.1.4
         with:
           path: /tmp/devices.txt
-        if: ${{ always() }}
+        if: ${{ failure() }}
       - name: Echo devices.txt
         run: echo "${{ steps.devices.outputs.content }}"
-        if: ${{ always() }}
+        if: ${{ failure() }}
