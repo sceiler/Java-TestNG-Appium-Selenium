@@ -21,7 +21,7 @@ public class DeviceTests extends TestBase {
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
-        Assert.assertTrue(assertion(result), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
+        Assert.assertTrue(assertion(result));
     }
 
     @Test(dataProvider = "RDCDataProviderUS")
@@ -33,7 +33,7 @@ public class DeviceTests extends TestBase {
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
-        Assert.assertTrue(assertion(result), deviceName + " " + driver.get().getCapabilities().getCapability("testobject_test_report_url") + System.lineSeparator() + result);
+        Assert.assertTrue(assertion(result));
     }
 
     private boolean assertion(String text) {
