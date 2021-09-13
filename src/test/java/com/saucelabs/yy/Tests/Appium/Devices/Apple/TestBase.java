@@ -126,11 +126,13 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
         capabilities.setCapability("publicDevicesOnly", true);
         capabilities.setCapability("privateDevicesOnly", false);
+        capabilities.setCapability("orientation", "PORTRAIT");
+        capabilities.setCapability("deviceOrientation", "PORTRAIT");
         capabilities.setCapability("tags", List.of("device_check"));
         capabilities.setCapability("sauce:options", sauceOptions);
 
         driver.set(new AppiumDriver<>(createDriverURL(region), capabilities));
-        System.out.println("Setting SessionID: " + driver.get().getSessionId());
+        //System.out.println("Setting SessionID: " + driver.get().getSessionId());
         setSessionId(driver.get().getSessionId().toString());
         driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
