@@ -25,7 +25,10 @@ jobs:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           BUILD_TAG: GitHub-Java-Appium-Device-Check-1.${{ github.run_number }}
-      - name: Show results
-        run: |
-          echo ::set-output name=version::$(cat /tmp/devices.txt)
-          echo ${{ steps.vars.outputs.version }}
+      - name: Read devices.txt
+        id: devices
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: /tmp/devices.txt
+      - name: Echo devices.txt
+        run: echo "${{ steps.devices.outputs.content }}"
