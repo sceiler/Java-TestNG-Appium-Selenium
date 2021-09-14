@@ -149,7 +149,7 @@ public class TestBase extends SuperTestBase {
                 String platformVersion = (String) caps.getCapability("platformVersion");
                 String url = (String) caps.getCapability("testobject_test_report_url");
 
-                File yourFile = new File(System.getProperty("java.io.tmpdir") + "/devices.txt");
+                File yourFile = new File("tmp/devices.txt");
 
                 try {
                     yourFile.createNewFile(); // if file already exists will do nothing
