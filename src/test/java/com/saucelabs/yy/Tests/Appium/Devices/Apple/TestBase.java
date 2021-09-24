@@ -152,9 +152,10 @@ public class TestBase extends SuperTestBase {
                 File yourFile = new File("tmp/devices.txt");
 
                 try {
+                    new File("tmp").mkdirs();
                     yourFile.createNewFile(); // if file already exists will do nothing
                 } catch (IOException e) {
-                    System.out.println("Could not create devices.txt. Cause: " + e.getCause());
+                    System.out.println("Could not create devices.txt. Cause: " + e);
                 }
 
                 System.out.println("Writing result to: " + yourFile.getAbsolutePath());
