@@ -1,7 +1,6 @@
 package com.saucelabs.yy.Tests.Appium.SwagLabsApp.EmulatorSimulator;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +17,7 @@ public class LoginTests extends TestBase {
         getDriver().findElement(new AppiumBy.ByAccessibilityId("test-Password")).sendKeys("bad");
         getDriver().findElement(new AppiumBy.ByAccessibilityId("test-LOGIN")).click();
 
-        Assert.assertTrue(getDriver().findElement(new MobileBy.ByAccessibilityId("test-Error message")).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(new AppiumBy.ByAccessibilityId("test-Error message")).isDisplayed());
     }
 
     @Test(dataProvider = "EmulatorSimulatorDataProvider")
@@ -28,7 +27,7 @@ public class LoginTests extends TestBase {
         getDriver().findElement(new AppiumBy.ByAccessibilityId("test-Password")).sendKeys("");
         getDriver().findElement(new AppiumBy.ByAccessibilityId("test-LOGIN")).click();
 
-        Assert.assertTrue(getDriver().findElement(new MobileBy.ByAccessibilityId("test-Error message")).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(new AppiumBy.ByAccessibilityId("test-Error message")).isDisplayed());
     }
 
     @Test(dataProvider = "EmulatorSimulatorDataProvider")

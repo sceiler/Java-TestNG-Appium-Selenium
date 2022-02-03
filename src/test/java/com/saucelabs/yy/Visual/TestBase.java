@@ -46,8 +46,16 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("appium:platformVersion", platformVersion);
         capabilities.setCapability("appium:deviceName", deviceName);
 
+        if (platformName.equals("Android")) {
+            capabilities.setCapability("appium:app", "storage:filename=Android-MyDemoAppRN.1.1.0.build-226.apk");
+        } else {
+            capabilities.setCapability("appium:app", "storage:filename=iOS-Real-Device-MyRNDemoApp.1.1.0-146.ipa.ipa");
+        }
+
         sauceOptions.setCapability("name", methodName);
         sauceOptions.setCapability("appiumVersion", "1.22.2");
+        sauceOptions.setCapability("username", System.getenv("SAUCE_USERNAME"));
+        sauceOptions.setCapability("accessKey", System.getenv("SAUCE_ACCESS_KEY"));
 
         if (buildTag != null) {
             sauceOptions.setCapability("build", buildTag);

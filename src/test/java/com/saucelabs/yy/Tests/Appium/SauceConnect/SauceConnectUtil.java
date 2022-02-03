@@ -7,6 +7,8 @@ import com.saucelabs.saucerest.DataCenter;
 import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.yy.Tests.Appium.TestBase;
 
+import java.io.IOException;
+
 public class SauceConnectUtil extends TestBase {
     private SauceREST sauceREST;
     private ThreadLocal<SauceConnectHelper> sauceConnectHelper = new ThreadLocal<>();
@@ -32,7 +34,7 @@ public class SauceConnectUtil extends TestBase {
         return sauceREST.getTunnelInformation(id);
     }
 
-    public void deleteTunnel(String id) {
+    public void deleteTunnel(String id) throws IOException {
         sauceREST.deleteTunnel(id);
     }
 

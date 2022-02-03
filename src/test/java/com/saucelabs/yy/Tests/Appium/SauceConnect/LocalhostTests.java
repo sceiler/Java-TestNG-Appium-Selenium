@@ -8,6 +8,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
@@ -54,7 +55,7 @@ public class LocalhostTests extends TestBase {
     }
 
     @AfterSuite
-    public void teardown() {
+    public void teardown() throws IOException {
         util.stopSauceConnect();
         System.out.println("Delete tunnel with ID '" + tunnelID + "'");
         util.deleteTunnel(tunnelID);
