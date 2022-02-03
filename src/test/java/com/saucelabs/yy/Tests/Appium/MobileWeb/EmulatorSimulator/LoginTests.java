@@ -19,7 +19,8 @@ public class LoginTests extends TestBase {
         annotate("Sending invalid password");
         getDriver().findElement(By.cssSelector("#password")).sendKeys("bad");
         // need to hide keyboard because otherwise clicking on login button does not work on Android -.-
-        getDriver().hideKeyboard();
+        // TODO: uncomment when Appium Java Client implements hideKeyboard again
+        //getDriver().hideKeyboard();
         annotate("Clicking login button");
         getDriver().findElement(By.cssSelector("#login-button")).click();
 
@@ -36,7 +37,8 @@ public class LoginTests extends TestBase {
         annotate("Sending blank password");
         getDriver().findElement(By.cssSelector("#password")).sendKeys("");
         annotate("Clicking login button");
-        getDriver().hideKeyboard();
+        // TODO: uncomment when Appium Java Client implements hideKeyboard again
+        //getDriver().hideKeyboard();
         getDriver().findElement(By.cssSelector("#login-button")).click();
 
         Assert.assertTrue(getDriver().findElements(By.cssSelector("button[class='error-button']")).size() > 0);
@@ -52,7 +54,8 @@ public class LoginTests extends TestBase {
         annotate("Sending valid password");
         getDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         annotate("Clicking login button");
-        getDriver().hideKeyboard();
+        // TODO: uncomment when Appium Java Client implements hideKeyboard again
+        //getDriver().hideKeyboard();
         getDriver().findElement(By.cssSelector("#login-button")).click();
 
         Assert.assertTrue(getDriver().getCurrentUrl().contains("inventory"));

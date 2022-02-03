@@ -1,29 +1,28 @@
-package com.saucelabs.yy.Tests.Appium.MobileWeb.EmulatorSimulator;
+package com.saucelabs.yy.Visual;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
-import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.Cookie;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.time.Duration;
 
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 
-    @DataProvider(name = "EmulatorSimulatorDataProvider", parallel = true)
-    public static Object[][] emuSimDataProvider(Method testMethod) {
+    @DataProvider(name = "RDC", parallel = true)
+    public static Object[][] RDCBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Android GoogleAPI Emulator", "11.0"},
-                new Object[]{"iOS", "iPhone 12 Simulator", "14.3"}
+                new Object[]{"iOS", "iPhone_SE_2020_14_POC18", "14"},
+                new Object[]{"Android", "Samsung_Galaxy_S20_POC38", "10"}
         };
     }
 
@@ -42,44 +41,43 @@ public class TestBase extends SuperTestBase {
     protected void createDriver(String platformName, String deviceName, String platformVersion, String methodName, MutableCapabilities caps) throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
         MutableCapabilities sauceOptions = new MutableCapabilities();
-        capabilities.setCapability(CapabilityType.PLATFORM_NAME, platformName);
 
-        if (!platformVersion.equals("")) {
-            capabilities.setCapability("appium:platformVersion", platformVersion);
-        }
-
+        capabilities.setCapability("platformName", platformName);
+        capabilities.setCapability("appium:platformVersion", platformVersion);
         capabilities.setCapability("appium:deviceName", deviceName);
-        sauceOptions.setCapability("name", methodName);
 
-        if (platformName.equals("Android")) {
-            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
+        sauceOptions.setCapability("name", methodName);
+        sauceOptions.setCapability("appiumVersion", "1.22.2");
+
+        if (buildTag != null) {
+            sauceOptions.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability(CapabilityType.BROWSER_NAME, "Safari");
+            sauceOptions.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Visual-" + localBuildTag);
         }
 
         if (caps != null) {
             capabilities.merge(caps);
         }
 
-        if (buildTag != null) {
-            sauceOptions.setCapability("build", buildTag);
+        if (platformName.equals("Android")) {
+            driver.set(new AndroidDriver(createDriverURL(), capabilities));
         } else {
-            sauceOptions.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-EmuSim-" + localBuildTag);
+            driver.set(new IOSDriver(createDriverURL(), capabilities));
         }
-
-        capabilities.setCapability("sauce:options", sauceOptions);
-
-        driver.set(new AppiumDriver(createDriverURL(), capabilities));
-        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.get().get("https://www.saucedemo.com");
-        driver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
+        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        if (driver.get() != null) {
-            ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-            driver.get().quit();
+        ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+        driver.get().quit();
+
+        if (androidDriver.get() != null) {
+            ((JavascriptExecutor) androidDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            androidDriver.get().quit();
+        } else if (iosDriver.get() != null) {
+            ((JavascriptExecutor) iosDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            iosDriver.get().quit();
         }
     }
 

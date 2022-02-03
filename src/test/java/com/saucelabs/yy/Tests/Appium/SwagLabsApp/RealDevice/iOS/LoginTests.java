@@ -1,6 +1,7 @@
 package com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.iOS;
 
 import com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.TestBase;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,8 +15,8 @@ public class LoginTests extends TestBase {
     public void blankCredentials(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, testMethod.getName());
 
-        getDriver().findElementByAccessibilityId("test-LOGIN").click();
-        Assert.assertTrue(getDriver().findElementByAccessibilityId("test-Error message").isDisplayed());
+        getDriver().findElement(By.id("test-LOGIN")).click();
+        Assert.assertTrue(getDriver().findElement(By.id("test-Error message")).isDisplayed());
         getDriver().getScreenshotAs(OutputType.FILE);
     }
 
@@ -23,9 +24,9 @@ public class LoginTests extends TestBase {
     public void validCredentials(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, testMethod.getName());
 
-        getDriver().findElementByAccessibilityId("test-Username").sendKeys("standard_user");
-        getDriver().findElementByAccessibilityId("test-Password").sendKeys("secret_sauce");
-        getDriver().findElementByAccessibilityId("test-LOGIN").click();
+        getDriver().findElement(By.id("test-Username")).sendKeys("standard_user");
+        getDriver().findElement(By.id("test-Password")).sendKeys("secret_sauce");
+        getDriver().findElement(By.id("test-LOGIN")).click();
         getDriver().getScreenshotAs(OutputType.FILE);
     }
 }

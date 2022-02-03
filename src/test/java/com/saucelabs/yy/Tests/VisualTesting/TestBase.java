@@ -14,8 +14,8 @@ import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
 
@@ -74,7 +74,7 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("sauce:visual", visualOptions);
 
         remoteWebDriver.set(new RemoteWebDriver(new URL("http://hub.screener.io:80/wd/hub"), capabilities));
-        remoteWebDriver.get().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        remoteWebDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         remoteWebDriver.get().get("https://www.saucedemo.com");
         remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
         javascriptExecutor.set(remoteWebDriver.get());

@@ -10,9 +10,9 @@ import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
     public String buildTag = System.getenv("BUILD_TAG");
@@ -67,7 +67,7 @@ public class TestBase extends SuperTestBase {
         driver.set(new AppiumDriver(createDriverURL(), caps));
         sessionId.set(driver.get().getSessionId().toString());
         System.out.println("Session id:" + getSessionId());
-        getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
     @AfterMethod

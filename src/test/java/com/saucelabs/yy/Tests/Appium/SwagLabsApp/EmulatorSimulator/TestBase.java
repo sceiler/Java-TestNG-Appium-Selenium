@@ -91,7 +91,7 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
+        driver.set(new AppiumDriver(createDriverURL(), capabilities));
     }
 
     @AfterMethod

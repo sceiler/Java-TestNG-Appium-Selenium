@@ -12,8 +12,8 @@ import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
 
@@ -68,6 +68,22 @@ public class TestBase extends SuperTestBase {
         };
     }
 
+    @DataProvider(name = "twoBrowsers", parallel = true)
+    public static Object[][] sauceTwoBrowsers(Method testMethod) {
+        return new Object[][]{
+                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+        };
+    }
+
+    @DataProvider(name = "headlessBrowsers", parallel = true)
+    public static Object[][] headlessBrowsers(Method testMethod) {
+        return new Object[][]{
+                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.LINUX.label()},
+                new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.LINUX.label()},
+        };
+    }
+
     protected void createDriver(String browser, String version, String os, String methodName) throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
         MutableCapabilities sauceOptions = new MutableCapabilities();
@@ -77,7 +93,7 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability(CapabilityType.PLATFORM_NAME, os);
 
         sauceOptions.setCapability("name", methodName);
-        sauceOptions.setCapability("tags", Arrays.asList(""));
+        sauceOptions.setCapability("tags", Arrays.asList("SVFLG"));
 
         if (buildTag != null) {
             sauceOptions.setCapability("build", buildTag);
@@ -88,7 +104,7 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("sauce:options", sauceOptions);
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
-        remoteWebDriver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        remoteWebDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         remoteWebDriver.get().get("https://www.saucedemo.com");
         remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }

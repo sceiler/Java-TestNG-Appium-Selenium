@@ -6,10 +6,8 @@ import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.sikuli.script.Finder;
 import org.sikuli.script.Match;
@@ -36,10 +34,10 @@ public class LoginTests extends TestBase {
         annotate("Open saucedemo.com inventory");
         getRemoteWebDriver().get("https://www.saucedemo.com/inventory.html");
         annotate("Check if 'Products' is shown");
-        Assert.assertTrue(getRemoteWebDriver().findElementByCssSelector(".title").isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().findElement(By.cssSelector(".title")).isDisplayed());
 
         annotate("Find Sauce Labs Backpack element");
-        WebElement element = getRemoteWebDriver().findElementByCssSelector("img[alt='Sauce Labs Backpack']");
+        WebElement element = getRemoteWebDriver().findElement(By.cssSelector("img[alt='Sauce Labs Backpack']"));
         Point point = element.getLocation();
         Dimension dimension = element.getSize();
         System.out.println("Center: " + (point.x + (dimension.width / 2)) + "," + (point.y + (dimension.height / 2)));
@@ -51,7 +49,7 @@ public class LoginTests extends TestBase {
         //Thread.sleep(5000);
         annotate("Take a screenshot");
         getRemoteWebDriver().getScreenshotAs(OutputType.FILE);
-        Assert.assertTrue(getRemoteWebDriver().findElementByCssSelector(".inventory_details_img").isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().findElement(By.cssSelector(".inventory_details_img")).isDisplayed());
     }
 
     private BufferedImage takeScreenshot() throws IOException {

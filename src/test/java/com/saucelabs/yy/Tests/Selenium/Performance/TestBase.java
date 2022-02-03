@@ -13,6 +13,7 @@ import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.Arrays;
 
 public class TestBase extends SuperTestBase {
@@ -41,8 +42,8 @@ public class TestBase extends SuperTestBase {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
-        capabilities.setCapability(CapabilityType.VERSION, version);
-        capabilities.setCapability(CapabilityType.PLATFORM, os);
+        capabilities.setCapability(CapabilityType.BROWSER_VERSION, version);
+        capabilities.setCapability(CapabilityType.PLATFORM_NAME, os);
         capabilities.setCapability("name", methodName);
         capabilities.setCapability("tags", Arrays.asList("Performance"));
         capabilities.setCapability("extendedDebugging", true);
@@ -55,7 +56,7 @@ public class TestBase extends SuperTestBase {
         }
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
-        webDriverWait.set(new WebDriverWait(remoteWebDriver.get(), 10));
+        webDriverWait.set(new WebDriverWait(remoteWebDriver.get(), Duration.ofSeconds(10)));
         sessionId.set(getRemoteWebDriver().getSessionId().toString());
     }
 

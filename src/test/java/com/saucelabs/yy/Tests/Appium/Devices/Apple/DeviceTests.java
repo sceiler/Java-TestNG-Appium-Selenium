@@ -16,7 +16,8 @@ public class DeviceTests extends TestBase {
     public void checkForSignedInAppleIdOnEU(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 
-        driver.get().activateApp("com.apple.Preferences");
+        // TODO: uncomment when Appium reimplements this method
+        //driver.get().activateApp("com.apple.Preferences");
         Thread.sleep(1000);
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
@@ -28,7 +29,8 @@ public class DeviceTests extends TestBase {
     public void checkForSignedInAppleIdOnUS(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         createDriver(platform, deviceName, platformVersion, methodName.getName(), Region.US);
 
-        driver.get().activateApp("com.apple.Preferences");
+        // TODO: uncomment when Appium reimplements this method
+        //driver.get().activateApp("com.apple.Preferences");
         Thread.sleep(1000);
         OCR ocr = new OCR();
         String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);

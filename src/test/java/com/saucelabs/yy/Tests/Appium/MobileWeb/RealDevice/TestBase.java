@@ -12,7 +12,7 @@ import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class TestBase extends SuperTestBase {
 
@@ -66,8 +66,8 @@ public class TestBase extends SuperTestBase {
             capabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-Web-" + localBuildTag);
         }
 
-        driver.set(new AppiumDriver<>(createDriverURL(), capabilities));
-        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.set(new AppiumDriver(createDriverURL(), capabilities));
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.get().get("https://www.saucedemo.com");
         driver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }

@@ -1,16 +1,12 @@
 package com.saucelabs.yy.Tests.ATD.Slow.iOS;
 
-import com.saucelabs.yy.Tests.ATD.Pages.iOS.Slow.Page;
 import com.saucelabs.yy.Tests.ATD.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GoldenPathTests extends TestBase {
 
@@ -30,7 +26,8 @@ public class GoldenPathTests extends TestBase {
         getDriver().findElement(By.xpath("//XCUIElementTypeTextField[@name=\"test-First Name\"]")).sendKeys("Agile Testing");
         getDriver().findElement(By.xpath("//XCUIElementTypeTextField[@name=\"test-Last Name\"]")).sendKeys("Days");
         getDriver().findElement(By.xpath("//XCUIElementTypeTextField[@name=\"test-Zip/Postal Code\"]")).sendKeys("123455");
-        getDriver().hideKeyboard();
+        // TODO: uncomment when Appium Java Client implements hideKeyboard again
+        //getDriver().hideKeyboard();
         getDriver().findElement(By.xpath("//XCUIElementTypeOther[@name=\"test-CONTINUE\"]")).click();
         swipeUp();
         swipeUp();

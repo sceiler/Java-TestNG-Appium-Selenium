@@ -12,22 +12,16 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class TestBase extends SuperTestBase {
     public String buildTag = System.getenv("BUILD_TAG");
@@ -131,10 +125,10 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability("tags", List.of("device_check"));
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        driver.set(new AppiumDriver<>(createDriverURL(region), capabilities));
+        driver.set(new AppiumDriver(createDriverURL(region), capabilities));
         //System.out.println("Setting SessionID: " + driver.get().getSessionId());
         setSessionId(driver.get().getSessionId().toString());
-        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
     @AfterMethod(alwaysRun = true)

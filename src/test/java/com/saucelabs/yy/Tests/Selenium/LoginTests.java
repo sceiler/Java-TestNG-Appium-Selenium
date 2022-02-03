@@ -54,7 +54,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getRemoteWebDriver().getCurrentUrl().contains("inventory"));
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "headlessBrowsers")
     public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");

@@ -30,7 +30,7 @@ public class LocalhostTests extends TestBase {
     @Test(dataProvider = "emulatorBrowserDataProvider")
     public void openLocalRouterLoginPageOnEmulator(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         MutableCapabilities caps = new MutableCapabilities();
-        caps.setCapability("tunnelIdentifier", TUNNEL_NAME);
+        caps.setCapability("tunnelName", TUNNEL_NAME);
         createDriver(platform, deviceName, platformVersion, methodName.getName(), caps);
 
         getAndroidDriver().get("http://192.168.178.1");
@@ -43,7 +43,7 @@ public class LocalhostTests extends TestBase {
     @Test(dataProvider = "RDCBrowserDataProvider")
     public void openLocalRouterLoginPageOnRDC(String platform, String deviceName, Method methodName) throws MalformedURLException, InterruptedException {
         MutableCapabilities caps = new MutableCapabilities();
-        caps.setCapability("tunnelIdentifier", TUNNEL_NAME);
+        caps.setCapability("tunnelName", TUNNEL_NAME);
         createDriver(platform, deviceName, methodName.getName(), caps);
 
         getAndroidDriver().get("http://192.168.178.1");

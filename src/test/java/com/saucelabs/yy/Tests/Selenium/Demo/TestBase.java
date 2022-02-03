@@ -1,8 +1,7 @@
-package com.saucelabs.yy.Tests.Sikuli;
+package com.saucelabs.yy.Tests.Selenium.Demo;
 
 import com.saucelabs.yy.Tests.Selenium.Constants;
 import com.saucelabs.yy.Tests.SuperTestBase;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
@@ -14,20 +13,43 @@ import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
-import java.util.Collections;
+import java.util.Arrays;
 
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
 
-    @DataProvider(name = "browsers", parallel = true)
-    public static Object[][] browser(Method testMethod) {
+    @DataProvider(name = "hardCodedBrowsers", parallel = true)
+    public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
                 new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
+
                 new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()}
+        };
+    }
+
+    @DataProvider(name = "singleBrowser", parallel = true)
+    public static Object[][] sauceSingleBrowser(Method testMethod) {
+        return new Object[][]{
+                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+        };
+    }
+
+    @DataProvider(name = "twoBrowsers", parallel = true)
+    public static Object[][] sauceTwoBrowsers(Method testMethod) {
+        return new Object[][]{
+                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+        };
+    }
+
+    @DataProvider(name = "headlessBrowsers", parallel = true)
+    public static Object[][] headlessBrowsers(Method testMethod) {
+        return new Object[][]{
+                new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.LINUX.label()},
+                new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.LINUX.label()},
         };
     }
 
@@ -40,26 +62,18 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability(CapabilityType.PLATFORM_NAME, os);
 
         sauceOptions.setCapability("name", methodName);
-        sauceOptions.setCapability("tags", Collections.singletonList("Sikuli"));
-
-        if (os.equalsIgnoreCase("macOS 11.00")) {
-            sauceOptions.setCapability("screenResolution", "2048x1536");
-        } else if (os.equalsIgnoreCase("Windows 10")) {
-            sauceOptions.setCapability("screenResolution", "2560x1600");
-        }
+        sauceOptions.setCapability("tags", Arrays.asList("SVFLG"));
 
         if (buildTag != null) {
             sauceOptions.setCapability("build", buildTag);
         } else {
-            sauceOptions.setCapability("build", "YiMin-Local-Java-Selenium-Web-Sikuli-" + localBuildTag);
+            sauceOptions.setCapability("build", "YiMin-Local-Java-Selenium-Web-SVLFG-" + localBuildTag);
         }
 
         capabilities.setCapability("sauce:options", sauceOptions);
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
         remoteWebDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        remoteWebDriver.get().get("https://www.saucedemo.com");
-        remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
     }
 
     @AfterMethod

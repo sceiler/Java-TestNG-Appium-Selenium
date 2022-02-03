@@ -1,8 +1,8 @@
 package com.saucelabs.yy.cucumber.steps;
 
 import com.saucelabs.yy.cucumber.tests.RunTest;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.Status;
@@ -27,24 +27,24 @@ public class StepDefinitions extends RunTest {
 
     @Then("I should see Swag Labs login page")
     public void iShouldSeeSwagLabsLoginPage() {
-        Assert.assertTrue(driver.get().findElementByAccessibilityId("test-LOGIN").isDisplayed());
+        Assert.assertTrue(driver.get().findElement(By.id("test-LOGIN")).isDisplayed());
     }
 
     @When("I enter valid login credentials")
     public void iEnterValidLoginCredentials() {
-        driver.get().findElementByAccessibilityId("test-Username").sendKeys("standard_user");
-        driver.get().findElementByAccessibilityId("test-Password").sendKeys("secret_sauce");
+        driver.get().findElement(By.id("test-Username")).sendKeys("standard_user");
+        driver.get().findElement(By.id("test-Password")).sendKeys("secret_sauce");
     }
 
     @When("I enter invalid login credentials")
     public void iEnterInvalidLoginCredentials() {
-        driver.get().findElementByAccessibilityId("test-Username").sendKeys("bla");
-        driver.get().findElementByAccessibilityId("test-Password").sendKeys("bla");
+        driver.get().findElement(By.id("test-Username")).sendKeys("bla");
+        driver.get().findElement(By.id("test-Password")).sendKeys("bla");
     }
 
     @And("I click on login button")
     public void iClickOnLoginButton() {
-        driver.get().findElementByAccessibilityId("test-LOGIN").click();
+        driver.get().findElement(By.id("test-LOGIN")).click();
     }
 
     @Then("take a screenshot")
@@ -54,7 +54,7 @@ public class StepDefinitions extends RunTest {
 
     @Then("I am on the Inventory page")
     public void iAmOnTheInventoryPage() {
-        Platform platform = driver.get().getCapabilities().getPlatform();
+        Platform platform = driver.get().getCapabilities().getPlatformName();
 
         if (platform.is(Platform.ANDROID)) {
             Assert.assertTrue(driver.get().findElement(By.xpath("(//android.view.ViewGroup[@content-desc=\"test-ADD TO CART\"])[1]")).isDisplayed());
@@ -65,7 +65,7 @@ public class StepDefinitions extends RunTest {
 
     @Then("I have got an login error message")
     public void iHaveGotAnLoginErrorMessage() {
-        Assert.assertTrue(driver.get().findElement(new MobileBy.ByAccessibilityId("test-Error message")).isDisplayed());
+        Assert.assertTrue(driver.get().findElement(new AppiumBy.ByAccessibilityId("test-Error message")).isDisplayed());
     }
 
     @After

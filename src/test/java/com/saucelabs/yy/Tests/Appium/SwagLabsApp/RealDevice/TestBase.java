@@ -10,7 +10,7 @@ import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class TestBase extends SuperTestBase {
 
@@ -65,9 +65,9 @@ public class TestBase extends SuperTestBase {
             caps.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + localBuildTag);
         }
 
-        driver.set(new AppiumDriver<>(createDriverURL(), caps));
+        driver.set(new AppiumDriver(createDriverURL(), caps));
         sessionId.set(driver.get().getSessionId().toString());
-        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
     @AfterMethod

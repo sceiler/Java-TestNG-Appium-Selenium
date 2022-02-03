@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests.Selenium;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -34,9 +35,9 @@ public class ChromeDriverTests extends TestBase {
 
         remoteWebDriver.get("https://google.com");
         remoteWebDriver.get("https://saucedemo.com");
-        remoteWebDriver.findElementByCssSelector("#user-name").sendKeys("standard_user");
-        remoteWebDriver.findElementByCssSelector("#password").sendKeys("secret_sauce");
-        remoteWebDriver.findElementByCssSelector("#login-button").click();
+        remoteWebDriver.findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
+        remoteWebDriver.findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
+        remoteWebDriver.findElement(By.cssSelector("#login-button")).click();
 
         remoteWebDriver.quit();
     }
