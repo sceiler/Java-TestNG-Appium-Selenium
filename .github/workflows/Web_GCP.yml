@@ -1,4 +1,4 @@
-name: Selenium Web Tests
+name: Selenium Web Tests GCP
 
 on:
   push:
