@@ -5,6 +5,7 @@ import org.bytedeco.leptonica.PIX;
 import org.bytedeco.tesseract.TessBaseAPI;
 
 import java.io.File;
+import java.util.Locale;
 
 import static org.bytedeco.leptonica.global.lept.pixRead;
 
@@ -28,7 +29,7 @@ public class OCR {
         api.SetImage(image);
         // Get OCR result
         outText = api.GetUTF8Text();
-        String result = outText.getString();
+        String result = outText.getString().toLowerCase(Locale.ROOT);
         //System.out.println("OCR output:\n" + outText.getString());
 
         // Destroy used object and release memory

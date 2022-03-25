@@ -3,7 +3,7 @@ package com.saucelabs.yy.Tests.Appium.Devices.Apple;
 import com.saucelabs.yy.Region;
 import com.saucelabs.yy.Tests.SuperTestBase;
 import com.saucelabs.yy.Utility.SauceRESTHelper;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
@@ -103,9 +103,9 @@ public class TestBase extends SuperTestBase {
         }
 
         capabilities.setCapability("appium:deviceName", deviceName);
-        capabilities.setCapability("testobject_session_creation_timeout", "90000");
-        capabilities.setCapability("newCommandTimeout", "900");
-        capabilities.setCapability("name", methodName);
+        sauceOptions.setCapability("testobject_session_creation_timeout", "90000");
+        sauceOptions.setCapability("newCommandTimeout", "900");
+        sauceOptions.setCapability("name", methodName);
 
         if (platformName.equals("Android")) {
             capabilities.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
@@ -117,27 +117,27 @@ public class TestBase extends SuperTestBase {
             capabilities.merge(caps);
         }
 
-        capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
-        capabilities.setCapability("publicDevicesOnly", true);
-        capabilities.setCapability("privateDevicesOnly", false);
-        capabilities.setCapability("orientation", "PORTRAIT");
+        sauceOptions.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Device-Check-" + localBuildTag));
+        sauceOptions.setCapability("publicDevicesOnly", true);
+        sauceOptions.setCapability("privateDevicesOnly", false);
+        sauceOptions.setCapability("orientation", "PORTRAIT");
         capabilities.setCapability("deviceOrientation", "PORTRAIT");
-        capabilities.setCapability("tags", List.of("device_check"));
+        sauceOptions.setCapability("tags", List.of("device_check"));
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        driver.set(new AppiumDriver(createDriverURL(region), capabilities));
+        iosDriver.set(new IOSDriver(createDriverURL(region), capabilities));
         //System.out.println("Setting SessionID: " + driver.get().getSessionId());
-        setSessionId(driver.get().getSessionId().toString());
-        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        setSessionId(iosDriver.get().getSessionId().toString());
+        iosDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDownMethod(ITestResult result) {
-        if (driver.get() != null) {
-            ((JavascriptExecutor) driver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+        if (iosDriver.get() != null) {
+            ((JavascriptExecutor) iosDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
 
             if (!result.isSuccess()) {
-                var caps = driver.get().getCapabilities();
+                var caps = iosDriver.get().getCapabilities();
                 String udid = (String) caps.getCapability("udid");
                 String deviceName = (String) caps.getCapability("testobject_device");
                 String platformVersion = (String) caps.getCapability("platformVersion");
@@ -178,7 +178,7 @@ public class TestBase extends SuperTestBase {
                 }
             }
             //System.out.println("Quitting driver with SessionID: " + getSessionId());
-            driver.get().quit();
+            iosDriver.get().quit();
         } else {
             System.out.println("Driver is null for whatever reason.");
         }
@@ -193,6 +193,6 @@ public class TestBase extends SuperTestBase {
     }
 
     private boolean isEU() {
-        return driver.get().getRemoteAddress().getHost().contains("eu-central-1");
+        return iosDriver.get().getRemoteAddress().getHost().contains("eu-central-1");
     }
 }

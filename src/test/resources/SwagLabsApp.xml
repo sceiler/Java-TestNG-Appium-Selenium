@@ -3,7 +3,7 @@
 <suite name="Swag Labs App Suite" verbose="1" parallel="tests" thread-count="100" data-provider-thread-count="100">
     <test name="Swag Labs App Test" parallel="methods" thread-count="100">
         <packages>
-            <package name="com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.*"/>
+            <package name="com.saucelabs.yy.Tests.Appium.SwagLabsApp.RealDevice.iOS.*"/>
         </packages>
     </test>
 </suite>

@@ -4,6 +4,7 @@ import com.saucelabs.yy.Tests.SuperTestBase;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
@@ -23,9 +24,6 @@ public class TestBase extends SuperTestBase {
     @DataProvider(name = "AndroidRealDevices", parallel = true)
     public static Object[][] androidRealDevicesDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", ".*"},
-                new Object[]{"Android", ".*"},
-                new Object[]{"Android", ".*"},
                 new Object[]{"Android", ".*"}
         };
     }
@@ -33,9 +31,6 @@ public class TestBase extends SuperTestBase {
     @DataProvider(name = "iOSRealDevices", parallel = true)
     public static Object[][] iOSRealDevicesDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"iOS", "iPhone.*"},
-                new Object[]{"iOS", "iPhone.*"},
-                new Object[]{"iOS", "iPhone.*"},
                 new Object[]{"iOS", "iPhone.*"}
         };
     }
@@ -46,26 +41,51 @@ public class TestBase extends SuperTestBase {
 
     protected void createDriver(String platformName, String deviceName, String testMethod) throws MalformedURLException {
         MutableCapabilities caps = new MutableCapabilities();
-        caps.setCapability("username", username);
-        caps.setCapability("accessKey", accesskey);
-        caps.setCapability("deviceName", deviceName);
-        caps.setCapability("browserName", "");
+        MutableCapabilities sauceOptions = new MutableCapabilities();
+
+        caps.setCapability("appium:deviceName", deviceName);
         caps.setCapability("platformName", platformName);
-        caps.setCapability("name", testMethod);
+        sauceOptions.setCapability("name", testMethod);
 
         if (platformName.equals("Android")) {
-            caps.setCapability("app", "storage:filename=" + ANDROID_FILE_NAME);
+            caps.setCapability("appium:app", "storage:filename=" + ANDROID_FILE_NAME);
         } else if (platformName.equals("iOS")) {
-            caps.setCapability("app", "storage:filename=" + IOS_FILE_NAME);
+            caps.setCapability("appium:app", "storage:filename=" + IOS_FILE_NAME);
         }
 
         if (buildTag != null) {
-            caps.setCapability("build", buildTag);
+            sauceOptions.setCapability("build", buildTag);
         } else {
-            caps.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + localBuildTag);
+            sauceOptions.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + localBuildTag);
         }
 
+        caps.setCapability("sauce:options", sauceOptions);
+
         driver.set(new AppiumDriver(createDriverURL(), caps));
+        sessionId.set(driver.get().getSessionId().toString());
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    }
+
+    protected void createJWPDriver(String platformName, String deviceName, String testMethod) throws MalformedURLException {
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setCapability("deviceName", deviceName);
+        desiredCapabilities.setCapability("platformName", platformName);
+        desiredCapabilities.setCapability("name", testMethod);
+        desiredCapabilities.setCapability("appiumVersion", "1.21.0");
+
+        if (platformName.equals("Android")) {
+            desiredCapabilities.setCapability("app", "storage:filename=" + ANDROID_FILE_NAME);
+        } else if (platformName.equals("iOS")) {
+            desiredCapabilities.setCapability("app", "storage:filename=" + IOS_FILE_NAME);
+        }
+
+        if (buildTag != null) {
+            desiredCapabilities.setCapability("build", buildTag);
+        } else {
+            desiredCapabilities.setCapability("build", "YiMin-Local-Java-Appium-Mobile-App-" + localBuildTag);
+        }
+
+        driver.set(new AppiumDriver(createDriverURL(), desiredCapabilities));
         sessionId.set(driver.get().getSessionId().toString());
         driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }

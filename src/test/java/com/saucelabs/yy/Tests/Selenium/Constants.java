@@ -1,18 +1,21 @@
 package com.saucelabs.yy.Tests.Selenium;
 
 public class Constants {
-    public enum PLATFORM
-    {
+    public enum PLATFORM {
+        WINDOWS11("Windows 11"),
         WINDOWS10("Windows 10"),
         WINDOWS81("Windows 8.1"),
         WINDOWS8("Windows 8"),
         WINDOWS7("Windows 7"),
         LINUX("Linux"),
-        OSXELCAPITAN("macOS 10.12"),
+        OSXYOSEMITE("OS X 10.10"),
+        OSXELCAPITAN("OS X 10.11"),
+        MACOSSIERRA("macOS 10.12"),
         MACOSHIGHSIERRA("macOS 10.13"),
         MACOSMOJAVE("macOS 10.14"),
         MACOSCATALINA("macOS 10.15"),
-        MACOSBIGSUR("macOS 11.00");
+        MACOSBIGSUR("macOS 11.00"),
+        MACOSMONTEREY("macOS 12");
 
         String label;
 
@@ -20,11 +23,12 @@ public class Constants {
             this.label = label;
         }
 
-        public String label() { return label; }
+        public String label() {
+            return label;
+        }
     }
 
-    public enum BROWSER
-    {
+    public enum BROWSER {
         CHROME("chrome"),
         FIREFOX("firefox"),
         EDGE("MicrosoftEdge"),
@@ -37,11 +41,12 @@ public class Constants {
             this.label = label;
         }
 
-        public String label() { return label; }
+        public String label() {
+            return label;
+        }
     }
 
-    public enum VERSION
-    {
+    public enum VERSION {
         LATEST("latest"),
         LATEST1("latest-1"),
         LATEST2("latest-2"),
@@ -54,6 +59,8 @@ public class Constants {
             this.label = label;
         }
 
-        public String label() { return label; }
+        public String label() {
+            return label;
+        }
     }
 }

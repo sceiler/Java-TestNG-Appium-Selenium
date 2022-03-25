@@ -8,8 +8,10 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 
@@ -21,8 +23,8 @@ public class TestBase extends SuperTestBase {
     @DataProvider(name = "RDC", parallel = true)
     public static Object[][] RDCBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"iOS", "iPhone_SE_2020_14_POC18", "14"},
-                new Object[]{"Android", "Samsung_Galaxy_S20_POC38", "10"}
+                //new Object[]{"iOS", "iPhone_SE_2020_14_POC18", "14"},
+                new Object[]{"Android", "Samsung.*", "10"}
         };
     }
 
@@ -53,9 +55,7 @@ public class TestBase extends SuperTestBase {
         }
 
         sauceOptions.setCapability("name", methodName);
-        sauceOptions.setCapability("appiumVersion", "1.22.2");
-        sauceOptions.setCapability("username", System.getenv("SAUCE_USERNAME"));
-        sauceOptions.setCapability("accessKey", System.getenv("SAUCE_ACCESS_KEY"));
+        sauceOptions.setCapability("appiumVersion", "1.22.0");
 
         if (buildTag != null) {
             sauceOptions.setCapability("build", buildTag);
@@ -73,6 +73,11 @@ public class TestBase extends SuperTestBase {
             driver.set(new IOSDriver(createDriverURL(), capabilities));
         }
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
+    }
+
+    @BeforeMethod
+    public void setup() {
+        new File("visual/results").mkdirs();
     }
 
     @AfterMethod

@@ -29,4 +29,14 @@ public class LoginTests extends TestBase {
         getDriver().findElement(By.id("test-LOGIN")).click();
         getDriver().getScreenshotAs(OutputType.FILE);
     }
+
+    @Test(dataProvider = "iOSRealDevices")
+    public void JWPTest(String platformName, String deviceName, Method testMethod) throws MalformedURLException {
+        createJWPDriver(platformName, deviceName, testMethod.getName());
+
+        getDriver().findElement(By.id("test-Username")).sendKeys("standard_user");
+        getDriver().findElement(By.id("test-Password")).sendKeys("secret_sauce");
+        getDriver().findElement(By.id("test-LOGIN")).click();
+        getDriver().getScreenshotAs(OutputType.FILE);
+    }
 }

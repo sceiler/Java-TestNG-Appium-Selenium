@@ -3,6 +3,7 @@
 <suite name="Mobile App Visual Test Suite" verbose="1" parallel="tests" thread-count="100"
        data-provider-thread-count="100">
     <test name="Mobile App Visual Tests" parallel="methods" thread-count="100">
+        <!--
         <classes>
             <class name="com.saucelabs.yy.Visual.VisualTests">
                 <methods>
@@ -10,5 +11,9 @@
                 </methods>
             </class>
         </classes>
+        -->
+        <packages>
+            <package name="com.saucelabs.yy.Visual.*"/>
+        </packages>
     </test>
 </suite>

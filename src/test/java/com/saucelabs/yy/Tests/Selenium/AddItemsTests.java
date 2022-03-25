@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 
 public class AddItemsTests extends TestBase {
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "Browsers")
     public void addOneItemtoCart(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         getRemoteWebDriver().get("https://www.saucedemo.com/inventory.html");
@@ -17,11 +17,11 @@ public class AddItemsTests extends TestBase {
 
         Assert.assertEquals("1", getRemoteWebDriver().findElement(By.className("shopping_cart_badge")).getText());
 
-        getRemoteWebDriver().get("http://www.saucedemo.com/cart.html");
+        getRemoteWebDriver().get("https://www.saucedemo.com/cart.html");
         Assert.assertEquals(1, getRemoteWebDriver().findElements(By.className("inventory_item_name")).size());
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "Browsers")
     public void addTwoItemsToCart(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         getRemoteWebDriver().get("https://www.saucedemo.com/inventory.html");
@@ -30,7 +30,7 @@ public class AddItemsTests extends TestBase {
 
         Assert.assertEquals("2", getRemoteWebDriver().findElement(By.className("shopping_cart_badge")).getText());
 
-        getRemoteWebDriver().get("http://www.saucedemo.com/cart.html");
+        getRemoteWebDriver().get("https://www.saucedemo.com/cart.html");
         Assert.assertEquals(2, getRemoteWebDriver().findElements(By.className("inventory_item_name")).size());
     }
 }

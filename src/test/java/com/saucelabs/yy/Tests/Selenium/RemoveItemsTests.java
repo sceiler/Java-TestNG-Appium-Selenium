@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 
 public class RemoveItemsTests extends TestBase {
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "Browsers")
     public void removeOneItemFromCart(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         getRemoteWebDriver().get("https://www.saucedemo.com/inventory.html");
@@ -17,7 +17,7 @@ public class RemoveItemsTests extends TestBase {
 
         Assert.assertEquals("1", getRemoteWebDriver().findElement(By.cssSelector("span[class*='shopping_cart_badge']")).getText());
 
-        getRemoteWebDriver().get("http://www.saucedemo.com/cart.html");
+        getRemoteWebDriver().get("https://www.saucedemo.com/cart.html");
         Assert.assertEquals("Sauce Labs Backpack", getRemoteWebDriver().findElement(By.cssSelector("div[class='inventory_item_name']")).getText());
 
         getRemoteWebDriver().findElement(By.cssSelector("button[id='remove-sauce-labs-backpack']")).click();

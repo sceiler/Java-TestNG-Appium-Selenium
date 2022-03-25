@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 
 public class LoginTests extends TestBase {
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "Browsers")
     public void invalidCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
@@ -24,7 +24,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getRemoteWebDriver().findElements(By.cssSelector("button[class='error-button']")).size() > 0);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "Browsers")
     public void blankCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
@@ -39,7 +39,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getRemoteWebDriver().findElements(By.cssSelector("button[class='error-button']")).size() > 0);
     }
 
-    @Test(dataProvider = "hardCodedBrowsers")
+    @Test(dataProvider = "Browsers")
     public void validCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
@@ -54,7 +54,7 @@ public class LoginTests extends TestBase {
         Assert.assertTrue(getRemoteWebDriver().getCurrentUrl().contains("inventory"));
     }
 
-    @Test(dataProvider = "headlessBrowsers")
+    @Test(dataProvider = "Browsers")
     public void loginUIPresent(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");

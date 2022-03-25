@@ -16,24 +16,22 @@ public class DeviceTests extends TestBase {
     public void checkForSignedInAppleIdOnEU(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         createDriver(platform, deviceName, platformVersion, methodName.getName());
 
-        // TODO: uncomment when Appium reimplements this method
-        //driver.get().activateApp("com.apple.Preferences");
+        iosDriver.get().activateApp("com.apple.Preferences");
         Thread.sleep(1000);
         OCR ocr = new OCR();
-        String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
+        String result = ocr.getText(iosDriver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
         Assert.assertTrue(assertion(result));
     }
 
-    @Test(dataProvider = "RDCDataProviderUS")
+    @Test(dataProvider = "RDCDataProviderUS", enabled = false)
     public void checkForSignedInAppleIdOnUS(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         createDriver(platform, deviceName, platformVersion, methodName.getName(), Region.US);
 
-        // TODO: uncomment when Appium reimplements this method
-        //driver.get().activateApp("com.apple.Preferences");
+        iosDriver.get().activateApp("com.apple.Preferences");
         Thread.sleep(1000);
         OCR ocr = new OCR();
-        String result = ocr.getText(driver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
+        String result = ocr.getText(iosDriver.get().getScreenshotAs(OutputType.FILE)).toLowerCase(Locale.ROOT);
 
         Assert.assertTrue(assertion(result));
     }
