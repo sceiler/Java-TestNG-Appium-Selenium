@@ -34,7 +34,24 @@ public class TestBase extends SuperTestBase {
                 configs = new Object[][]{
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()}
+                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
+                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
+
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
+                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
                 };
                 return configs;
             default:
