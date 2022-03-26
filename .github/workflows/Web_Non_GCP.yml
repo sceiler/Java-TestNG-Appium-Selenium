@@ -1,4 +1,4 @@
-name: Selenium Web Tests GCP
+name: Selenium Web Tests Non GCP
 
 on:
   schedule:
