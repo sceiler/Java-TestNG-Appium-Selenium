@@ -50,6 +50,8 @@ public class Constants {
         LATEST("latest"),
         LATEST1("latest-1"),
         LATEST2("latest-2"),
+        LATEST3("latest-3"),
+        LATEST4("latest-4"),
         BETA("beta"),
         DEV("dev");
 
