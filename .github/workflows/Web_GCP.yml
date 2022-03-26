@@ -24,3 +24,6 @@ jobs:
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY_GCP }}
           BUILD_TAG: Selenium-GCP-1.${{ github.run_number }}
           TAGS: GCP_TESTING,GCP
+      - name: Publish Test Report
+        if: ${{ always() }}
+        uses: scacap/action-surefire-report@v1
