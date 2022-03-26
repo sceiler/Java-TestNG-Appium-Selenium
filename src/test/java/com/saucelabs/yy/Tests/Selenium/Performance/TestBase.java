@@ -3,8 +3,8 @@ package com.saucelabs.yy.Tests.Selenium.Performance;
 import com.saucelabs.yy.Tests.Selenium.Constants;
 import com.saucelabs.yy.Tests.SuperTestBase;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -39,21 +39,25 @@ public class TestBase extends SuperTestBase {
     }
 
     protected void createDriver(String browser, String version, String os, String methodName) throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        MutableCapabilities capabilities = new MutableCapabilities();
+        MutableCapabilities sauceOptions = new MutableCapabilities();
 
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
         capabilities.setCapability(CapabilityType.BROWSER_VERSION, version);
         capabilities.setCapability(CapabilityType.PLATFORM_NAME, os);
-        capabilities.setCapability("name", methodName);
-        capabilities.setCapability("tags", Arrays.asList("Performance"));
-        capabilities.setCapability("extendedDebugging", true);
-        capabilities.setCapability("capturePerformance", true);
+
+        sauceOptions.setCapability("name", methodName);
+        sauceOptions.setCapability("tags", Arrays.asList("Performance"));
+        sauceOptions.setCapability("extendedDebugging", true);
+        sauceOptions.setCapability("capturePerformance", true);
 
         if (buildTag != null) {
-            capabilities.setCapability("build", buildTag);
+            sauceOptions.setCapability("build", buildTag);
         } else {
-            capabilities.setCapability("build", "YiMin-Local-Java-Selenium-Web-Performance-" + localBuildTag);
+            sauceOptions.setCapability("build", "YiMin-Local-Java-Selenium-Web-Performance-" + localBuildTag);
         }
+
+        capabilities.setCapability("sauce:options", sauceOptions);
 
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
         webDriverWait.set(new WebDriverWait(remoteWebDriver.get(), Duration.ofSeconds(10)));

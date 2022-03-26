@@ -1,10 +1,6 @@
 name: Device Check Test
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
   workflow_dispatch:
 
 jobs:
@@ -14,17 +10,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          distribution: 'zulu'
-          java-version: '11'
+          java-version: '17'
+          distribution: 'temurin'
       - name: Build with Maven
         run: mvn --quiet clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Device_Check.xml
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          BUILD_TAG: GitHub-Java-Appium-Device-Check-1.${{ github.run_number }}
+          BUILD_TAG: Device-Check-1.${{ github.run_number }}
       - name: Read devices.txt
         id: devices
         uses: juliangruber/read-file-action@v1.1.4
