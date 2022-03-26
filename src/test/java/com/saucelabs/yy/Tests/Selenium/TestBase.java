@@ -18,6 +18,7 @@ import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class TestBase extends SuperTestBase {
@@ -123,7 +124,7 @@ public class TestBase extends SuperTestBase {
         sauceOptions.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Selenium-Web-" + localBuildTag));
 
         if (tags != null) {
-            sauceOptions.setCapability("tags", tags);
+            sauceOptions.setCapability("tags", Arrays.asList(tags.split(",")));
         }
 
         if (browser.equalsIgnoreCase("Chrome")) {

@@ -32,4 +32,4 @@ jobs:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           BUILD_TAG: Selenium-Non-GCP-1.${{ github.run_number }}
-          TAGS: GCP_TESTING
+          TAGS: GCP_TESTING,NON_GCP
