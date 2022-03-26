@@ -18,10 +18,12 @@ import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
+import java.util.Objects;
 
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
+    public String tags = System.getenv("TAGS");
     private static String config;
 
     @DataProvider(name = "Browsers", parallel = true)
@@ -121,10 +123,10 @@ public class TestBase extends SuperTestBase {
 
         sauceOptions.setCapability("name", methodName);
 
-        if (buildTag != null) {
-            sauceOptions.setCapability("build", buildTag);
-        } else {
-            sauceOptions.setCapability("build", "YiMin-Local-Java-Selenium-Web-" + localBuildTag);
+        sauceOptions.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Selenium-Web-" + localBuildTag));
+
+        if (tags != null) {
+            sauceOptions.setCapability("tags", tags);
         }
 
         if (browser.equalsIgnoreCase("Chrome")) {
