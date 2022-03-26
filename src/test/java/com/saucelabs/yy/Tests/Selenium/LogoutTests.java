@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 public class LogoutTests extends TestBase {
 
     @Test(dataProvider = "Browsers")
-    public void validCredentials(String browser, String version, String os, Method method) throws MalformedURLException {
+    public void passingLogout(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com");
         getRemoteWebDriver().get("https://www.saucedemo.com");
