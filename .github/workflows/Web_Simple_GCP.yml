@@ -22,7 +22,7 @@ jobs:
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME_GCP }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY_GCP }}
-          BUILD_TAG: Selenium-Simple-GCP-1.${{ github.run_number }}
+          BUILD_TAG: Selenium-Simple-GCP-2.${{ github.run_number }}
           TAGS: GCP_TESTING,GCP,SimpleTests
       - name: Publish Test Report
         if: ${{ always() }}
