@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests.Selenium;
 
+import com.saucelabs.yy.Region;
 import com.saucelabs.yy.Tests.SuperTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +12,9 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
@@ -25,7 +28,9 @@ public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
     public String tags = System.getenv("TAGS");
+    public Region region;
     private static String config;
+
 
     @DataProvider(name = "Browsers", parallel = true)
     public static Object[][] Browsers(Method testMethod) {
@@ -122,8 +127,7 @@ public class TestBase extends SuperTestBase {
         }
     }
 
-    protected void createDriver(String browser, String version, String os, String methodName) throws MalformedURLException {
-
+    protected void createDriver(String browser, String version, String os, String methodName, Region region) throws MalformedURLException {
         MutableCapabilities capabilities = new MutableCapabilities();
         MutableCapabilities sauceOptions = new MutableCapabilities();
 
@@ -157,7 +161,7 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
+        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(region), capabilities));
         getRemoteWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         getRemoteWebDriver().get("https://www.saucedemo.com");
         //remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
@@ -169,15 +173,45 @@ public class TestBase extends SuperTestBase {
         getRemoteWebDriver().findElement(By.cssSelector("#login-button")).click();
     }
 
+    protected void createDriver(String browser, String version, String os, String methodName) throws MalformedURLException {
+        if (region != null) {
+            createDriver(browser, version, os, methodName, region);
+        } else {
+            createDriver(browser, version, os, methodName, Region.EU);
+        }
+    }
+
     @BeforeSuite
     public void setup(ITestContext context) {
         config = context.getCurrentXmlTest().getParameter("browserConfig");
     }
 
+    @BeforeMethod
+    public void setup() {
+        // try to use REGION defined in environment variable
+        if (System.getenv("REGION") != null && !System.getenv("REGION").isEmpty() && !System.getenv("REGION").isBlank()) {
+            region = Region.fromString(System.getenv("REGION"));
+        }
+
+        // xml config takes priority over environment variable
+        String regionString = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("REGION");
+        if (regionString != null && !regionString.isBlank() && !regionString.isEmpty()) {
+            region = Region.fromString(regionString);
+        }
+
+        // fallback/default if nothing is set
+        if (region == null) {
+            region = Region.EU;
+        }
+    }
+
     @AfterMethod
     public void tearDown(ITestResult result) {
         ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-        remoteWebDriver.get().quit();
+
+        if (getRemoteWebDriver() != null) {
+            getRemoteWebDriver().quit();
+        }
     }
 
     protected void annotate(String text) {
