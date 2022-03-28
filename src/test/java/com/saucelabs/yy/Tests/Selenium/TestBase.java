@@ -4,12 +4,12 @@ import com.saucelabs.yy.Region;
 import com.saucelabs.yy.Tests.SuperTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -22,6 +22,8 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class TestBase extends SuperTestBase {
@@ -127,40 +129,30 @@ public class TestBase extends SuperTestBase {
     }
 
     protected void createDriver(String browser, String version, String os, String methodName, Region region) throws MalformedURLException {
-        MutableCapabilities capabilities = new MutableCapabilities();
-        MutableCapabilities sauceOptions = new MutableCapabilities();
+        AbstractDriverOptions browserOptions = switch (Constants.BROWSER.valueOf(browser)) {
+            case CHROME -> new ChromeOptions();
+            case FIREFOX -> new FirefoxOptions();
+            case EDGE -> new EdgeOptions();
+            case SAFARI -> new SafariOptions();
+            default -> null;
+        };
 
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
-        capabilities.setCapability(CapabilityType.BROWSER_VERSION, version);
-        capabilities.setCapability(CapabilityType.PLATFORM_NAME, os);
+        browserOptions.setPlatformName(os);
+        browserOptions.setBrowserVersion(version);
+        browserOptions.setAcceptInsecureCerts(true);
 
-        sauceOptions.setCapability("name", methodName);
+        Map<String, Object> sauceOptions = new HashMap<>();
 
-        sauceOptions.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Selenium-Web-" + localBuildTag));
+        sauceOptions.put("name", methodName);
+        sauceOptions.put("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Selenium-Web-" + localBuildTag));
 
         if (tags != null) {
-            sauceOptions.setCapability("tags", Arrays.asList(tags.split(",")));
+            sauceOptions.put("tags", Arrays.asList(tags.split(",")));
         }
 
-        if (browser.equalsIgnoreCase("Chrome")) {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("--ignore-ssl-errors=yes");
-            chromeOptions.addArguments("--ignore-certificate-errors");
-            capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-        } else if (browser.equalsIgnoreCase("Firefox")) {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.getProfile().setAcceptUntrustedCertificates(true);
-            capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, firefoxOptions);
-        } else if (browser.equalsIgnoreCase("MicrosoftEdge")) {
-            EdgeOptions edgeOptions = new EdgeOptions();
-            edgeOptions.addArguments("--ignore-ssl-errors=yes");
-            edgeOptions.addArguments("--ignore-certificate-errors");
-            capabilities.setCapability(EdgeOptions.CAPABILITY, edgeOptions);
-        }
+        browserOptions.setCapability("sauce:options", sauceOptions);
 
-        capabilities.setCapability("sauce:options", sauceOptions);
-
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(region), capabilities));
+        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(region), browserOptions));
         getRemoteWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         getRemoteWebDriver().get("https://www.saucedemo.com");
         //remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));

@@ -12,36 +12,6 @@ public class OpenURLTests extends TestBase {
     @Test(dataProvider = "Browsers")
     public void openSauceDemo(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-        annotate("Open saucedemo.com");
-        getRemoteWebDriver().get("https://www.saucedemo.com");
-
         Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Swag Labs"));
-    }
-
-    @Test(dataProvider = "Browsers")
-    public void openGoogle(String browser, String version, String os, Method method) throws MalformedURLException {
-        createDriver(browser, version, os, method.getName());
-        annotate("Open google.com");
-        getRemoteWebDriver().get("https://www.google.com");
-
-        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Google"));
-    }
-
-    @Test(dataProvider = "Browsers")
-    public void openApple(String browser, String version, String os, Method method) throws MalformedURLException {
-        createDriver(browser, version, os, method.getName());
-        annotate("Open apple.com");
-        getRemoteWebDriver().get("https://www.apple.com");
-
-        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Apple"));
-    }
-
-    @Test(dataProvider = "Browsers")
-    public void openInstagram(String browser, String version, String os, Method method) throws MalformedURLException {
-        createDriver(browser, version, os, method.getName());
-        annotate("Open instagram.com");
-        getRemoteWebDriver().get("https://www.instagram.com");
-
-        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Instagram"));
     }
 }
