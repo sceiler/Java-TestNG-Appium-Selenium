@@ -4,7 +4,7 @@
     <test name="Selenium Web Test" parallel="methods" thread-count="500">
         <parameter name="browserConfig" value=""/>
         <packages>
-            <package name="com.saucelabs.yy.Tests.Selenium.SimpleTests"/>
+            <package name="com.saucelabs.yy.Tests.Selenium.SimpleTests.*"/>
         </packages>
     </test>
 </suite>
