@@ -1,4 +1,4 @@
-name: Selenium Web Tests APAC GCP
+name: Selenium Web Simple Tests Non GCP
 
 on:
   workflow_dispatch:
@@ -18,13 +18,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Maven
-        run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/SeleniumWeb_GCP.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
+        run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Selenium_Web_Simple.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          BUILD_TAG: Selenium-GCP-1.${{ github.run_number }}
-          TAGS: GCP_TESTING,GCP,APAC
-          REGION: APAC
+          BUILD_TAG: Selenium-Simple-Non-GCP-1.${{ github.run_number }}
+          TAGS: GCP_TESTING,NON_GCP,SimpleTests
       - name: Publish Test Report
         if: ${{ always() }}
         uses: scacap/action-surefire-report@v1
