@@ -15,7 +15,7 @@ public class OpenURLTests extends TestBase {
         annotate("Open saucedemo.com");
         getRemoteWebDriver().get("https://www.saucedemo.com");
 
-        Assert.assertTrue(getRemoteWebDriver().getTitle().equalsIgnoreCase("Swag Labs"));
+        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Swag Labs"));
     }
 
     @Test(dataProvider = "Browsers")
@@ -24,7 +24,7 @@ public class OpenURLTests extends TestBase {
         annotate("Open google.com");
         getRemoteWebDriver().get("https://www.google.com");
 
-        Assert.assertTrue(getRemoteWebDriver().getTitle().equalsIgnoreCase("Google"));
+        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Google"));
     }
 
     @Test(dataProvider = "Browsers")
@@ -33,7 +33,7 @@ public class OpenURLTests extends TestBase {
         annotate("Open apple.com");
         getRemoteWebDriver().get("https://www.apple.com");
 
-        Assert.assertTrue(getRemoteWebDriver().getTitle().equalsIgnoreCase("Apple"));
+        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Apple"));
     }
 
     @Test(dataProvider = "Browsers")
@@ -42,6 +42,6 @@ public class OpenURLTests extends TestBase {
         annotate("Open instagram.com");
         getRemoteWebDriver().get("https://www.instagram.com");
 
-        Assert.assertTrue(getRemoteWebDriver().getTitle().equalsIgnoreCase("Instagram"));
+        Assert.assertTrue(getRemoteWebDriver().getTitle().contains("Instagram"));
     }
 }
