@@ -31,7 +31,6 @@ public class TestBase extends SuperTestBase {
     public Region region;
     private static String config;
 
-
     @DataProvider(name = "Browsers", parallel = true)
     public static Object[][] Browsers(Method testMethod) {
         String browserConfig = config;
