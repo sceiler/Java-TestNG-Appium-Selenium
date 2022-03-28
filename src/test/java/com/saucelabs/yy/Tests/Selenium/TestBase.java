@@ -21,10 +21,7 @@ import org.testng.annotations.DataProvider;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class TestBase extends SuperTestBase {
 
@@ -43,31 +40,31 @@ public class TestBase extends SuperTestBase {
                 configs = new Object[][]{
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
 
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
 
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
 
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS81.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS81.label()},
 
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS81.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS81.label()},
                 };
@@ -100,16 +97,16 @@ public class TestBase extends SuperTestBase {
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSHIGHSIERRA.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSSIERRA.label()},
 
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMOJAVE.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSHIGHSIERRA.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSSIERRA.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.OSXELCAPITAN.label()},
-                        new Object[]{Constants.BROWSER.EDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.OSXYOSEMITE.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMOJAVE.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSHIGHSIERRA.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSSIERRA.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.OSXELCAPITAN.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.OSXYOSEMITE.label()},
 
                         new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
                         new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
@@ -129,10 +126,10 @@ public class TestBase extends SuperTestBase {
     }
 
     protected void createDriver(String browser, String version, String os, String methodName, Region region) throws MalformedURLException {
-        AbstractDriverOptions browserOptions = switch (Constants.BROWSER.valueOf(browser)) {
+        AbstractDriverOptions browserOptions = switch (Constants.BROWSER.valueOf(browser.toUpperCase(Locale.ROOT))) {
             case CHROME -> new ChromeOptions();
             case FIREFOX -> new FirefoxOptions();
-            case EDGE -> new EdgeOptions();
+            case MICROSOFTEDGE -> new EdgeOptions();
             case SAFARI -> new SafariOptions();
             default -> null;
         };
