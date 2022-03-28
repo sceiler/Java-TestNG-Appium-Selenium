@@ -151,7 +151,7 @@ public class TestBase extends SuperTestBase {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.getProfile().setAcceptUntrustedCertificates(true);
             capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, firefoxOptions);
-        } else if (browser.equalsIgnoreCase("Edge")) {
+        } else if (browser.equalsIgnoreCase("MicrosoftEdge")) {
             EdgeOptions edgeOptions = new EdgeOptions();
             edgeOptions.addArguments("--ignore-ssl-errors=yes");
             edgeOptions.addArguments("--ignore-certificate-errors");
