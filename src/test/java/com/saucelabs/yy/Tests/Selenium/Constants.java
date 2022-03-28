@@ -31,7 +31,7 @@ public class Constants {
     public enum BROWSER {
         CHROME("chrome"),
         FIREFOX("firefox"),
-        EDGE("MicrosoftEdge"),
+        MICROSOFTEDGE("MicrosoftEdge"),
         SAFARI("safari"),
         INTERNETEXPLORER("internet explorer");
 
