@@ -1,4 +1,4 @@
-name: Selenium Web Tests GCP
+name: Selenium Web Tests APAC GCP
 
 on:
   workflow_dispatch:
