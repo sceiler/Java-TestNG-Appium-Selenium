@@ -29,7 +29,7 @@ import java.util.Comparator;
 public class LoginTests extends TestBase {
 
     @Test(dataProvider = "browsers")
-    public void clickOnBackpackViaLocalImage(String browser, String version, String os, Method method) throws IOException, InterruptedException {
+    public void clickOnBackpackViaLocalImage(String browser, String version, String os, Method method) throws IOException {
         createDriver(browser, version, os, method.getName());
         annotate("Open saucedemo.com inventory");
         getRemoteWebDriver().get("https://www.saucedemo.com/inventory.html");
@@ -62,9 +62,8 @@ public class LoginTests extends TestBase {
             BufferedImage newScreenshotImage = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
             newScreenshotImage.createGraphics().drawImage(originalImage, 0, 0, Color.WHITE, null);
             bufferedImage = newScreenshotImage;
-        } else {
-            throw new ElementNotVisibleException("Element not found - ");
         }
+
         return bufferedImage;
     }
 
@@ -72,7 +71,6 @@ public class LoginTests extends TestBase {
      * @param baseImg       Screenshot of the browser in the VM
      * @param targetImgPath the image on the local file system used to find a matching on the VM
      * @return coordinates of the found and matching element
-     * @throws IOException
      */
     private Point2D getCoords(BufferedImage baseImg, String targetImgPath) throws IOException {
         Match m;
