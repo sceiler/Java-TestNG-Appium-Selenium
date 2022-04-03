@@ -15,6 +15,10 @@ import java.net.MalformedURLException;
 
 public class TestBase extends SuperTestBase {
 
+    public static final String IPA = "iOS-Real-Device-MyRNDemoApp.1.2.0-150.ipa";
+    public static final String ZIP = "iOS-Simulator-MyRNDemoApp.1.2.0-152.zip";
+    public static final String APK = "Android-MyDemoAppRN.1.2.0.build-231.apk";
+
     public String buildTag = System.getenv("BUILD_TAG");
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 

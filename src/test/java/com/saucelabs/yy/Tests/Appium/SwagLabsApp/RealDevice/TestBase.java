@@ -13,11 +13,12 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
 
+import static com.saucelabs.yy.Tests.Appium.TestBase.APK;
+import static com.saucelabs.yy.Tests.Appium.TestBase.IPA;
+
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
-    public final String ANDROID_FILE_NAME = "Android.SauceLabs.Mobile.Sample.app.2.7.1.apk";
-    public final String IOS_FILE_NAME = "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa";
 
     private ThreadLocal<String> sessionId = new ThreadLocal<>();
 
@@ -48,9 +49,9 @@ public class TestBase extends SuperTestBase {
         sauceOptions.setCapability("name", testMethod);
 
         if (platformName.equals("Android")) {
-            caps.setCapability("appium:app", "storage:filename=" + ANDROID_FILE_NAME);
+            caps.setCapability("appium:app", "storage:filename=" + IPA);
         } else if (platformName.equals("iOS")) {
-            caps.setCapability("appium:app", "storage:filename=" + IOS_FILE_NAME);
+            caps.setCapability("appium:app", "storage:filename=" + APK);
         }
 
         if (buildTag != null) {
@@ -74,9 +75,9 @@ public class TestBase extends SuperTestBase {
         desiredCapabilities.setCapability("appiumVersion", "1.21.0");
 
         if (platformName.equals("Android")) {
-            desiredCapabilities.setCapability("app", "storage:filename=" + ANDROID_FILE_NAME);
+            desiredCapabilities.setCapability("app", "storage:filename=" + APK);
         } else if (platformName.equals("iOS")) {
-            desiredCapabilities.setCapability("app", "storage:filename=" + IOS_FILE_NAME);
+            desiredCapabilities.setCapability("app", "storage:filename=" + IPA);
         }
 
         if (buildTag != null) {

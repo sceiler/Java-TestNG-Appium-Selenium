@@ -13,6 +13,9 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.Objects;
 
+import static com.saucelabs.yy.Tests.Appium.TestBase.APK;
+import static com.saucelabs.yy.Tests.Appium.TestBase.ZIP;
+
 public class TestBase extends SuperTestBase {
 
     public String buildTag = System.getenv("BUILD_TAG");
@@ -76,10 +79,10 @@ public class TestBase extends SuperTestBase {
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
 
         if (platformName.equals("Android")) {
-            capabilities.setCapability("app", "storage:filename=Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
-            capabilities.setCapability("appWaitActivity", "com.swaglabsmobileapp.MainActivity");
+            capabilities.setCapability("app", "storage:filename=" + APK);
+            //capabilities.setCapability("appWaitActivity", "com.swaglabsmobileapp.MainActivity");
         } else if (platformName.equals("iOS")) {
-            capabilities.setCapability("app", "storage:filename=iOS.Simulator.SauceLabs.Mobile.Sample.app.2.7.1.zip");
+            capabilities.setCapability("app", "storage:filename=" + ZIP);
         }
 
         if (caps != null) {
