@@ -95,3 +95,5 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+/src/test/java/com/saucelabs/yy/Tests/Appium/Playground/
+src/test/resources/Playground.xml
