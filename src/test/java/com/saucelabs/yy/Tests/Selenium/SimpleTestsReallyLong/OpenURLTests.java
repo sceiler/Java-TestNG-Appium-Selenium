@@ -19,7 +19,7 @@ public class OpenURLTests extends TestBase {
     @Test(dataProvider = "Browsers", invocationCount = 1)
     public void logout(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-        getRemoteWebDriver().findElement(By.className("bm-burger-button")).click();
+        getRemoteWebDriver().findElement(By.id("react-burger-menu-btn")).click();
         getRemoteWebDriver().findElement(By.id("logout_sidebar_link")).click();
         Assert.assertTrue(getRemoteWebDriver().findElement(By.className("bot_column")).isDisplayed());
     }
@@ -27,7 +27,7 @@ public class OpenURLTests extends TestBase {
     @Test(dataProvider = "Browsers", invocationCount = 1)
     public void lockedOutUser(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-        getRemoteWebDriver().findElement(By.className("bm-burger-button")).click();
+        getRemoteWebDriver().findElement(By.id("react-burger-menu-btn")).click();
         getRemoteWebDriver().findElement(By.id("logout_sidebar_link")).click();
         getRemoteWebDriver().findElement(By.cssSelector("#user-name")).sendKeys("locked_out_user");
         getRemoteWebDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
@@ -38,7 +38,7 @@ public class OpenURLTests extends TestBase {
     @Test(dataProvider = "Browsers", invocationCount = 1)
     public void problemUser(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-        getRemoteWebDriver().findElement(By.className("bm-burger-button")).click();
+        getRemoteWebDriver().findElement(By.id("react-burger-menu-btn")).click();
         getRemoteWebDriver().findElement(By.id("logout_sidebar_link")).click();
         getRemoteWebDriver().findElement(By.cssSelector("#user-name")).sendKeys("problem_user");
         getRemoteWebDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
