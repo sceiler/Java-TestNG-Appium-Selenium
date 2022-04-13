@@ -1,4 +1,4 @@
-name: Selenium Web Simple Tests GCP
+name: Selenium Web Simple Tests GCP Long
 
 on:
   workflow_dispatch:
