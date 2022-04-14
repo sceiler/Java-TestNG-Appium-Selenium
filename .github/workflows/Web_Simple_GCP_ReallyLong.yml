@@ -3,7 +3,7 @@ name: Selenium Web Simple Tests GCP Really Long
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 * * * *'
+    - cron: '10 * * * *'
 
 jobs:
   build:
