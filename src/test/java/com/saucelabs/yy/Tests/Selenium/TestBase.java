@@ -195,14 +195,15 @@ public class TestBase extends SuperTestBase {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-
         if (getRemoteWebDriver() != null) {
+            ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
             getRemoteWebDriver().quit();
         }
     }
 
     protected void annotate(String text) {
-        ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:context=" + text);
+        if (getRemoteWebDriver() != null) {
+            ((JavascriptExecutor) getRemoteWebDriver()).executeScript("sauce:context=" + text);
+        }
     }
 }
