@@ -14,7 +14,7 @@
     <properties>
         <org.testng.testng.version>7.5</org.testng.testng.version>
         <org.hamcrest.hamcrest-core.version>2.2</org.hamcrest.hamcrest-core.version>
-        <org.seleniumhq.selenium.selenium-java>4.1.3</org.seleniumhq.selenium.selenium-java>
+        <org.seleniumhq.selenium.selenium-java>4.1.4</org.seleniumhq.selenium.selenium-java>
         <io.appium.java-client>8.0.0</io.appium.java-client>
     </properties>
 
