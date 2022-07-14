@@ -132,7 +132,12 @@
         <dependency>
             <groupId>com.github.angleshq</groupId>
             <artifactId>angles-java-core</artifactId>
-            <version>1.0.31</version>
+            <version>1.0.36</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
