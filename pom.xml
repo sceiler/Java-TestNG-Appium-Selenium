@@ -134,6 +134,11 @@
             <artifactId>angles-java-core</artifactId>
             <version>1.0.31</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+        </dependency>
     </dependencies>
 
     <build>
