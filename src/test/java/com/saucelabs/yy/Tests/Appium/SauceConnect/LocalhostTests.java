@@ -28,11 +28,11 @@ public class LocalhostTests extends TestBase {
         } while (util.tunnelID == null);
     }
 
-    @Test(dataProvider = "emulatorBrowserDataProvider")
+    @Test(dataProvider = "emulatorBrowserDataProvider", enabled = false)
     public void openLocalRouterLoginPageOnEmulator(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException, InterruptedException {
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("tunnelName", TUNNEL_NAME);
-        createDriver(platform, deviceName, platformVersion, methodName.getName(), caps);
+        //createDriver(platform, deviceName, platformVersion, methodName.getName(), caps);
 
         getAndroidDriver().get("http://192.168.178.1");
 
@@ -41,11 +41,11 @@ public class LocalhostTests extends TestBase {
         Assert.assertEquals(getAndroidDriver().getTitle(), "FRITZ!Box");
     }
 
-    @Test(dataProvider = "RDCBrowserDataProvider")
+    @Test(dataProvider = "RDCBrowserDataProvider", enabled = false)
     public void openLocalRouterLoginPageOnRDC(String platform, String deviceName, Method methodName) throws MalformedURLException, InterruptedException {
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("tunnelName", TUNNEL_NAME);
-        createDriver(platform, deviceName, methodName.getName(), caps);
+        //createDriver(platform, deviceName, methodName.getName(), caps);
 
         getAndroidDriver().get("http://192.168.178.1");
 

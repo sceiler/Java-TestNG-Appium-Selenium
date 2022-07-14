@@ -97,3 +97,4 @@ nb-configuration.xml
 .DS_Store
 /src/test/java/com/saucelabs/yy/Tests/Appium/Playground/
 src/test/resources/Playground.xml
+/src/test/resources/Appium/Playground.xml

@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Sauce Demo RDC Suite" verbose="1" parallel="tests" thread-count="100" data-provider-thread-count="100">
+    <test name="Sauce Demo Android Tests" parallel="methods" thread-count="100">
+        <parameter name="config" value="OnlyAndroid"/>
+        <packages>
+            <package name="com.saucelabs.yy.Tests.Appium.MobileWeb.RealDevice.Android"/>
+        </packages>
+    </test>
+    <test name="Sauce Demo iOS Tests" parallel="methods" thread-count="100">
+        <parameter name="config" value="OnlyiOS"/>
+        <packages>
+            <package name="com.saucelabs.yy.Tests.Appium.MobileWeb.RealDevice.iOS"/>
+        </packages>
+    </test>
+</suite>

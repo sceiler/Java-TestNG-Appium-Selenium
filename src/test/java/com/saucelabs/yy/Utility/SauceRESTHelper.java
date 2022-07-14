@@ -39,8 +39,8 @@ public class SauceRESTHelper {
             osVersion = jsonObject.getString("osVersion");
             id = jsonObject.getString("id");
 
-            if (os.equalsIgnoreCase("IOS")) {
-                deviceModelArrayList.add(new DeviceModel(os, osVersion, id));
+            if (os.equalsIgnoreCase("android")) {
+                deviceModelArrayList.add(new DeviceModel("Android", osVersion, id));
             }
         }
 

@@ -12,6 +12,11 @@ import java.nio.file.Paths;
 public class VisualUtility {
 
     private File screenshot;
+
+    public CapabilitiesModel getCapabilitiesModel() {
+        return capabilitiesModel;
+    }
+
     private CapabilitiesModel capabilitiesModel;
 
     public VisualUtility() {
@@ -20,6 +25,10 @@ public class VisualUtility {
 
     public VisualUtility(File screenshot, Capabilities capabilities) {
         this.screenshot = screenshot;
+        this.capabilitiesModel = new CapabilitiesModel(capabilities);
+    }
+
+    public VisualUtility(Capabilities capabilities) {
         this.capabilitiesModel = new CapabilitiesModel(capabilities);
     }
 
@@ -62,7 +71,7 @@ public class VisualUtility {
      * @return true if both screenshots are the same
      */
     public boolean compare() throws IOException {
-        File file = new File(Constants.RESULT_DIRECTORY + capabilitiesModel.getDeviceName());
+        File file = new File(Constants.RESULT_DIRECTORY + capabilitiesModel.getDevice());
 
         if (!file.exists()) {
             file.mkdirs();
@@ -75,8 +84,8 @@ public class VisualUtility {
     }
 
     private void createBaseline() throws IOException {
-        File directoryPath = new File(Constants.RESULT_DIRECTORY + capabilitiesModel.getDeviceName());
+        File directoryPath = new File(Constants.RESULT_DIRECTORY + capabilitiesModel.getDevice());
 
-        FileUtils.copyFile(screenshot, new File(Constants.RESULT_DIRECTORY + capabilitiesModel.getDeviceName() + "_baseline.png"));
+        FileUtils.copyFile(screenshot, new File(Constants.RESULT_DIRECTORY + capabilitiesModel.getDevice() + "_baseline.png"));
     }
 }

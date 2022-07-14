@@ -1,9 +1,9 @@
-name: Mobile Web EmuSim Tests
+name: Appium My Demo App RDC Tests
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 * * * *'
+    - cron: '15 * * * *'
 
 jobs:
   build:
@@ -18,8 +18,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Maven
-        run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/AppiumMobileWebEmulatorSimulator.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
+        run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/MyDemoApp_RDC.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          BUILD_TAG: Mobile-Web-EmuSim-1.${{ github.run_number }}
+          BUILD_TAG: MyDemoApp-RDC-1.${{ github.run_number }}

@@ -69,6 +69,25 @@ public class TestBase extends SuperTestBase {
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS81.label()},
                 };
                 return configs;
+            case "Smoke":
+                configs = new Object[][]{
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                };
+                return configs;
+            case "Integration":
+                configs = new Object[][]{
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                };
+                return configs;
             default:
                 configs = new Object[][]{
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
@@ -97,8 +116,6 @@ public class TestBase extends SuperTestBase {
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSHIGHSIERRA.label()},
                         new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSSIERRA.label()},
 
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
                         new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
                         new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
                         new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
@@ -136,7 +153,6 @@ public class TestBase extends SuperTestBase {
 
         browserOptions.setPlatformName(os);
         browserOptions.setBrowserVersion(version);
-        browserOptions.setAcceptInsecureCerts(true);
 
         Map<String, Object> sauceOptions = new HashMap<>();
 
@@ -152,7 +168,6 @@ public class TestBase extends SuperTestBase {
         remoteWebDriver.set(new RemoteWebDriver(createDriverURL(region), browserOptions));
         getRemoteWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         getRemoteWebDriver().get("https://www.saucedemo.com");
-        //remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
         annotate("Sending valid username");
         getRemoteWebDriver().findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
         annotate("Sending valid password");

@@ -16,6 +16,8 @@ public class SuperTestBase implements ITestListener {
     public String username = System.getenv("SAUCE_USERNAME");
     public String accesskey = System.getenv("SAUCE_ACCESS_KEY");
     public String visualAccessKey = System.getenv("SCREENER_API_KEY");
+    public String testfairy_username = System.getenv("TESTFAIRY_USERNAME");
+    public String testfairy_accesskey = System.getenv("TESTFAIRY_ACCESS_KEY");
     public ThreadLocal<AndroidDriver> androidDriver = new ThreadLocal<>();
     public ThreadLocal<IOSDriver> iosDriver = new ThreadLocal<>();
     public ThreadLocal<RemoteWebDriver> remoteWebDriver = new ThreadLocal<>();
