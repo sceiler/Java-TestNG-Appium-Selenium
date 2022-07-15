@@ -6,7 +6,8 @@ on:
     - cron: '30 * * * *'
   push:
     paths:
-      - 'src/test/resources/Appium/MobileWeb/**'
+      - 'src/test/java/com/saucelabs/yy/Tests/Appium/MobileWeb/EmulatorSimulator/**'
+      - 'src/test/resources/Appium/AppiumMobileWebEmulatorSimulator.xml'
 
 jobs:
   build:

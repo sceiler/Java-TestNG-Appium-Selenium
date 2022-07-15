@@ -6,7 +6,8 @@ on:
     - cron: '45 * * * *'
   push:
     paths:
-      - 'src/test/resources/Appium/MyDemoApp/**'
+      - 'src/test/resources/Appium/**'
+      - 'src/test/java/com/saucelabs/yy/cucumber/**'
 
 jobs:
   build:
