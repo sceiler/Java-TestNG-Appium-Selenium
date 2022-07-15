@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 * * * *'
+  push:
+    paths:
+      - 'src/test/resources/Appium/MobileWeb/**'
 
 jobs:
   build:

@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '15 * * * *'
+  push:
+    paths:
+      - 'src/test/resources/Appium/MyDemoApp/**'
 
 jobs:
   build:

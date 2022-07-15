@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Web Simple Smoke Tests Suite" verbose="1" parallel="tests" thread-count="500"
-       data-provider-thread-count="500">
-    <test name="Web Simple Smoke Tests" parallel="methods" thread-count="500">
+<suite name="Web Simple Smoke Tests Suite" verbose="1" parallel="tests" thread-count="1"
+       data-provider-thread-count="1">
+    <test name="Web Simple Smoke Tests" parallel="methods" thread-count="200">
         <parameter name="browserConfig" value="Smoke"/>
         <classes>
             <class name="com.saucelabs.yy.Tests.Selenium.SimpleTests"/>

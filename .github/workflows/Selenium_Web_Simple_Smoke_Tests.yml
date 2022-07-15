@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 * * * *'
+  push:
+    paths:
+      - 'src/test/resources/Selenium/**'
 
 jobs:
   build:
