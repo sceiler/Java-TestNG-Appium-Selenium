@@ -2,18 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="BDD Test Suite" verbose="1" parallel="tests" data-provider-thread-count="100" thread-count="100"
        preserve-order="false">
-    <test name="iPhone" parallel="methods" thread-count="100">
-        <parameter name="deviceName" value="iPhone.*"/>
-        <parameter name="platformName" value="iOS"/>
-        <classes>
-            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
-        </classes>
-    </test>
+    <!--    <test name="iPhone" parallel="methods" thread-count="100">-->
+    <!--        <parameter name="deviceName" value="iPhone.*"/>-->
+    <!--        <parameter name="platformName" value="iOS"/>-->
+    <!--        <classes>-->
+    <!--            <class name="com.saucelabs.yy.cucumber.tests.RunAndroidTests"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
     <test name="Android" parallel="methods">
         <parameter name="deviceName" value="Google Pixel.*"/>
         <parameter name="platformName" value="Android"/>
         <classes>
-            <class name="com.saucelabs.yy.cucumber.tests.RunTest"/>
+            <class name="com.saucelabs.yy.cucumber.tests.RunAndroidTests"/>
         </classes>
     </test>
 </suite>

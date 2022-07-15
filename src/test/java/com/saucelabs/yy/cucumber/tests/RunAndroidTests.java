@@ -1,7 +1,8 @@
 package com.saucelabs.yy.cucumber.tests;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 @CucumberOptions(
         features = "src/test/java/com/saucelabs/yy/cucumber/feature",
-        glue = {"com.saucelabs.yy.cucumber.steps"},
+        glue = {"com.saucelabs.yy.cucumber.steps.Android"},
         plugin = {
                 "summary",
                 "pretty",
@@ -23,10 +24,10 @@ import java.util.Objects;
                 "json:target/cucumber-reports/CucumberTestReport.json"
         })
 
-public class RunTest extends SuperTestBase {
+public class RunAndroidTests extends SuperTestBase {
     private TestNGCucumberRunner testNGCucumberRunner;
 
-    public static ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    public static ThreadLocal<AndroidDriver> driver = new ThreadLocal<>();
     public String buildTag = System.getenv("BUILD_TAG");
 
     @BeforeClass(alwaysRun = true)
@@ -38,19 +39,15 @@ public class RunTest extends SuperTestBase {
     @Parameters({"deviceName", "platformName"})
     public void setUpClass(String deviceName, String platformName) throws Exception {
         MutableCapabilities capabilities = new MutableCapabilities();
-        capabilities.setCapability("deviceName", deviceName);
-        capabilities.setCapability("platformName", platformName);
-        capabilities.setCapability("browserName", "");
+        MutableCapabilities sauceCapabilities = new MutableCapabilities();
+        capabilities.setCapability("appium:deviceName", deviceName);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
+        capabilities.setCapability("appium:app", "storage:filename=" + "Android-MyDemoAppRN.apk");
 
-        if (platformName.equals("iOS")) {
-            capabilities.setCapability("app", "storage:filename=" + "iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
-        } else if (platformName.equals("Android")) {
-            capabilities.setCapability("app", "storage:filename=" + "Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
-        }
+        sauceCapabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Mobile-App-BDD-" + SuperTestBase.localBuildTag));
+        capabilities.setCapability("sauce:options", sauceCapabilities);
 
-        capabilities.setCapability("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Appium-Mobile-App-BDD-" + SuperTestBase.localBuildTag));
-
-        driver.set(new AppiumDriver(new URL("https://" + username + ":" + accesskey + "@ondemand.eu-central-1.saucelabs.com/wd/hub"), capabilities));
+        driver.set(new AndroidDriver(new URL("https://" + username + ":" + accesskey + "@ondemand.eu-central-1.saucelabs.com/wd/hub"), capabilities));
         driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
