@@ -1,11 +1,11 @@
 package com.saucelabs.yy.Visual;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
+import com.saucelabs.yy.Utility.RemoteWebDriverExtended;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -72,7 +72,7 @@ public class TestBase extends SuperTestBase {
         } else {
             driver.set(new IOSDriver(createDriverURL(), capabilities));
         }
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
+        remoteWebDriver.set(new RemoteWebDriverExtended(createDriverURL(), capabilities));
     }
 
     @BeforeMethod

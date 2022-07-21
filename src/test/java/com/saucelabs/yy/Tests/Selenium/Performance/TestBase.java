@@ -2,10 +2,10 @@ package com.saucelabs.yy.Tests.Selenium.Performance;
 
 import com.saucelabs.yy.Tests.Selenium.Constants;
 import com.saucelabs.yy.Tests.SuperTestBase;
+import com.saucelabs.yy.Utility.RemoteWebDriverExtended;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -30,7 +30,7 @@ public class TestBase extends SuperTestBase {
         };
     }
 
-    public RemoteWebDriver getRemoteWebDriver() {
+    public RemoteWebDriverExtended getRemoteWebDriver() {
         return remoteWebDriver.get();
     }
 
@@ -59,7 +59,7 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
+        remoteWebDriver.set(new RemoteWebDriverExtended(createDriverURL(), capabilities));
         webDriverWait.set(new WebDriverWait(remoteWebDriver.get(), Duration.ofSeconds(10)));
         sessionId.set(getRemoteWebDriver().getSessionId().toString());
     }

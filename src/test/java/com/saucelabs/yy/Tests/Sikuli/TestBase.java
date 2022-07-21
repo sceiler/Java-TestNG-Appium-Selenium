@@ -2,11 +2,11 @@ package com.saucelabs.yy.Tests.Sikuli;
 
 import com.saucelabs.yy.Tests.Selenium.Constants;
 import com.saucelabs.yy.Tests.SuperTestBase;
+import com.saucelabs.yy.Utility.RemoteWebDriverExtended;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
@@ -56,7 +56,7 @@ public class TestBase extends SuperTestBase {
 
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(), capabilities));
+        remoteWebDriver.set(new RemoteWebDriverExtended(createDriverURL(), capabilities));
         remoteWebDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         remoteWebDriver.get().get("https://www.saucedemo.com");
         remoteWebDriver.get().manage().addCookie(new Cookie("session-username", "standard_user"));
