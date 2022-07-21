@@ -1,6 +1,8 @@
 package com.saucelabs.yy.Utility;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -16,14 +18,9 @@ public class RemoteWebDriverExtended extends RemoteWebDriver {
         super(driverURL, capabilities);
     }
 
-//    @Override
-//    public WebElement findElement(By locator) {
-//
-//        if (this.findElement(locator).isEnabled() && this.findElement(locator).isDisplayed()) {
-//            return super.findElement(locator);
-//        } else {
-//            new WebDriverWait(this, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
-//            return super.findElement(locator);
-//        }
-//    }
+    @Override
+    public WebElement findElement(By locator) {
+        return super.findElement(locator);
+        // new WebDriverWait(this, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
+    }
 }
