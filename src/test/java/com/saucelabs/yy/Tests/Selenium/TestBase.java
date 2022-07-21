@@ -2,13 +2,13 @@ package com.saucelabs.yy.Tests.Selenium;
 
 import com.saucelabs.yy.Region;
 import com.saucelabs.yy.Tests.SuperTestBase;
+import com.saucelabs.yy.Utility.RemoteWebDriverExtended;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -139,7 +139,7 @@ public class TestBase extends SuperTestBase {
 
         browserOptions.setCapability("sauce:options", sauceOptions);
 
-        remoteWebDriver.set(new RemoteWebDriver(createDriverURL(region), browserOptions));
+        remoteWebDriver.set(new RemoteWebDriverExtended(createDriverURL(region), browserOptions));
         getRemoteWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         getRemoteWebDriver().get("https://www.saucedemo.com");
         annotate("Sending valid username");

@@ -1,11 +1,11 @@
 package com.saucelabs.yy.Tests;
 
 import com.saucelabs.yy.Region;
+import com.saucelabs.yy.Utility.RemoteWebDriverExtended;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestListener;
 
 import java.net.MalformedURLException;
@@ -20,7 +20,7 @@ public class SuperTestBase implements ITestListener {
     public String testfairy_accesskey = System.getenv("TESTFAIRY_ACCESS_KEY");
     public ThreadLocal<AndroidDriver> androidDriver = new ThreadLocal<>();
     public ThreadLocal<IOSDriver> iosDriver = new ThreadLocal<>();
-    public ThreadLocal<RemoteWebDriver> remoteWebDriver = new ThreadLocal<>();
+    public ThreadLocal<RemoteWebDriverExtended> remoteWebDriver = new ThreadLocal<>();
     public ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
     public ThreadLocal<JavascriptExecutor> javascriptExecutor = new ThreadLocal<>();
     public final static String localBuildTag = String.valueOf(new Random(System.currentTimeMillis()).nextInt()).replace("-", "");
@@ -57,7 +57,7 @@ public class SuperTestBase implements ITestListener {
         return iosDriver.get();
     }
 
-    public RemoteWebDriver getRemoteWebDriver() {
+    public RemoteWebDriverExtended getRemoteWebDriver() {
         return remoteWebDriver.get();
     }
 

@@ -98,3 +98,4 @@ nb-configuration.xml
 /src/test/java/com/saucelabs/yy/Tests/Appium/Playground/
 src/test/resources/Playground.xml
 /src/test/resources/Appium/Playground.xml
+/src/test/java/com/saucelabs/yy/Tests/Selenium/Playground/
