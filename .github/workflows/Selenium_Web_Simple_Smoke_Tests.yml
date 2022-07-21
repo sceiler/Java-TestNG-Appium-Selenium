@@ -7,6 +7,8 @@ on:
   push:
     paths:
       - 'src/test/java/com/saucelabs/yy/Tests/Selenium/**'
+      - 'src/test/java/com/saucelabs/yy/Tests/SuperTestBase.java'
+      - 'src/test/java/com/saucelabs/yy/Utility/**'
       - 'src/test/resources/Selenium/Selenium_Web_Simple_Smoke_Tests.xml'
 
 jobs:
