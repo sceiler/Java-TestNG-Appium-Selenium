@@ -1,4 +1,4 @@
-name: Mobile Web EmuSim Tests
+name: Appium Mobile Web EmuSim Tests
 
 on:
   workflow_dispatch:

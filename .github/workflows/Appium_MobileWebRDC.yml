@@ -1,4 +1,4 @@
-name: Mobile Web RDC Tests
+name: Appium Mobile Web RDC Tests
 
 on:
   workflow_dispatch:
