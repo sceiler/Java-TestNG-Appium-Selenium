@@ -3,7 +3,7 @@ name: Selenium Web Integration Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '30 */2 * * *'
 
 jobs:
   build:
