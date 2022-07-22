@@ -23,7 +23,7 @@ public class SimpleTests extends TestBase {
         createDriver(browser, version, os, method.getName());
 
         new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("react-burger-menu-btn"))).click();
-        getRemoteWebDriver().findElement(By.id("logout_sidebar_link")).click();
+        new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link"))).click();
         Assert.assertTrue(getRemoteWebDriver().findElement(By.className("bot_column")).isDisplayed());
     }
 
@@ -31,7 +31,7 @@ public class SimpleTests extends TestBase {
     public void lockedOutUser(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("react-burger-menu-btn"))).click();
-        getRemoteWebDriver().findElement(By.id("logout_sidebar_link")).click();
+        new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link"))).click();
         getRemoteWebDriver().findElement(By.cssSelector("#user-name")).sendKeys("locked_out_user");
         getRemoteWebDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         getRemoteWebDriver().findElement(By.cssSelector("#login-button")).click();
@@ -42,7 +42,7 @@ public class SimpleTests extends TestBase {
     public void problemUser(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
         new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("react-burger-menu-btn"))).click();
-        getRemoteWebDriver().findElement(By.id("logout_sidebar_link")).click();
+        new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link"))).click();
         getRemoteWebDriver().findElement(By.cssSelector("#user-name")).sendKeys("problem_user");
         getRemoteWebDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         getRemoteWebDriver().findElement(By.cssSelector("#login-button")).click();
