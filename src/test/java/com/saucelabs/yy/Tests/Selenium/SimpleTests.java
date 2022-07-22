@@ -144,7 +144,7 @@ public class SimpleTests extends TestBase {
         getRemoteWebDriver().findElement(By.id("postal-code")).sendKeys("123456");
         getRemoteWebDriver().findElement(By.id("continue")).click();
         Assert.assertEquals(getRemoteWebDriver().findElement(By.className("summary_value_label")).getText(), "SauceCard #31337");
-        getRemoteWebDriver().findElement(By.id("finish")).click();
+        new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("finish"))).click();
         Assert.assertTrue(getRemoteWebDriver().findElement(By.className("pony_express")).isDisplayed());
         getRemoteWebDriver().findElement(By.id("back-to-products")).click();
         Assert.assertEquals(getRemoteWebDriver().findElement(By.className("shopping_cart_link")).getText(), "");

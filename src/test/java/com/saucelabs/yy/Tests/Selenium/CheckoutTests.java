@@ -37,6 +37,6 @@ public class CheckoutTests extends TestBase {
         annotate("Click finish button");
         getRemoteWebDriver().findElement(By.cssSelector("#finish")).click();
 
-        Assert.assertTrue(getRemoteWebDriver().findElement(By.cssSelector(".pony_express")).isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().findElement(By.className("pony_express")).isDisplayed());
     }
 }
