@@ -122,12 +122,18 @@ public class SimpleTests extends TestBase {
     public void addBackpackAndOnesieToCart(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
 
+        annotate("Add Backpack");
         getRemoteWebDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        annotate("Add Onesie");
         getRemoteWebDriver().findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
+        annotate("Go to cart");
         getRemoteWebDriver().get("https://www.saucedemo.com/cart.html");
 
+        annotate("Check if cart has 2 items");
         Assert.assertEquals(getRemoteWebDriver().findElements(By.className("inventory_item_name")).size(), 2);
+        annotate("Check if Backpack is displayed");
         Assert.assertTrue(getRemoteWebDriver().findElement(By.id("item_2_title_link")).isDisplayed());
+        annotate("Check if Onesie is displayed");
         Assert.assertTrue(getRemoteWebDriver().findElement(By.id("item_4_title_link")).isDisplayed());
     }
 
@@ -135,18 +141,37 @@ public class SimpleTests extends TestBase {
     public void checkout(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
 
+        annotate("Click Backpack");
         getRemoteWebDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        annotate("Click Onesie");
         getRemoteWebDriver().findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
+        annotate("Go to Shopping Cart");
         getRemoteWebDriver().get("https://www.saucedemo.com/cart.html");
+        annotate("Click on Checkout");
         getRemoteWebDriver().findElement(By.id("checkout")).click();
+        annotate("Enter \"Sauce\" as first name");
         getRemoteWebDriver().findElement(By.id("first-name")).sendKeys("Sauce");
+        annotate("Enter \"Bot\" as last name");
         getRemoteWebDriver().findElement(By.id("last-name")).sendKeys("Bot");
+        annotate("Enter \"123456\" as postal code");
         getRemoteWebDriver().findElement(By.id("postal-code")).sendKeys("123456");
+        annotate("Click on Continue button");
         getRemoteWebDriver().findElement(By.id("continue")).click();
+        annotate("Check that SauceCard #31337 is displayed");
         Assert.assertEquals(getRemoteWebDriver().findElement(By.className("summary_value_label")).getText(), "SauceCard #31337");
-        new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("finish"))).click();
+        // Click is bugged on older MacOS/Safari versions. Looks to be fixed in Big Sur
+        if (getRemoteWebDriver().getCapabilities().getPlatformName().name().equalsIgnoreCase(Constants.PLATFORM.MACOSCATALINA.label)) {
+            annotate("Clicking on Finish button using JavaScript executor");
+            getRemoteWebDriver().executeScript("arguments[0].click();", getRemoteWebDriver().findElement(By.id("finish")));
+        } else {
+            annotate("Click on Finish button");
+            getRemoteWebDriver().findElement(By.id("finish")).click();
+        }
+        annotate("Assert that Pony Express image is displayed");
         Assert.assertTrue(getRemoteWebDriver().findElement(By.className("pony_express")).isDisplayed());
+        annotate("Click on Products");
         getRemoteWebDriver().findElement(By.id("back-to-products")).click();
+        annotate("Check that Shopping Cart is empty");
         Assert.assertEquals(getRemoteWebDriver().findElement(By.className("shopping_cart_link")).getText(), "");
     }
 }
