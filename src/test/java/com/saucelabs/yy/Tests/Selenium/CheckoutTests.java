@@ -34,9 +34,8 @@ public class CheckoutTests extends TestBase {
         getRemoteWebDriver().findElement(By.cssSelector("#postal-code")).sendKeys("12345");
         annotate("Click continue button");
         getRemoteWebDriver().findElement(By.cssSelector("#continue")).click();
-        annotate(getRemoteWebDriver().getCapabilities().getPlatformName().name());
         // Click is bugged on older MacOS/Safari versions. Looks to be fixed in Big Sur
-        if (getRemoteWebDriver().getCapabilities().getPlatformName().name().equalsIgnoreCase(Constants.PLATFORM.MACOSCATALINA.label)) {
+        if (os.equalsIgnoreCase(Constants.PLATFORM.MACOSCATALINA.label)) {
             annotate("Clicking on Finish button using JavaScript executor");
             getRemoteWebDriver().executeScript("arguments[0].click();", getRemoteWebDriver().findElement(By.id("finish")));
         } else {
