@@ -140,7 +140,7 @@ public class SimpleTests extends TestBase {
     @Test(dataProvider = "Browsers")
     public void checkout(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-
+        
         annotate("Click Backpack");
         getRemoteWebDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
         annotate("Click Onesie");
@@ -160,7 +160,7 @@ public class SimpleTests extends TestBase {
         annotate("Check that SauceCard #31337 is displayed");
         Assert.assertEquals(getRemoteWebDriver().findElement(By.className("summary_value_label")).getText(), "SauceCard #31337");
         // Click is bugged on older MacOS/Safari versions. Looks to be fixed in Big Sur
-        if (getRemoteWebDriver().getCapabilities().getPlatformName().name().equalsIgnoreCase(Constants.PLATFORM.MACOSCATALINA.label)) {
+        if (os.equalsIgnoreCase(Constants.PLATFORM.MACOSCATALINA.label)) {
             annotate("Clicking on Finish button using JavaScript executor");
             getRemoteWebDriver().executeScript("arguments[0].click();", getRemoteWebDriver().findElement(By.id("finish")));
         } else {
