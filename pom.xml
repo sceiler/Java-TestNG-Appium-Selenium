@@ -12,6 +12,7 @@
     <description>Maven project containing tests run against saucedemo.com</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.testng.testng.version>7.6.1</org.testng.testng.version>
         <org.hamcrest.hamcrest-core.version>2.2</org.hamcrest.hamcrest-core.version>
         <org.seleniumhq.selenium.selenium-java>4.4.0</org.seleniumhq.selenium.selenium-java>
@@ -133,11 +134,6 @@
             <groupId>com.github.angleshq</groupId>
             <artifactId>angles-java-core</artifactId>
             <version>1.0.36</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
