@@ -6,8 +6,8 @@ on:
     - cron: '0 5 */30 * *'
 
 env:
-  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+  SAUCE_USERNAME: ${{ secrets.SE_DEMO_USER }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SE_DEMO_ACCESS_KEY }}
 
 jobs:
   download_upload_app:
