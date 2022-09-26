@@ -40,9 +40,13 @@ jobs:
       - name: Build with Maven
         run: mvn clean compile -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -V
 
+  codeql:
+    name: 'CodeQL'
+    uses: sceiler/Java-TestNG-Appium-Selenium/.github/workflows/codeql-analysis.yml@master
+  
   dependabot:
     name: 'Dependabot'
-    needs: [ main_job ]
+    needs: [ main_job, codeql ]
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
     steps:
