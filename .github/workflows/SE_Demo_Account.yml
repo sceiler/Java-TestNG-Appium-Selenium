@@ -10,7 +10,7 @@ env:
   SAUCE_ACCESS_KEY: ${{ secrets.SE_DEMO_ACCESS_KEY }}
 
 jobs:
-  test1:
+  Appium_BDD_RDC:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
@@ -24,8 +24,8 @@ jobs:
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/BDD.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
         env:
           BUILD_TAG: MyDemoApp-BDD-RDC-1.${{ github.run_number }}
-  test2:
-    needs: test1
+  Appium_My_Demo_App_RDC:
+    needs: Appium_BDD_RDC
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
@@ -39,8 +39,8 @@ jobs:
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/MyDemoApp_RDC.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
         env:
           BUILD_TAG: MyDemoApp-RDC-1.${{ github.run_number }}
-  test3:
-    needs: test2
+  Appium_Web_RDC:
+    needs: Appium_My_Demo_App_RDC
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
@@ -54,8 +54,8 @@ jobs:
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/AppiumMobileWebRealDevice.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
         env:
           BUILD_TAG: Mobile-Web-RDC-1.${{ github.run_number }}
-  test4:
-    needs: test3
+  Selenium:
+    needs: Appium_Web_RDC
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
