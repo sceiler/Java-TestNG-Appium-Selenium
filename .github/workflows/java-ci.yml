@@ -43,6 +43,10 @@ jobs:
   codeql:
     name: 'CodeQL'
     uses: sceiler/Java-TestNG-Appium-Selenium/.github/workflows/codeql-analysis.yml@master
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
   
   dependabot:
     name: 'Dependabot'
