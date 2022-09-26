@@ -25,6 +25,7 @@ jobs:
         env:
           BUILD_TAG: MyDemoApp-BDD-RDC-1.${{ github.run_number }}
   test2:
+    needs: test1
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +40,7 @@ jobs:
         env:
           BUILD_TAG: MyDemoApp-RDC-1.${{ github.run_number }}
   test3:
+    needs: test2
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +55,7 @@ jobs:
         env:
           BUILD_TAG: Mobile-Web-RDC-1.${{ github.run_number }}
   test4:
+    needs: test3
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
