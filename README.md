@@ -1,10 +1,24 @@
 # Java-TestNG-Appium-Selenium
-Project containing tests run against real devices, virtual devices and VMs. Tests are mobile app, web and mobile web.
 
-Also includes test for Sauce Connect (starts and stops Sauce Connect as part of test).
+A privately owned and maintained repo with test scripts that run on [Sauce Labs](https://saucelabs.com/).
+This repo is organized with a tree structure starting mainly with Appium and Selenium but also has examples using
+Cucumber
+and Sikuli and more.
 
-In addition, there are tests using the Application Storage including automatically retrieving file_id using Sauce REST API.
+## Table of Contents
 
-Visual testing using Screener is also included but not working currently.
+| Appium                                                                                                                  | Selenium                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [My Demo App Real Device Android](src/test/java/com/saucelabs/yy/Tests/Appium/MyDemoApp/RealDevice/Android/README.md)   | [Selenium](src/test/java/com/saucelabs/yy/Tests/Selenium/README.md)                                   |
+| [My Demo App Real Device iOS](src/test/java/com/saucelabs/yy/Tests/Appium/MyDemoApp/RealDevice/iOS/README.md)           | [Sauce Performance](src/test/java/com/saucelabs/yy/Tests/Selenium/Performance/README.md)              |
+| [My Demo App EmuSim Android](src/test/java/com/saucelabs/yy/Tests/Appium/MyDemoApp/EmulatorSimulator/Android/README.md) | [Sauce Visual Testing](src/test/java/com/saucelabs/yy/Tests/VisualTesting/README.md)                  |
+| [My Demo App EmuSim iOS](src/test/java/com/saucelabs/yy/Tests/Appium/MyDemoApp/EmulatorSimulator/iOS/README.md)         | [Sikuli](src/test/java/com/saucelabs/yy/Tests/Sikuli/README.md)                                       |
+| [Mobile Web Real Device Android](src/test/java/com/saucelabs/yy/Tests/Appium/MobileWeb/RealDevice/Android/README.md)    | [Sauce Extended Debugging](src/test/java/com/saucelabs/yy/Tests/Selenium/ExtendedDebugging/README.md) |
+| [Mobile Web Real Device iOS](src/test/java/com/saucelabs/yy/Tests/Appium/MobileWeb/RealDevice/iOS/README.md)            |                                                                                                       |
+| [Mobile Web EmuSim Android](src/test/java/com/saucelabs/yy/Tests/Appium/MobileWeb/EmulatorSimulator/Android/README.md)  |                                                                                                       |
+| [Mobile Web EmuSim iOS](src/test/java/com/saucelabs/yy/Tests/Appium/MobileWeb/EmulatorSimulator/iOS/README.md)          |                                                                                                       |
+| [Cucumber/BDD Real Device](src/test/java/com/saucelabs/yy/cucumber/README.md)                                           |                                                                                                       |
 
-Code is either taken or inspired from https://wiki.saucelabs.com/display/public/DOCS/The+Sauce+Labs+Cookbook+Home https://github.com/saucelabs-training https://github.com/saucelabs?q=yimin&type=&language=
+In general, tests can be run by executing the respective config xml file found [here](src/test/resources).
+Another way to run these tests as part of a CI/CD pipeline is shown by using GitHub Actions and
+Workflows ([Workflows](.github/workflows).)
