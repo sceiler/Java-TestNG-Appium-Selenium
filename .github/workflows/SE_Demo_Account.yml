@@ -14,9 +14,9 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 18
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '18'
           distribution: 'temurin'
@@ -29,9 +29,9 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 18
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '18'
           distribution: 'temurin'
@@ -44,9 +44,9 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 18
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '18'
           distribution: 'temurin'
@@ -59,9 +59,9 @@ jobs:
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 18
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '18'
           distribution: 'temurin'
