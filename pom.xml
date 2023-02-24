@@ -138,7 +138,7 @@
         <dependency>
             <groupId>com.github.angleshq</groupId>
             <artifactId>angles-java-core</artifactId>
-            <version>1.0.36</version>
+            <version>1.0.38</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
