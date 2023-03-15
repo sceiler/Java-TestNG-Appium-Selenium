@@ -2,11 +2,14 @@ package com.saucelabs.yy.Tests.Appium.MyDemoApp.RealDevice.Android;
 
 import com.saucelabs.yy.Tests.Appium.TestBase;
 import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.time.Duration;
 
 public class CheckoutTest extends TestBase {
 
@@ -39,7 +42,7 @@ public class CheckoutTest extends TestBase {
         // Click on payment button
         getAndroidDriver().findElement(AppiumBy.accessibilityId("To Payment button")).click();
         // Enter full name
-        getAndroidDriver().findElement(AppiumBy.accessibilityId("Full Name* input field")).sendKeys("Rebecca Winter");
+        new WebDriverWait(getAndroidDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Full Name* input field"))).sendKeys("Rebecca Winter");
         // Enter card number
         getAndroidDriver().findElement(AppiumBy.accessibilityId("Card Number* input field")).sendKeys("325812657568789");
         // Enter expiration date
