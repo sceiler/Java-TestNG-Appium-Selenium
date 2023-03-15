@@ -7,7 +7,7 @@ import org.bytedeco.tesseract.TessBaseAPI;
 import java.io.File;
 import java.util.Locale;
 
-import static org.bytedeco.leptonica.global.lept.pixRead;
+import static org.bytedeco.leptonica.global.leptonica.pixRead;
 
 public class OCR {
 
