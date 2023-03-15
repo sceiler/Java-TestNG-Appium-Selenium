@@ -1,0 +1,14 @@
+apiVersion: v1alpha
+kind: imagerunner
+sauce:
+region: eu-central-1
+suites:
+  - name: HTO RDC Appium My Demo App
+    image: $DOCKER_IMAGE
+    entrypoint: "mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/MyDemoApp_RDC.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V"
+    imagePullAuth:
+      user: $DOCKER_USERNAME
+      token: $DOCKER_PASSWORD
+    env:
+      BUILD_TAG: $BUILD_TAG
+      REGION: eu-central-1
