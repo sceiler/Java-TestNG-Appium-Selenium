@@ -53,6 +53,6 @@ jobs:
       - name: Run Saucectl
         env:
           DOCKER_IMAGE: ${{ needs.docker_hub.outputs.tag }}
-          BUILD_TAG: HTO-MyDemoApp-RDC-1.${{ github.run_number }}
+          BUILD_TAG: HTO-Integration-Tests-1.${{ github.run_number }}
           REGION: eu-central-1
         run: saucectl run
