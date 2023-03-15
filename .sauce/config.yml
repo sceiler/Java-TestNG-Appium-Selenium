@@ -5,7 +5,7 @@ sauce:
 suites:
   - name: HTO RDC Appium My Demo App
     image: $DOCKER_IMAGE
-    entrypoint: "mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/MyDemoApp_RDC.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V"
+    entrypoint: "mvn clean test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/MyDemoApp_RDC.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V"
     imagePullAuth:
       user: $DOCKER_USERNAME
       token: $DOCKER_PASSWORD
