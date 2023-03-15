@@ -19,7 +19,7 @@ public class LocalhostTests extends TestBase {
 
     @BeforeSuite
     public void setup() throws InterruptedException {
-        this.util = new SauceConnectUtil(DataCenter.EU);
+        this.util = new SauceConnectUtil(DataCenter.EU_CENTRAL);
         util.startSauceConnect();
 
         do {
