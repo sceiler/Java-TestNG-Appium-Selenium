@@ -1,7 +1,7 @@
 apiVersion: v1alpha
 kind: imagerunner
 sauce:
-region: eu-central-1
+  region: eu-central-1
 suites:
   - name: HTO RDC Appium My Demo App
     image: $DOCKER_IMAGE
