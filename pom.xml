@@ -167,27 +167,20 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-testng</artifactId>
+                        <version>3.0.0</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
                     <parallel>classesAndMethods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
+                    <suiteXmlFiles>
+                        <suiteXmlFile></suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
-                <!-- <configuration>
-                     <suiteXmlFiles>src/test/resources/all.xml</suiteXmlFiles>
-
-                     <parallel>classes</parallel>
-                     <threadCount>40</threadCount>
-                     <redirectTestOutputToFile>false</redirectTestOutputToFile>
-                     <excludes>
-                         <exclude>**/TestBase.java</exclude>
-                         <exclude>**/Constants.java</exclude>
-                     </excludes>
-                     -->
-                <!--
-                <suiteXmlFiles>testng.xml</suiteXmlFiles>
-                <includes>
-                    <include>LoginTests.java</include>
-                </includes>
-            </configuration>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
