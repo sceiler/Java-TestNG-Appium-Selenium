@@ -18,7 +18,7 @@ jobs:
       - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
-          java-version: '18'
+          java-version: '19'
           distribution: 'temurin'
       - name: Run Appium BDD RDC tests
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/BDD.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
@@ -33,7 +33,7 @@ jobs:
       - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
-          java-version: '18'
+          java-version: '19'
           distribution: 'temurin'
       - name: Run Appium My Demo App RDC tests
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/MyDemoApp_RDC.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
@@ -48,7 +48,7 @@ jobs:
       - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
-          java-version: '18'
+          java-version: '19'
           distribution: 'temurin'
       - name: Run Appium Web RDC tests
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Appium/AppiumMobileWebRealDevice.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
@@ -63,7 +63,7 @@ jobs:
       - name: Set up JDK 18
         uses: actions/setup-java@v3
         with:
-          java-version: '18'
+          java-version: '19'
           distribution: 'temurin'
       - name: Run Selenium tests
         run: mvn clean install compile test -Dsurefire.suiteXmlFiles=./src/test/resources/Selenium/Selenium_Web_Simple_Smoke_Tests.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V
