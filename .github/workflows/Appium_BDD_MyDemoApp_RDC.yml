@@ -3,7 +3,7 @@ name: Appium BDD My Demo App RDC Tests
 on:
   workflow_dispatch:
   schedule:
-    - cron: '45 * * * *'
+    - cron: '45 */3 * * *'
   push:
     paths:
       - 'src/test/resources/Appium/**'

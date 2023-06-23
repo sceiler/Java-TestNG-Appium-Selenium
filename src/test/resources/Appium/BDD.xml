@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="BDD Test Suite" verbose="1" parallel="tests" data-provider-thread-count="100" thread-count="100"
+<suite name="BDD Test Suite" verbose="1" parallel="tests" data-provider-thread-count="50" thread-count="50"
        preserve-order="false">
     <!--    <test name="iPhone" parallel="methods" thread-count="100">-->
     <!--        <parameter name="deviceName" value="iPhone.*"/>-->

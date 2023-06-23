@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Swag Labs App Suite" verbose="1" parallel="tests" thread-count="100" data-provider-thread-count="100">
-    <test name="Swag Labs App Test" parallel="methods" thread-count="100">
+<suite name="Swag Labs App Suite" verbose="1" parallel="tests" thread-count="50" data-provider-thread-count="50">
+    <test name="Swag Labs App Test" parallel="methods" thread-count="50">
         <packages>
             <package name="com.saucelabs.yy.Tests.Appium.MyDemoApp.EmulatorSimulator.*"/>
         </packages>
