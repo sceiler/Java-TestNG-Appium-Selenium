@@ -36,33 +36,33 @@ public abstract class TestBase extends SuperTestBase {
         switch (config.get()) {
             case "OnlyAndroid":
                 configs = new Object[][]{
-                        new Object[]{"Android", ".*", "12"},
+                        new Object[]{"Android", ".*", "13"},
                         new Object[]{"Android", ".*", "12"}
                 };
                 return configs;
             case "OnlyiOS":
                 configs = new Object[][]{
-                        new Object[]{"iOS", ".*", "15"},
+                        new Object[]{"iOS", ".*", "16"},
                         new Object[]{"iOS", ".*", "15"}
                 };
                 return configs;
             case "OnlySimulator":
                 configs = new Object[][]{
-                        new Object[]{"iOS", "iPhone 13 Pro Simulator", "15.2"},
-                        new Object[]{"iOS", "iPhone 12 Pro Simulator", "14.5"},
+                        new Object[]{"iOS", "iPhone 14 Simulator", "16.2"},
+                        new Object[]{"iOS", "iPhone 13 Simulator", "15.5"},
                 };
                 return configs;
             case "OnlyEmulator":
                 configs = new Object[][]{
+                        new Object[]{"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "13.0"},
                         new Object[]{"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "12.0"},
-                        new Object[]{"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "11.0"},
                 };
                 return configs;
             default:
                 configs = new Object[][]{
+                        new Object[]{"Android", ".*", "13"},
                         new Object[]{"Android", ".*", "12"},
-                        new Object[]{"Android", ".*", "12"},
-                        new Object[]{"iOS", ".*", "15"},
+                        new Object[]{"iOS", ".*", "16"},
                         new Object[]{"iOS", ".*", "15"}
                 };
                 return configs;
