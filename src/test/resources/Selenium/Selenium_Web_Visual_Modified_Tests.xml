@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Web Visual Modified Tests Suite" verbose="1" parallel="tests" thread-count="200"
+       data-provider-thread-count="200">
+    <test name="Web Visual Modified Tests" parallel="methods" thread-count="200">
+        <parameter name="browserConfig" value="OnlyChrome"/>
+        <classes>
+            <class name="com.saucelabs.yy.Tests.Selenium.VisualTesting.VisualModifiedTests"/>
+        </classes>
+    </test>
+</suite>

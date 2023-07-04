@@ -21,6 +21,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.saucelabs.visual</groupId>
+            <artifactId>java-client</artifactId>
+            <version>0.2.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.13.0</version>

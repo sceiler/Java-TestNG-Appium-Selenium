@@ -75,6 +75,11 @@ public class TestBase extends SuperTestBase {
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
                 };
                 return configs;
+            case "OnlyChrome":
+                configs = new Object[][]{
+                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                };
+                return configs;
             case "Integration":
                 configs = new Object[][]{
                         new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
