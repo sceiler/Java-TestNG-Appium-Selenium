@@ -12,7 +12,7 @@ public class LogoutLoginTest extends TestBase {
 
     @Test(dataProvider = "Devices")
     public void logoutLoginTest(String platformName, String deviceName, String platformVersion, Method testMethod) throws MalformedURLException {
-        createDriver(platformName, deviceName, platformVersion, true, true, testMethod.getName());
+        createDriver(platformName, deviceName, platformVersion, true, true, testMethod.getName(), "");
 
         // Click on hamburger menu icon
         getIOSDriver().findElement(AppiumBy.iOSNsPredicateString("label == \"Menu, tab, 3 of 3\"")).click();

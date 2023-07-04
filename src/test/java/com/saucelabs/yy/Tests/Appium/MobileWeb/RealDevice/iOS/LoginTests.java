@@ -12,7 +12,7 @@ public class LoginTests extends TestBase {
 
     @Test(dataProvider = "Devices")
     public void loginUIPresent(String platform, String deviceName, String platformVersion, Method methodName) throws MalformedURLException {
-        createDriver(platform, deviceName, platformVersion, false, false, methodName.getName());
+        createDriver(platform, deviceName, platformVersion, false, false, methodName.getName(), "");
         //annotate("Open saucedemo.com");
         getIOSDriver().get("https://www.saucedemo.com");
         //annotate("Check if username input present");
