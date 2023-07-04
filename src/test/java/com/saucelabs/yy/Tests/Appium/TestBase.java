@@ -20,9 +20,9 @@ import java.time.Duration;
 public abstract class TestBase extends SuperTestBase {
 
     // Downloaded from here https://github.com/saucelabs/my-demo-app-rn/releases
-    public static final String IPA = "iOS-Real-Device-MyRNDemoApp.ipa";
-    public static final String ZIP = "iOS-Simulator-MyRNDemoApp.zip";
-    public static final String APK = "Android-MyDemoAppRN.apk";
+    public static final String IPA = "MyRNDemoApp-1.5.0.ipa";
+    public static final String ZIP = "MyRNDemoApp-1.5.0.zip";
+    public static final String APK = "MyRNDemoApp-1.5.0.apk";
 
     public String buildTag = System.getenv("BUILD_TAG");
     protected ThreadLocal<String> sessionId = new ThreadLocal<>();
