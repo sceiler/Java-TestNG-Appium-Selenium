@@ -5,6 +5,8 @@ This repo is organized with a tree structure starting mainly with Appium and Sel
 Cucumber
 and Sikuli and more.
 
+The goal of this repo is to provide code examples and solutions to common use cases from users.
+
 ## Table of Contents
 
 | Appium                                                                                                                  | Selenium                                                                                              |
