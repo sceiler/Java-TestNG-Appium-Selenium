@@ -35,7 +35,7 @@ public class AppUpgradeTest extends TestBase {
         annotate("Click About");
         getAndroidDriver().findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"menu item about\"]/android.widget.TextView")).click();
         annotate("Check version");
-        String newVersion = getAndroidDriver().findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"about screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView")).getText();
+        String newVersion = getAndroidDriver().findElement(By.xpath("//android.view.ViewGroup[@content-desc=\"about screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.TextView[2]")).getText();
         Assert.assertTrue(newVersion.contains("1.5.0"));
         getAndroidDriver().getScreenshotAs(OutputType.FILE);
 
