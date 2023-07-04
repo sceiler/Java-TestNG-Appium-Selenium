@@ -19,7 +19,6 @@ import java.time.Duration;
 
 public abstract class TestBase extends SuperTestBase {
 
-    // Downloaded from here https://github.com/saucelabs/my-demo-app-rn/releases
     public static final String IPA = "MyRNDemoApp-1.5.0.ipa";
     public static final String ZIP = "MyRNDemoApp-1.5.0.zip";
     public static final String APK = "MyRNDemoApp-1.5.0.apk";
@@ -81,8 +80,10 @@ public abstract class TestBase extends SuperTestBase {
         if (isAppTest) {
             if (platformName.equalsIgnoreCase(MobilePlatform.ANDROID)) {
                 caps.setCapability("appium:app", "storage:filename=" + APK);
+                caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
             } else if (platformName.equalsIgnoreCase(MobilePlatform.IOS)) {
                 caps.setCapability("appium:app", "storage:filename=" + (isSimulator ? ZIP : IPA));
+                caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
             }
         } else {
             if (platformName.equalsIgnoreCase(MobilePlatform.ANDROID)) {
