@@ -72,7 +72,7 @@ public abstract class TestBase extends SuperTestBase {
         }
     }
 
-    protected void createDriver(String platformName, String deviceName, String platformVersion, boolean isSimulator, boolean isAppTest, String testMethod) throws MalformedURLException {
+    protected void createDriver(String platformName, String deviceName, String platformVersion, boolean isSimulator, boolean isAppTest, String testMethod, String appFileName) throws MalformedURLException {
         MutableCapabilities caps = new MutableCapabilities();
         MutableCapabilities sauceOptions = new MutableCapabilities();
 
@@ -83,10 +83,18 @@ public abstract class TestBase extends SuperTestBase {
 
         if (isAppTest) {
             if (platformName.equalsIgnoreCase(MobilePlatform.ANDROID)) {
-                caps.setCapability("appium:app", "storage:filename=" + APK);
+                if (appFileName.isEmpty()) {
+                    caps.setCapability("appium:app", "storage:filename=" + APK);
+                } else {
+                    caps.setCapability("appium:app", "storage:filename=" + appFileName);
+                }
                 caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
             } else if (platformName.equalsIgnoreCase(MobilePlatform.IOS)) {
-                caps.setCapability("appium:app", "storage:filename=" + (isSimulator ? ZIP : IPA));
+                if (appFileName.isEmpty()) {
+                    caps.setCapability("appium:app", "storage:filename=" + (isSimulator ? ZIP : IPA));
+                } else {
+                    caps.setCapability("appium:app", "storage:filename=" + appFileName);
+                }
                 caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
             }
         } else {
@@ -121,7 +129,7 @@ public abstract class TestBase extends SuperTestBase {
     }
 
     protected void createDriver(String platformName, String deviceName, String platformVersion, String testMethod) throws MalformedURLException {
-        createDriver(platformName, deviceName, platformVersion, false, true, testMethod);
+        createDriver(platformName, deviceName, platformVersion, false, true, testMethod, "");
     }
 
     @Parameters({"config"})
