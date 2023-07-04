@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 
 public class AppUpgradeTest extends TestBase {
     @Test(dataProvider = "Devices")
-    public void appUpgrade(String deviceName, String platformVersion, String platformName, Method testMethod) throws MalformedURLException {
+    public void appUpgrade(String platformName, String deviceName, String platformVersion, Method testMethod) throws MalformedURLException {
         createDriver(platformName, deviceName, platformVersion, false, true, testMethod.getName(), APKOld);
 
         annotate("Check that app version is 1.3.0");
