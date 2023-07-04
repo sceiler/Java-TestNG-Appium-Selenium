@@ -88,8 +88,10 @@ public abstract class TestBase extends SuperTestBase {
         } else {
             if (platformName.equalsIgnoreCase(MobilePlatform.ANDROID)) {
                 caps.setCapability(CapabilityType.BROWSER_NAME, "Chrome");
+                caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
             } else if (platformName.equalsIgnoreCase(MobilePlatform.IOS)) {
                 caps.setCapability(CapabilityType.BROWSER_NAME, "Safari");
+                caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
             }
         }
 
