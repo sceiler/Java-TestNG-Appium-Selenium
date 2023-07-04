@@ -23,9 +23,9 @@ public class LogoutLoginTest extends TestBase {
         // Dismiss alert
         getAndroidDriver().findElement(AppiumBy.id("android:id/button1")).click();
         // Enter username
-        getAndroidDriver().findElement(AppiumBy.accessibilityId("Username input field")).sendKeys("bob@example.com");
+        getAndroidDriver().findElement(AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"login screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.EditText[1]")).sendKeys("bob@example.com");
         // Enter password
-        getAndroidDriver().findElement(AppiumBy.accessibilityId("Password input field")).sendKeys("10203040");
+        getAndroidDriver().findElement(AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"login screen\"]/android.widget.ScrollView/android.view.ViewGroup/android.widget.EditText[2]")).sendKeys("10203040");
         // Click Login button
         getAndroidDriver().findElement(AppiumBy.accessibilityId("Login button")).click();
         // Verify we are at checkout screen

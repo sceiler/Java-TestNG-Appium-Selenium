@@ -23,9 +23,9 @@ public class LogoutLoginTest extends TestBase {
         // Dismiss alert
         getIOSDriver().findElement(AppiumBy.accessibilityId("OK")).click();
         // Enter username
-        getIOSDriver().findElement(AppiumBy.iOSNsPredicateString("name == \"Username input field\"")).sendKeys("bob@example.com");
+        getIOSDriver().findElement(AppiumBy.iOSNsPredicateString("value == \"Username\"")).sendKeys("bob@example.com");
         // Enter password
-        getIOSDriver().findElement(AppiumBy.iOSNsPredicateString("name == \"Password input field\"")).sendKeys("10203040");
+        getIOSDriver().findElement(AppiumBy.iOSNsPredicateString("value == \"Password\" AND type == \"XCUIElementTypeSecureTextField\"")).sendKeys("10203040");
         // Click Login button
         getIOSDriver().findElement(AppiumBy.accessibilityId("Login button")).click();
         // Verify we are at checkout screen
