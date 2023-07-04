@@ -23,6 +23,10 @@ public abstract class TestBase extends SuperTestBase {
     public static final String ZIP = "MyRNDemoApp-1.5.0.zip";
     public static final String APK = "MyRNDemoApp-1.5.0.apk";
 
+    public static final String IPAOld = "MyRNDemoApp-1.3.0.ipa";
+    public static final String ZIPOld = "MyRNDemoApp-1.3.0.zip";
+    public static final String APKOld = "MyRNDemoApp-1.3.0.apk";
+
     public String buildTag = System.getenv("BUILD_TAG");
     protected ThreadLocal<String> sessionId = new ThreadLocal<>();
     protected static ThreadLocal<String> config = new ThreadLocal<>();
