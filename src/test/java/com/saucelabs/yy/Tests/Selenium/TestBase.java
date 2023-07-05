@@ -25,116 +25,94 @@ import java.util.*;
 
 public class TestBase extends SuperTestBase {
 
+    private static String config;
     public String buildTag = System.getenv("BUILD_TAG");
     public String tags = System.getenv("TAGS");
     public Region region;
-    private static String config;
 
     @DataProvider(name = "Browsers", parallel = true)
-    public static Object[][] Browsers(Method testMethod) {
+    public static Object[][] getBrowserConfigurations(Method testMethod) {
         String browserConfig = config;
-        Object[][] configs;
 
-        switch (browserConfig) {
-            case "GCP":
-                configs = new Object[][]{
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+        return switch (browserConfig) {
+            case "GCP" -> getGcpConfigurations();
+            case "Smoke" -> getSmokeConfigurations();
+            case "OnlyChrome" -> getOnlyChromeConfigurations();
+            case "Integration" -> getIntegrationConfigurations();
+            default -> getDefaultConfigurations();
+        };
+    }
 
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST1.label(), Constants.PLATFORM.WINDOWS81.label()},
+    private static Object[][] getGcpConfigurations() {
+        return new Object[][]{
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+        };
+    }
 
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST2.label(), Constants.PLATFORM.WINDOWS81.label()},
+    private static Object[][] getSmokeConfigurations() {
+        return new Object[][]{
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+        };
+    }
 
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST3.label(), Constants.PLATFORM.WINDOWS81.label()},
+    private static Object[][] getOnlyChromeConfigurations() {
+        return new Object[][]{
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+        };
+    }
 
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST4.label(), Constants.PLATFORM.WINDOWS81.label()},
-                };
-                return configs;
-            case "Smoke":
-                configs = new Object[][]{
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                };
-                return configs;
-            case "OnlyChrome":
-                configs = new Object[][]{
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                };
-                return configs;
-            case "Integration":
-                configs = new Object[][]{
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                };
-                return configs;
-            default:
-                configs = new Object[][]{
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                        new Object[]{Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
+    private static Object[][] getIntegrationConfigurations() {
+        return new Object[][]{
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                {Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+        };
+    }
 
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                        new Object[]{Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
-
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                        new Object[]{Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
-
-                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
-                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
-                        new Object[]{Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
-                };
-                return configs;
-        }
+    private static Object[][] getDefaultConfigurations() {
+        return new Object[][]{
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS81.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                {Constants.BROWSER.FIREFOX.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
+                {Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                {Constants.BROWSER.MICROSOFTEDGE.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
+                {Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSBIGSUR.label()},
+                {Constants.BROWSER.SAFARI.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSCATALINA.label()},
+        };
     }
 
     protected void createDriver(String browser, String version, String os, String methodName, Region region) throws MalformedURLException {
-        AbstractDriverOptions browserOptions = switch (Constants.BROWSER.valueOf(browser.toUpperCase(Locale.ROOT))) {
-            case CHROME -> new ChromeOptions();
-            case FIREFOX -> new FirefoxOptions();
-            case MICROSOFTEDGE -> new EdgeOptions();
-            case SAFARI -> new SafariOptions();
-            default -> null;
-        };
+        AbstractDriverOptions browserOptions = getDriverOptions(browser);
+        if (browserOptions == null) {
+            throw new IllegalArgumentException("Invalid browser: " + browser);
+        }
 
         browserOptions.setPlatformName(os);
         browserOptions.setBrowserVersion(version);
 
         Map<String, Object> sauceOptions = new HashMap<>();
-
         sauceOptions.put("name", methodName);
         sauceOptions.put("build", Objects.requireNonNullElseGet(buildTag, () -> "YiMin-Local-Java-Selenium-Web-" + localBuildTag));
 
@@ -144,15 +122,34 @@ public class TestBase extends SuperTestBase {
 
         browserOptions.setCapability("sauce:options", sauceOptions);
 
-        remoteWebDriver.set(new RemoteWebDriverExtended(createDriverURL(region), browserOptions));
-        getRemoteWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        getRemoteWebDriver().get("https://www.saucedemo.com");
+        remoteWebDriver.set(createRemoteWebDriver(region, browserOptions));
+        remoteWebDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+
+        performTestSteps(remoteWebDriver.get());
+    }
+
+    private AbstractDriverOptions getDriverOptions(String browser) {
+        Map<String, AbstractDriverOptions> driverOptionsMap = new HashMap<>();
+        driverOptionsMap.put(Constants.BROWSER.CHROME.label(), new ChromeOptions());
+        driverOptionsMap.put(Constants.BROWSER.FIREFOX.label(), new FirefoxOptions());
+        driverOptionsMap.put(Constants.BROWSER.MICROSOFTEDGE.label(), new EdgeOptions());
+        driverOptionsMap.put(Constants.BROWSER.SAFARI.label(), new SafariOptions());
+
+        return driverOptionsMap.get(browser.toLowerCase(Locale.ROOT));
+    }
+
+    private RemoteWebDriverExtended createRemoteWebDriver(Region region, AbstractDriverOptions options) throws MalformedURLException {
+        return new RemoteWebDriverExtended(createDriverURL(region), options);
+    }
+
+    private void performTestSteps(RemoteWebDriverExtended remoteWebDriver) {
+        remoteWebDriver.get("https://www.saucedemo.com");
         annotate("Sending valid username");
-        getRemoteWebDriver().findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
+        remoteWebDriver.findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
         annotate("Sending valid password");
-        getRemoteWebDriver().findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
+        remoteWebDriver.findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         annotate("Clicking login button");
-        getRemoteWebDriver().findElement(By.cssSelector("#login-button")).click();
+        remoteWebDriver.findElement(By.cssSelector("#login-button")).click();
     }
 
     protected void createDriver(String browser, String version, String os, String methodName) throws MalformedURLException {

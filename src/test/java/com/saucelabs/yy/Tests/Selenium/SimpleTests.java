@@ -24,7 +24,7 @@ public class SimpleTests extends TestBase {
 
         new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("react-burger-menu-btn"))).click();
         new WebDriverWait(getRemoteWebDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(By.id("logout_sidebar_link"))).click();
-        Assert.assertTrue(getRemoteWebDriver().findElement(By.className("bot_column")).isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().findElement(By.className("login_logo")).isDisplayed());
     }
 
     @Test(dataProvider = "Browsers")
@@ -140,7 +140,7 @@ public class SimpleTests extends TestBase {
     @Test(dataProvider = "Browsers")
     public void checkout(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-        
+
         annotate("Click Backpack");
         getRemoteWebDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
         annotate("Click Onesie");

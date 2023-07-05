@@ -1,6 +1,7 @@
 package com.saucelabs.yy.Tests.Appium;
 
 import com.saucelabs.yy.Tests.SuperTestBase;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -33,43 +34,33 @@ public abstract class TestBase extends SuperTestBase {
     protected String platform = "";
 
     @DataProvider(name = "Devices", parallel = true)
-    public static Object[][] Devices() {
-        Object[][] configs;
+    public static Object[][] devicesDataProvider() {
+        String configValue = config.get();
 
-        switch (config.get()) {
-            case "OnlyAndroid":
-                configs = new Object[][]{
-                        new Object[]{"Android", ".*", "13"},
-                        new Object[]{"Android", ".*", "12"}
-                };
-                return configs;
-            case "OnlyiOS":
-                configs = new Object[][]{
-                        new Object[]{"iOS", ".*", "16"},
-                        new Object[]{"iOS", ".*", "15"}
-                };
-                return configs;
-            case "OnlySimulator":
-                configs = new Object[][]{
-                        new Object[]{"iOS", "iPhone 14 Simulator", "16.2"},
-                        new Object[]{"iOS", "iPhone 13 Simulator", "15.5"},
-                };
-                return configs;
-            case "OnlyEmulator":
-                configs = new Object[][]{
-                        new Object[]{"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "13.0"},
-                        new Object[]{"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "12.0"},
-                };
-                return configs;
-            default:
-                configs = new Object[][]{
-                        new Object[]{"Android", ".*", "13"},
-                        new Object[]{"Android", ".*", "12"},
-                        new Object[]{"iOS", ".*", "16"},
-                        new Object[]{"iOS", ".*", "15"}
-                };
-                return configs;
-        }
+        return switch (configValue) {
+            case "OnlyAndroid" -> new Object[][]{
+                    {"Android", ".*", "13"},
+                    {"Android", ".*", "12"}
+            };
+            case "OnlyiOS" -> new Object[][]{
+                    {"iOS", ".*", "16"},
+                    {"iOS", ".*", "15"}
+            };
+            case "OnlySimulator" -> new Object[][]{
+                    {"iOS", "iPhone 14 Simulator", "16.2"},
+                    {"iOS", "iPhone 13 Simulator", "15.5"}
+            };
+            case "OnlyEmulator" -> new Object[][]{
+                    {"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "13.0"},
+                    {"Android", "Google Pixel 4a (5G) GoogleAPI Emulator", "12.0"}
+            };
+            default -> new Object[][]{
+                    {"Android", ".*", "13"},
+                    {"Android", ".*", "12"},
+                    {"iOS", ".*", "16"},
+                    {"iOS", ".*", "15"}
+            };
+        };
     }
 
     protected void createDriver(String platformName, String deviceName, String platformVersion, boolean isSimulator, boolean isAppTest, String testMethod, String appFileName) throws MalformedURLException {
@@ -83,18 +74,12 @@ public abstract class TestBase extends SuperTestBase {
 
         if (isAppTest) {
             if (platformName.equalsIgnoreCase(MobilePlatform.ANDROID)) {
-                if (appFileName.isEmpty()) {
-                    caps.setCapability("appium:app", "storage:filename=" + APK);
-                } else {
-                    caps.setCapability("appium:app", "storage:filename=" + appFileName);
-                }
+                String appPath = appFileName.isEmpty() ? "storage:filename=" + APK : "storage:filename=" + appFileName;
+                caps.setCapability("appium:app", appPath);
                 caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
             } else if (platformName.equalsIgnoreCase(MobilePlatform.IOS)) {
-                if (appFileName.isEmpty()) {
-                    caps.setCapability("appium:app", "storage:filename=" + (isSimulator ? ZIP : IPA));
-                } else {
-                    caps.setCapability("appium:app", "storage:filename=" + appFileName);
-                }
+                String appPath = appFileName.isEmpty() ? "storage:filename=" + (isSimulator ? ZIP : IPA) : "storage:filename=" + appFileName;
+                caps.setCapability("appium:app", appPath);
                 caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
             }
         } else {
@@ -107,12 +92,7 @@ public abstract class TestBase extends SuperTestBase {
             }
         }
 
-        if (buildTag != null) {
-            sauceOptions.setCapability("build", buildTag);
-        } else {
-            sauceOptions.setCapability("build", "YiMin-Local-Java-Appium-" + localBuildTag);
-        }
-
+        sauceOptions.setCapability("build", buildTag != null ? buildTag : "YiMin-Local-Java-Appium-" + localBuildTag);
         caps.setCapability("sauce:options", sauceOptions);
 
         if (platformName.equalsIgnoreCase(MobilePlatform.ANDROID)) {
@@ -141,21 +121,28 @@ public abstract class TestBase extends SuperTestBase {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
+        JavascriptExecutor executor = null;
+        AppiumDriver driverInstance;
+
         if (platform.equalsIgnoreCase(MobilePlatform.ANDROID)) {
-            if (getAndroidDriver() != null) {
-                ((JavascriptExecutor) getAndroidDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-                getAndroidDriver().quit();
-            } else if (getDriver() != null) {
-                ((JavascriptExecutor) getDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-                getDriver().quit();
-            }
+            driverInstance = getAndroidDriver();
         } else if (platform.equalsIgnoreCase(MobilePlatform.IOS)) {
-            if (getIOSDriver() != null) {
-                ((JavascriptExecutor) getIOSDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-                getIOSDriver().quit();
-            } else if (getDriver() != null) {
-                ((JavascriptExecutor) getDriver()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
-                getDriver().quit();
+            driverInstance = getIOSDriver();
+        } else {
+            driverInstance = getDriver();
+        }
+
+        if (driverInstance != null) {
+            executor = driverInstance;
+        }
+
+        try {
+            if (executor != null) {
+                executor.executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
+            }
+        } finally {
+            if (driverInstance != null) {
+                driverInstance.quit();
             }
         }
     }
