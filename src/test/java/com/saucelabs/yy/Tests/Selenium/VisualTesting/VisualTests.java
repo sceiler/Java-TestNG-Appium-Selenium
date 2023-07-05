@@ -1,5 +1,6 @@
 package com.saucelabs.yy.Tests.Selenium.VisualTesting;
 
+import com.saucelabs.visual.Region;
 import com.saucelabs.visual.VisualApi;
 import com.saucelabs.yy.Tests.Selenium.TestBase;
 import org.testng.annotations.Test;
@@ -12,7 +13,7 @@ public class VisualTests extends TestBase {
     public void visualTest(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
 
-        VisualApi visual = VisualApi.forProductionEu(getRemoteWebDriver());
+        VisualApi visual = new VisualApi(getRemoteWebDriver(), Region.EU_CENTRAL_1, System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY"));
 
         getRemoteWebDriver().get("https://www.saucedemo.com/");
         visual.check("Login Page");
