@@ -56,9 +56,9 @@ public class SimpleTests extends TestBase {
     }
 
     @Test(dataProvider = "Browsers")
-    public void checkFooterRobot(String browser, String version, String os, Method method) throws MalformedURLException {
+    public void checkUrl(String browser, String version, String os, Method method) throws MalformedURLException {
         createDriver(browser, version, os, method.getName());
-        Assert.assertTrue(getRemoteWebDriver().findElement(By.className("footer_robot")).isDisplayed());
+        Assert.assertTrue(getRemoteWebDriver().getCurrentUrl().equalsIgnoreCase("https://www.saucedemo.com/inventory.html"));
     }
 
     @Test(dataProvider = "Browsers")
