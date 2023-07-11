@@ -37,15 +37,14 @@ jobs:
 
       - uses: saucelabs/saucectl-run-action@v3
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          DOCKER_IMAGE: ${{ vars.DOCKER_USERNAME }}/sauce-orchestrate-demo:latest
+          DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         with:
           saucectl-version: latest
           sauce-username: ${{ secrets.SAUCE_USERNAME }}
           sauce-access-key: ${{ secrets.SAUCE_ACCESS_KEY }}
           env: |
-            DOCKER_USERNAME=${{ vars.DOCKER_USERNAME }}
-            DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}
-            DOCKER_IMAGE=${{ vars.DOCKER_USERNAME }}/sauce-orchestrate-demo:latest
             BUILD_TAG=SO-Smoke-Tests-1.${{ github.run_number }}
             REGION=EU
           region: eu-central-1

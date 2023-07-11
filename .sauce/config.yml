@@ -10,6 +10,3 @@ suites:
     imagePullAuth:
       user: $DOCKER_USERNAME
       token: $DOCKER_PASSWORD
-    env:
-      BUILD_TAG: $BUILD_TAG
-      REGION: EU
