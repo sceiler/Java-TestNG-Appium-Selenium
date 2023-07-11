@@ -1,0 +1,45 @@
+name: Sauce Orchestrate
+
+on:
+  push:
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+  schedule:
+    - cron: '50 */3 * * *'
+
+jobs:
+
+  docker_hub:
+    name: Setup Container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4.1.1
+        with:
+          push: true
+          tags: ${{ vars.DOCKER_USERNAME }}/sauce-orchestrate-demo:latest
+
+  orchestrated_eu:
+    name: Run Tests using Sauce Orchestrate
+    if: always()
+    needs: docker_hub
+    runs-on: ubuntu-latest
+    container: saucelabs/saucectl:latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Run Saucectl
+        env:
+          DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_IMAGE: ${{ vars.DOCKER_USERNAME }}/sauce-orchestrate-demo:latest
+          BUILD_TAG: SO-Smoke-Tests-1.${{ github.run_number }}
+          REGION: EU
+        run: saucectl run
