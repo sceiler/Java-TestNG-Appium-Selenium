@@ -1,4 +1,4 @@
-name: Hosted Test Orchestration
+name: Sauce Orchestration
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
 
   orchestrated_eu:
-    name: Run Tests Hosted by Sauce Labs EU
+    name: Run Tests using Sauce Orchestration
     needs: docker_hub
     runs-on: ubuntu-latest
     container: saucelabs/saucectl:latest
@@ -53,6 +53,6 @@ jobs:
       - name: Run Saucectl
         env:
           DOCKER_IMAGE: ${{ needs.docker_hub.outputs.tag }}
-          BUILD_TAG: HTO-Integration-Tests-1.${{ github.run_number }}
+          BUILD_TAG: SO-Integration-Tests-1.${{ github.run_number }}
           REGION: eu-central-1
         run: saucectl run

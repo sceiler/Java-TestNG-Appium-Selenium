@@ -3,7 +3,7 @@ kind: imagerunner
 sauce:
   region: eu-central-1
 suites:
-  - name: HTO VM Selenium Integration Tests
+  - name: Sauce Orchestration VM Selenium Integration Tests
     workload: webdriver
     image: $DOCKER_IMAGE
     entrypoint: "mvn clean test -Dsurefire.suiteXmlFiles=./src/test/resources/Selenium/Selenium_Web_Integration_Tests.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V"

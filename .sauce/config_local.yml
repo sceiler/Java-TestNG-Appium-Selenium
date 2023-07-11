@@ -1,0 +1,15 @@
+apiVersion: v1alpha
+kind: imagerunner
+sauce:
+  region: eu-central-1
+suites:
+  - name: Sauce Orchestration VM Selenium Smoke Tests
+    workload: webdriver
+    image: sceiler/sauce-orchestrate-demo:0.0.3
+    entrypoint: "mvn clean test -Dsurefire.suiteXmlFiles=./src/test/resources/Selenium/Selenium_Web_Simple_Smoke_Tests.xml -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -B -V"
+    imagePullAuth:
+      user: $DOCKER_USERNAME
+      token: $DOCKER_PASSWORD
+#    env:
+#      BUILD_TAG: $BUILD_TAG
+#      REGION: eu-central-1
