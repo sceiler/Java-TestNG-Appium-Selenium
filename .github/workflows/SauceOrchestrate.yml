@@ -31,15 +31,21 @@ jobs:
     if: always()
     needs: docker_hub
     runs-on: ubuntu-latest
-    container: saucelabs/saucectl:latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-      - name: Run Saucectl
+
+      - uses: saucelabs/saucectl-run-action@v3
         env:
-          DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_IMAGE: ${{ vars.DOCKER_USERNAME }}/sauce-orchestrate-demo:latest
-          BUILD_TAG: SO-Smoke-Tests-1.${{ github.run_number }}
-          REGION: EU
-        run: saucectl run
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          saucectl-version: latest
+          sauce-username: ${{ secrets.SAUCE_USERNAME }}
+          sauce-access-key: ${{ secrets.SAUCE_ACCESS_KEY }}
+          env: |
+            DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+            DOCKER_IMAGE: ${{ vars.DOCKER_USERNAME }}/sauce-orchestrate-demo:latest
+            BUILD_TAG: SO-Smoke-Tests-1.${{ github.run_number }}
+            REGION: EU
+          region: eu-central-1
