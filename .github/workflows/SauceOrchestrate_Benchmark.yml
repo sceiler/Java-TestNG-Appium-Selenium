@@ -1,4 +1,4 @@
-name: Sauce Orchestrate
+name: Sauce Orchestrate Benchmark
 
 on:
   workflow_dispatch:

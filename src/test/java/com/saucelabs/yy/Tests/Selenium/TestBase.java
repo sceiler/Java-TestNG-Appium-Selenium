@@ -56,7 +56,7 @@ public class TestBase extends SuperTestBase {
     private static Object[][] getSmokeConfigurations() {
         return new Object[][]{
                 {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS10.label()},
-                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.MACOSMONTEREY.label()},
+                {Constants.BROWSER.CHROME.label(), Constants.VERSION.LATEST.label(), Constants.PLATFORM.WINDOWS11.label()},
         };
     }
 
