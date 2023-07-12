@@ -18,6 +18,9 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
+      - name: Generate unix timestamp
+        run: echo TIMESTAMP=$(date +%s) >> $GITHUB_ENV
+
       - uses: saucelabs/saucectl-run-action@v3
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -30,6 +33,6 @@ jobs:
           sauce-username: ${{ secrets.SAUCE_USERNAME }}
           sauce-access-key: ${{ secrets.SAUCE_ACCESS_KEY }}
           env: |
-            BUILD_TAG=SO-Smoke-Tests-Benchmark-${{ matrix.counter }}-${{ matrix.resourceProfile }}
+            BUILD_TAG=SO-Smoke-Tests-Benchmark-${{ matrix.counter }}-${{ matrix.resourceProfile }}-${{ env.TIMESTAMP }}
             REGION=EU
           region: eu-central-1
