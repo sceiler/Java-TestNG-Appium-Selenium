@@ -129,7 +129,7 @@ public class TestBase extends SuperTestBase {
     }
 
     private AbstractDriverOptions getDriverOptions(String browser) {
-        Map<String, AbstractDriverOptions> driverOptionsMap = new HashMap<>();
+        Map<String, AbstractDriverOptions> driverOptionsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         driverOptionsMap.put(Constants.BROWSER.CHROME.label(), new ChromeOptions());
         driverOptionsMap.put(Constants.BROWSER.FIREFOX.label(), new FirefoxOptions());
         driverOptionsMap.put(Constants.BROWSER.MICROSOFTEDGE.label(), new EdgeOptions());
