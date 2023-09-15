@@ -2,8 +2,6 @@ name: Upload My Demo App monthly
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 5 */30 * *'
 
 env:
   SAUCE_USERNAME: ${{ secrets.SE_DEMO_USER }}

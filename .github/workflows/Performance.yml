@@ -2,8 +2,6 @@ name: Sauce Performance Tests
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '37 13 * * *'
 
 jobs:
   build:

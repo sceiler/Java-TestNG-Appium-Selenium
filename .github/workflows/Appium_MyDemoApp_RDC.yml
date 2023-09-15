@@ -2,8 +2,6 @@ name: Appium My Demo App RDC Tests
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '15 */3 * * *'
   push:
     paths:
       - 'src/test/java/com/saucelabs/yy/Tests/Appium/MyDemoApp/RealDevice/**'

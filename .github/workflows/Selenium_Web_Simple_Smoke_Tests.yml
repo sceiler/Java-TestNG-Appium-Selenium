@@ -2,8 +2,6 @@ name: Selenium Web Simple Smoke Tests
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '10 * * * *'
   push:
     paths:
       - 'src/test/java/com/saucelabs/yy/Tests/Selenium/**'
