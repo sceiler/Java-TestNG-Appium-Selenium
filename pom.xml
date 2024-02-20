@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.testng.testng.version>7.9.0</org.testng.testng.version>
         <org.hamcrest.hamcrest-core.version>2.2</org.hamcrest.hamcrest-core.version>
-        <org.seleniumhq.selenium.selenium-java>4.18.0</org.seleniumhq.selenium.selenium-java>
+        <org.seleniumhq.selenium.selenium-java>4.18.1</org.seleniumhq.selenium.selenium-java>
         <io.appium.java-client>8.6.0</io.appium.java-client>
     </properties>
 
