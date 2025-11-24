@@ -16,7 +16,7 @@
         <org.testng.testng.version>7.11.0</org.testng.testng.version>
         <org.hamcrest.hamcrest-core.version>3.0</org.hamcrest.hamcrest-core.version>
         <org.seleniumhq.selenium.selenium-java>4.33.0</org.seleniumhq.selenium.selenium-java>
-        <io.appium.java-client>8.6.0</io.appium.java-client>
+        <io.appium.java-client>10.0.0</io.appium.java-client>
     </properties>
 
     <dependencies>
